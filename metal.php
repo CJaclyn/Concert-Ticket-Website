@@ -50,6 +50,7 @@
     echo "<h3>".$row['Artist']."<br />"."</h3>";
     echo $row['Date']." - ".$row['Time']."<br />";
     echo $row['Street'].", ".$row['City'].", ".$row['State']."<br />";
+    echo "<a href=\"#\">Purchase Tickets!</a>";
     echo "</div>";
     echo "</div>";
   }

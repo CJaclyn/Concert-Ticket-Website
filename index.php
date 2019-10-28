@@ -53,13 +53,15 @@
     echo "<h3>".$row['Artist']."<br />"."</h3>";
     echo $row['Date']." - ".$row['Time']."<br />";
     echo $row['Street'].", ".$row['City'].", ".$row['State']."<br />";
+    echo "<a href=\"#\">Purchase Tickets!</a>";
     echo "</div>";
     echo "</div>";
   }
-
   mysqli_close($db);
    ?>
-
+   <div class="see-all">
+     <a href="all.php">See all concerts ➔</a>;
+   </div>
    <footer>
      <h4>Footer</h4>
      <p>Jaclyn C.</p>
