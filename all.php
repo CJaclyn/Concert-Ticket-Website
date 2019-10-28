@@ -55,5 +55,9 @@
 
   mysqli_close($db);
    ?>
+   <footer>
+     <h4>Footer</h4>
+     <p>Jaclyn C.</p>
+   </footer>
 </body>
 </html>

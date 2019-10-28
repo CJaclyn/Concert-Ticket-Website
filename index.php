@@ -61,7 +61,7 @@
    ?>
 
    <footer>
-     <h2>Footer</h2>
+     <h4>Footer</h4>
      <p>Jaclyn C.</p>
    </footer>
 </body>
