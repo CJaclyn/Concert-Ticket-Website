@@ -1,0 +1,61 @@
+body {
+  background-color: black;
+}
+
+h1 {
+  margin-top: 3.2rem;
+  color: white;
+  text-align: center;
+  background-color: red;
+  text-shadow: 3px 2px black;
+  padding: 1rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+  background-color: black;
+  color: white;
+  padding: 1rem;
+  margin-right: 25%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+div img {
+  width: 50%;
+}
+
+div .column {
+  padding: 1rem;
+  float: left;
+  width: 33.33%;
+}
+
+div .left {
+  width: 35%;
+  text-align: center;
+}
+
+div .right {
+  width: 50%;
+  background-color: white;
+  float: right;
+  margin-right: 10rem;
+  box-shadow: 5px 5px red;
+}
+
+.row {
+  padding-bottom: 1rem;
+}
+
+.row:first-of-type {
+  margin-top: 5rem;
+}
