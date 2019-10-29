@@ -1,12 +1,12 @@
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 div {
-  float: left;
-  width: 30%;
-  padding: 40px;
+	float: left;
+	width: 30%;
+	padding: 40px;
  
 }
 
@@ -15,10 +15,10 @@ h1 {
 }
 
 .a1 {
-  float: left;
-  padding: 50px;
-  width: 50%;
-  border-
+	float: left;
+	width: 50%;
+	padding-top: 50px;
+	padding-left: 150px;
 }
 
 .a2 {
@@ -28,16 +28,16 @@ h1 {
 }
 
 section:after {
-  content: "";
-  display: table;
-  clear: both;
+	content: "";
+	display: table;
+	clear: both;
 }
 
 @media (max-width: 600px) {
-  div, article {
-    width: 100%;
-    height: auto;
-  }
+	div, article {
+		width: 100%;
+		height: auto;
+  	}
 }
 
 .card {
@@ -48,8 +48,8 @@ section:after {
 }
 
 .title {
-  color: grey;
-  font-size: 18px;
+	color: grey;
+	font-size: 18px;
 }
 
 .img1 {
