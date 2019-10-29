@@ -56,6 +56,10 @@ div .right {
   padding-bottom: 1rem;
 }
 
+footer {
+  margin-top: 5rem;
+}
+
 .row:first-of-type {
   margin-top: 5rem;
 }

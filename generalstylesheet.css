@@ -52,15 +52,12 @@ nav ul li ul{
   display: none;
   position: absolute;
   background-color: white;
+  border-radius: 0px 0px 5px 5px;
+  overflow:hidden;
 }
 
 nav ul li ul li {
   width: 100%;
-}
-
-nav ul li ul {
-  border-radius: 0px 0px 5px 5px;
-  overflow:hidden;
 }
 
 h4 {
