@@ -2,24 +2,27 @@ body {
   background-color: black;
 }
 
+.see-all {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.see-all a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: white;
+}
+
+footer {
+  margin-top: 5rem;
+}
+
 h3 {
   font-size: 1.4rem;
   background-color: black;
   color: white;
   padding: 1rem;
   margin-right: 25%;
-}
-
-.see-all {
-  text-align: center;
-  margin-top: 1.5rem;
-  margin-bottom: 5rem;
-}
-
-.see-all a{
-  color: white;
-  text-decoration: none;
-  font-size: 1.5rem;
 }
 
 .header img {
@@ -90,4 +93,9 @@ div .right {
 
 .row {
   padding-bottom: 1rem;
+}
+
+.see-all a:hover {
+  color: red;
+  transition: .5s;
 }
