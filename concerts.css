@@ -2,6 +2,10 @@ body {
   background-color: black;
 }
 
+footer {
+  margin-top: 5rem;
+}
+
 * {
   box-sizing: border-box;
 }

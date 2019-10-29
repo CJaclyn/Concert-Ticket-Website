@@ -1,31 +1,63 @@
-#more {
-	display: none;
+body {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
-.s1 {
-	background-image: url(http://dancemusicnw.com/wp-content/uploads/2018/04/Seven-Lions-Jason-Ross.jpg);
-	padding: 30px;
+.header img {
+  width: 100%;
+}
+
+.header {
+  position: relative;
+  z-index: -1;
+}
+
+.centered h1{
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: .8rem;
+  left: 50%;
+  color: white;
+  font-size: 4rem;
+  background-color: red;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.title {
+  color: white;
 	text-align: center;
-	font-size: 30px;
-	color: white;
-	background-size: 100% 100%;
-	height: 30vh;
-}
-
-.a1 {
-	text-shadow:	-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-}
-
-.a2 {
-	text-align: center;
+  font-size: 1.5rem;
+  text-shadow: 1.5px 1px black;
+  background-color: red;
+  margin-left: 5rem;
+  margin-right: 5rem;
 }
 
 section {
-	border: 2px solid black;
+  margin-top: -.4rem;
+  padding: 1rem;
+  background-color: black;
+}
+
+section:first-of-type {
+  padding-top: 5rem;
+}
+
+section:last-of-type {
+  border-bottom: solid red 4px;
+  padding-bottom: 5rem;
 }
 
 article {
-	padding: 10px;
+  color: black;
+	padding: 2rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  margin-bottom: 2rem;
+  box-shadow: 5px 5px red;
+  background-color: white;
 }
 
 .read-more-state {
@@ -56,16 +88,10 @@ article {
 .read-more-trigger {
   cursor: pointer;
   display: inline-block;
-  padding: 0 .5em;
-  color: #666;
+  padding: 0.5em;
+  color: white;
   font-size: .9em;
-  line-height: 2;
-  border: 1px solid #ddd;
-  border-radius: .25em;
-}
-
-body {
-	padding: 2%;
+  background-color: red;
 }
 
 label {

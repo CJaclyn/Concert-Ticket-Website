@@ -24,9 +24,9 @@
           <li><a href="all.php">All</a></li>
         </ul>
       </li>
-      <li><a href="#">Purchase Tickets</a></li>
-      <li><a href="#">News</a></li>
-      <li><a href="#">Profile</a></li>
+      <li><a href="purchase.html">Purchase Tickets</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="profile.html">Profile</a></li>
     </ul>
   </nav>
 
@@ -50,7 +50,7 @@
     echo "<h3>".$row['Artist']."<br />"."</h3>";
     echo $row['Date']." - ".$row['Time']."<br />";
     echo $row['Street'].", ".$row['City'].", ".$row['State']."<br />";
-    echo "<a href=\"#\">Purchase Tickets!</a>";
+    echo "<a href=\"purchase.html\">Purchase Tickets!</a>";
     echo "</div>";
     echo "</div>";
   }
