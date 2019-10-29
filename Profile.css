@@ -1,0 +1,63 @@
+
+* {
+  box-sizing: border-box;
+}
+
+div {
+  float: left;
+  width: 30%;
+  padding: 40px;
+ 
+}
+
+h1 {
+	text-align: center;
+}
+
+.a1 {
+  float: left;
+  padding: 50px;
+  width: 50%;
+  border-
+}
+
+.a2 {
+	float: left;
+	padding: 50px;
+	width: 100%;
+}
+
+section:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media (max-width: 600px) {
+  div, article {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.card {
+	max-width: 300px;
+	margin: auto;
+	text-align: center;
+	
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+.img1 {
+	width: 100%;
+	display: block;
+}
+
+table img{
+	width:200px;
+	height: 300px;
+}

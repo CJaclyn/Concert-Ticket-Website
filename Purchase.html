@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Purchase Tickets</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="generalstylesheet.css">
+<link rel="stylesheet" type="text/css" href="Purchase.css">
+<link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">	
+</head>
+<body>
+  <header>
+  <img src="logo1.png" alt="midsommar music logo" height="55" width="55">
+  </header>
+  <nav>
+    <ul>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="concerts.html">Concerts<i class="down"></i></a>
+        <ul>
+          <li><a href="pop.php">Pop</a></li>
+          <li><a href="rock.php">Rock</a></li>
+          <li><a href="edm.php">EDM</a></li>
+          <li><a href="metal.php">Metal</a></li>
+          <li><a href="all.php">All</a></li>
+        </ul>
+      </li>
+      <li><a href="Purchase.html">Purchase Tickets</a></li>
+      <li><a href="News.html">News</a></li>
+      <li><a href="Profile.html">Profile</a></li>
+    </ul>
+  </nav>
+
+<h1>Purchase Tickets</h1>
+
+<div class="form">	
+	<form action="Purchase.php" method="post">
+		<fieldset class="border">
+			<legend>Ticket Selection</legend>
+			<label>Select Concert</label>
+			<div class="custom-select">
+				<select id="concert" name="concert">
+					<option value = "0">---Select A Concert---</option>
+					<option value = "1">Arctic Monkeys</option>
+					<option value = "2">Cage the Elephant</option>
+					<option value = "3">Glass Animals</option>
+					<option value = "4">MGMT</option>
+					<option value = "5">Martin Garrix</option>
+					<option value = "6">Milky Chance</option>
+					<option value = "7">Rammstein</option>
+					<option value = "8">Seven Lions</option>
+				</select>
+			</div>
+			<br>
+			<label>Select Ticket Type</label>
+			<div class="custom-select">
+				<select id="ticket" name="ticket">
+				<option value = "0">---Select Ticket Type---</option>
+					<option value = "Normal">Normal</option>
+					<option value = "VIP">VIP</option>
+				</select>
+			</div>
+			<br>
+			<label>Quantity</label>
+			<input type="number" name="quantity" min="1" max="8">
+		</fieldset>
+		<fieldset class="border">
+			<legend>User Information</legend>
+			<label>Email</label>
+			<input type="text" name="Email" placeholder="Email Address" autofocus></input><br>
+			<label>Full Name</label>
+			<input type="text" name="Name" placeholder="Full Name" autofocus></input><br>
+			<label>Username</label>
+			<input type="text" name="Username" placeholder="Username" autofocus></input><br>
+			<label>Password</label>
+			<input type="text" name="Password" placeholder="Password" autofocus></input><br>
+			<h3>Total:</h3><br>
+			<input type="checkbox" name="newsletter" value="newsletter">Subscribe to Newsletter<br>
+			<input type="checkbox" name="terms" value="terms">I Agree to Terms & Conditions<br>
+			<div class="checkout">
+				<input type="button" class="button" value="Check Out">
+			</div>
+		</fieldset>
+	</form>
+</div>
+</body>
+
+</html>
