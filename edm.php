@@ -17,7 +17,7 @@
       <li><a href="index.php">Home</a></li>
       <li><a href="concerts.html">Concerts<i class="down"></i></a>
         <ul>
-          <li><a href="edm.php">EDM</a></li>
+          <li><a href="pop.php">Pop</a></li>
           <li><a href="rock.php">Rock</a></li>
           <li><a href="edm.php">EDM</a></li>
           <li><a href="metal.php">Metal</a></li>
