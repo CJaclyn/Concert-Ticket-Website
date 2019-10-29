@@ -31,10 +31,12 @@
     </ul>
   </nav>
   <h1>Explore Concerts</h1>
-    <form class="searchbar" action="#">
-      <input type="text" placeholder="Artist or band">
+
+    <form class="searchbar" action="searchresult.php" method="post">
+      <input type="text" name="userSrch" placeholder="Artist or band">
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
+
   <div class="row">
     <div class="column left">
       <a href="pop.php"><video autoplay loop muted>
