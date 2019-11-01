@@ -72,6 +72,7 @@ footer {
     background-color: white;
     width: 100%;
     padding: .5rem;
+    color: black;
 }
 
 nav ul li a:hover {

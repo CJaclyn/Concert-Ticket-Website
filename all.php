@@ -34,7 +34,10 @@
 
   <?php
   $db = mysqli_connect('localhost','root','12345','ticket_web') or die('Error connecting to MySQL server.');
-  $allQuery = "SELECT * from concerts ORDER BY date ASC, time ASC";
+  $allQuery = "SELECT Artist, artists.Image, Street, City, State, Date, Time
+  FROM concerts
+  INNER JOIN artists ON artists.Artist_name = concerts.Artist
+  ORDER BY date ASC, time ASC";
 
   $all = mysqli_query($db, $allQuery);
   mysqli_query($db, $allQuery) or die('Error querying database.');

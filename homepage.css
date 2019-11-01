@@ -89,6 +89,7 @@ div .right {
   box-shadow: 5px 5px red;
   float: right;
   margin-right: 10rem;
+  color: black;
 }
 
 .row {

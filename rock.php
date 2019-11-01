@@ -34,8 +34,11 @@
 
   <?php
   $db = mysqli_connect('localhost','root','12345','ticket_web') or die('Error connecting to MySQL server.');
-  $rockQuery = "SELECT Artist, Street, City, State, Date, Time, Image FROM concerts
-  INNER JOIN artists ON artists.Artist_name = concerts.Artist WHERE genre='Rock' ORDER BY date ASC, time ASC";
+
+  $rockQuery = "SELECT Artist, artists.Image, Street, City, State, Date, Time
+  FROM concerts
+  INNER JOIN artists ON artists.Artist_name = concerts.Artist
+  WHERE genre='Rock' ORDER BY date ASC, time ASC";
 
   $rock = mysqli_query($db, $rockQuery);
   mysqli_query($db, $rockQuery) or die('Error querying database.');
@@ -43,7 +46,7 @@
   while ($row = mysqli_fetch_array($rock)) {
     echo "<div class=\"row\">";
     echo "<div class=\"column left\">";
-    echo "<img src='". $row['Image']."'width='300'>"."<br />";
+    echo "<img src='".$row['Image']."'width='300'>"."<br />";
     echo "</div>";
 
     echo "<div class=\"column right\">";

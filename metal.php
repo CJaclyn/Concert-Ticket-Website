@@ -34,8 +34,10 @@
 
   <?php
   $db = mysqli_connect('localhost','root','12345','ticket_web') or die('Error connecting to MySQL server.');
-  $metalQuery = "SELECT Artist, Street, City, State, Date, Time, Image FROM concerts
-  INNER JOIN artists ON artists.Artist_name = concerts.Artist WHERE genre='Metal' ORDER BY date ASC, time ASC";
+  $metalQuery = "SELECT Artist, artists.Image, Street, City, State, Date, Time
+  FROM concerts
+  INNER JOIN artists ON artists.Artist_name = concerts.Artist
+  WHERE genre='Metal' ORDER BY date ASC, time ASC";
 
   $metal = mysqli_query($db, $metalQuery);
   mysqli_query($db, $metalQuery) or die('Error querying database.');

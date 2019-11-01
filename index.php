@@ -37,8 +37,11 @@
   <h2>Upcoming Concerts</h2>
   <?php
   $db = mysqli_connect('localhost','root','12345','ticket_web') or die('Error connecting to MySQL server.');
-  $upcomingConcertsQuery = "SELECT * FROM concerts WHERE date BETWEEN
-  CURDATE() AND DATE_ADD(NOW(), INTERVAL 7 DAY) ORDER BY DATE(date) ASC, Time ASC";
+
+  $upcomingConcertsQuery = "SELECT Artist, artists.Image, Street, City, State, Date, Time
+  FROM concerts
+  INNER JOIN artists ON artists.Artist_name = concerts.Artist
+  WHERE Date BETWEEN CURDATE() AND DATE_ADD(NOW(), INTERVAL 7 DAY) ORDER BY DATE(Date) ASC, Time ASC";
 
   $upcomingConcerts= mysqli_query($db, $upcomingConcertsQuery);
   mysqli_query($db, $upcomingConcertsQuery) or die('Error querying database.');
@@ -60,7 +63,7 @@
   mysqli_close($db);
    ?>
    <div class="see-all">
-     <a href="all.php">See all concerts ➔</a>;
+     <a href="all.php">See all concerts ➔</a>
    </div>
    <footer>
      <h4>Footer</h4>
