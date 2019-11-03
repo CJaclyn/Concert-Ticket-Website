@@ -36,7 +36,11 @@
   echo $searchInput;
 
   $db = mysqli_connect('localhost','root','12345','ticket_web') or die('Error connecting to MySQL server.');
-  $concertResultQuery = "SELECT * FROM concerts WHERE artist REGEXP '$searchInput'";
+  $concertResultQuery = "SELECT Artist, artists.Image, Street, City, State, DATE_FORMAT(Date, '%a %b %e %Y') Date, TIME_FORMAT(Time, '%h %i %p') Time
+  FROM concerts
+  INNER JOIN artists ON artists.Artist_name = concerts.Artist
+  WHERE artist REGEXP '$searchInput'
+  ORDER BY date ASC, time ASC";
 
   $concertResult= mysqli_query($db, $concertResultQuery);
   mysqli_query($db, $concertResultQuery) or die('Error querying database.');

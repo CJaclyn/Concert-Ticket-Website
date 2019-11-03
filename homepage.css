@@ -18,7 +18,7 @@ footer {
 }
 
 h3 {
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   background-color: black;
   color: white;
   padding: 1rem;
@@ -53,7 +53,7 @@ h2 {
   text-align: center;
   margin: 0;
   padding: 3rem;
-  font-size: 2.5rem;
+  font-size: 3rem;
   text-shadow: 1.5px 1.5px red;
 }
 
@@ -75,7 +75,6 @@ div .column {
   padding: 1rem;
   float: left;
   width: 33.33%;
-  
 }
 
 div .left {
@@ -90,6 +89,7 @@ div .right {
   float: right;
   margin-right: 10rem;
   color: black;
+  font-size: 1.3rem;
 }
 
 .row {
@@ -99,4 +99,18 @@ div .right {
 .see-all a:hover {
   color: red;
   transition: .5s;
+}
+
+@media only screen and (max-width: 1368px) {
+  h1 {
+    font-size: 2.1rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  div .right {
+    font-size: 1.2rem;
+  }
 }

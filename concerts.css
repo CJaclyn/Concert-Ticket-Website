@@ -29,14 +29,14 @@ h1 {
   border: solid white;
   border-radius: 50px;
   width: 25%;
-  padding: 1rem;
+  padding: .8rem;
 }
 
 .searchbar button {
   border: none;
   background: none;
   color: white;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 
 .row:after {
@@ -54,7 +54,7 @@ div video {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   padding: .8rem;
   text-shadow: 3px 2px black;
 }
@@ -79,19 +79,17 @@ div video {
 
 div .column {
   padding: 1rem;
-  float: left;
   text-align: center;
 }
 
 div .left {
   width: 50%;
   text-align: center;
-  //background-color: coral;
+  float: left;
 }
 
 div .right {
   width: 50%;
-  //background-color: lightblue;
   float: right;
 }
 
@@ -116,13 +114,20 @@ button:hover {
   cursor: pointer;
 }
 
-@media only screen and (min-width: 776px) {
+@media only screen and (max-width: 1368px) {
   h1{font-size: 2.3rem;}
-  .centered{font-size: 2rem;}
+  
+  div video {
+    width: 100%;
+  }
+  
+  .centered{font-size: 2.5rem;}
+  
   .searchbar input[type=text]{
     padding: .5rem;
     width: 15%;
   }
+  
   .searchbar button {
     font-size: 1.4rem;
   }

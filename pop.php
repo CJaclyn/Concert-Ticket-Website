@@ -35,7 +35,7 @@
   <?php
   $db = mysqli_connect('localhost','root','12345','ticket_web') or die('Error connecting to MySQL server.');
 
-  $popQuery = "SELECT Artist, artists.Image, Street, City, State, Date, Time
+  $popQuery = "SELECT Artist, artists.Image, Street, City, State, DATE_FORMAT(Date, '%a %b %e %Y') Date, TIME_FORMAT(Time, '%h %i %p') Time
   FROM concerts
   INNER JOIN artists ON artists.Artist_name = concerts.Artist
   WHERE genre='Pop' ORDER BY date ASC, time ASC";
