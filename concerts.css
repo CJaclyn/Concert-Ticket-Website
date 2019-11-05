@@ -114,12 +114,14 @@ button:hover {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 776px) {
+@media only screen and (max-width: 1368px) {
+  div video {
+    width: 85%;
+  }
   h1{font-size: 2.3rem;}
-  .centered{font-size: 1rem;}
   .searchbar input[type=text]{
     padding: .5rem;
-    width: 15%;
+    width: 20%;
   }
   .searchbar button {
     font-size: 1.4rem;
