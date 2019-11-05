@@ -13,6 +13,18 @@ body {
   color: white;
 }
 
+footer {
+  margin-top: 5rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+  background-color: black;
+  color: white;
+  padding: 1rem;
+  margin-right: 25%;
+}
+
 .header img {
   width: 100%;
 }
@@ -33,7 +45,7 @@ body {
   padding: .8rem;
   padding-left: 2rem;
   padding-right: 2rem;
-
+  
 }
 
 h2 {
@@ -43,6 +55,45 @@ h2 {
   padding: 3rem;
   font-size: 3rem;
   text-shadow: 1.5px 1.5px red;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+div img {
+  width: 50%;
+}
+
+div .column {
+  padding: 1rem;
+  float: left;
+  width: 33.33%;
+  
+}
+
+div .left {
+  width: 35%;
+  text-align: center;
+}
+
+div .right {
+  width: 50%;
+  background-color: white;
+  box-shadow: 5px 5px red;
+  float: right;
+  margin-right: 10rem;
+  color: black;
+}
+
+.row {
+  padding-bottom: 1rem;
 }
 
 .see-all a:hover {
