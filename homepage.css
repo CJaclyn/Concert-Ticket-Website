@@ -13,18 +13,6 @@ body {
   color: white;
 }
 
-footer {
-  margin-top: 5rem;
-}
-
-h3 {
-  font-size: 1.7rem;
-  background-color: black;
-  color: white;
-  padding: 1rem;
-  margin-right: 25%;
-}
-
 .header img {
   width: 100%;
 }
@@ -45,7 +33,7 @@ h3 {
   padding: .8rem;
   padding-left: 2rem;
   padding-right: 2rem;
-  
+
 }
 
 h2 {
@@ -57,60 +45,7 @@ h2 {
   text-shadow: 1.5px 1.5px red;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-div img {
-  width: 50%;
-}
-
-div .column {
-  padding: 1rem;
-  float: left;
-  width: 33.33%;
-}
-
-div .left {
-  width: 35%;
-  text-align: center;
-}
-
-div .right {
-  width: 50%;
-  background-color: white;
-  box-shadow: 5px 5px red;
-  float: right;
-  margin-right: 10rem;
-  color: black;
-  font-size: 1.3rem;
-}
-
-.row {
-  padding-bottom: 1rem;
-}
-
 .see-all a:hover {
   color: red;
   transition: .5s;
-}
-
-@media only screen and (max-width: 1368px) {
-  h1 {
-    font-size: 2.1rem;
-  }
-  
-  h3 {
-    font-size: 1.5rem;
-  }
-  
-  div .right {
-    font-size: 1.2rem;
-  }
 }

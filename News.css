@@ -3,6 +3,10 @@ body {
   padding-right: 2rem;
 }
 
+footer {
+  margin-top: 0;
+}
+
 .header img {
   width: 100%;
 }

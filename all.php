@@ -4,8 +4,9 @@
 <title>all Concerts</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="generalstylesheet.css">
-<link rel="stylesheet" type="text/css" href="genre.css">
+<link rel="stylesheet" href="generalstylesheet.css">
+<link rel="stylesheet" href="genre.css">
+<link rel="stylesheet" href="displayconcerts.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>

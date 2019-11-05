@@ -6,10 +6,6 @@ footer {
   margin-top: 5rem;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 h1 {
   margin-top: 3.2rem;
   background-color: red;
@@ -39,12 +35,6 @@ h1 {
   font-size: 1.5rem;
 }
 
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
 div video {
   width: 75%;
   border: solid red 1.5px;
@@ -60,7 +50,7 @@ div video {
 }
 
 .centered a {
-  color: white; 
+  color: white;
   text-decoration: none;
 }
 
@@ -116,18 +106,18 @@ button:hover {
 
 @media only screen and (max-width: 1368px) {
   h1{font-size: 2.3rem;}
-  
+
   div video {
     width: 100%;
   }
-  
+
   .centered{font-size: 2.5rem;}
-  
+
   .searchbar input[type=text]{
     padding: .5rem;
     width: 15%;
   }
-  
+
   .searchbar button {
     font-size: 1.4rem;
   }

@@ -2,14 +2,6 @@ body {
   background-color: black;
 }
 
-h3 {
-  font-size: 1.4rem;
-  background-color: black;
-  color: white;
-  padding: 1rem;
-  margin-right: 25%;
-}
-
 h2 {
   margin-top: 3rem;
   color: white;
@@ -34,42 +26,4 @@ h2 {
 .see-concerts a:hover {
   color: red;
   transition: .5s;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-div img {
-  width: 50%;
-}
-
-div .column {
-  padding: 1rem;
-  float: left;
-  width: 33.33%;
-
-}
-
-div .left {
-  width: 35%;
-  text-align: center;
-}
-
-div .right {
-  width: 50%;
-  background-color: white;
-  box-shadow: 5px 5px red;
-  float: right;
-  margin-right: 10rem;
-}
-
-.row {
-  padding-bottom: 1rem;
 }
