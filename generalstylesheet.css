@@ -65,12 +65,15 @@ h4 {
   font-size: 1.6rem;
 }
 
+.row a {
+  color: red;
+}
+
 footer {
     background-color: white;
     width: 100%;
     padding: .5rem;
     color: black;
-    margin-top: 5rem;
 }
 
 nav ul li a:hover {
@@ -94,8 +97,8 @@ nav ul li ul li a:hover {
   transition: .5s;
 }
 
-@media only screen and (max-width: 1368px) {
+@media only screen and (max-width: 1368x) {
   nav ul li a {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 }

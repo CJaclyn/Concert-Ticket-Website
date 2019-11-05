@@ -26,15 +26,13 @@ form {
 
 label {
 	display: block;
-	font-weight: bold;
 	padding-top: 15px;
 	padding-bottom: 5px;
-	font-size: 1rem;
+	font-size: 1.2rem;
 }
 
 legend {
 	font-size: 1.5rem;
-	font-weight: bold;
 	background-color: red;
 	padding: .5rem;
 	color: white;
@@ -54,6 +52,8 @@ legend {
 
 h3 {
 	margin-top: 2.5rem;
+	font-size: 1.5rem;
+	font-weight: normal;
 }
 
 .button {
@@ -80,4 +80,14 @@ select {
 input[type="text"], input[type="password"], input[type="number"]{
 	padding: .5rem;
 	border: 1px solid black;
+}
+
+@media only screen and (max-width: 1368px) {
+	label {
+	font-size: 1rem;
+  }
+	
+	h3 {
+		font-size: 1.2rem;
+	}
 }
