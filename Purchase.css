@@ -66,6 +66,7 @@ h3 {
 	border: none;
 	color: white;
 	font-family: 'Staatliches', sans-serif;
+	border-radius: .2rem;
 }
 
 .checkout {

@@ -32,7 +32,7 @@ footer {
 .title {
   color: white;
 	text-align: center;
-  font-size: 1.5rem;
+  font-size: 2rem;
   text-shadow: 1.5px 1px black;
   background-color: red;
   margin-left: 5rem;
@@ -62,6 +62,12 @@ article {
   margin-bottom: 2rem;
   box-shadow: 5px 5px red;
   background-color: white;
+  font-size: 1.3rem;
+}
+
+article p {
+  margin-left: 5rem;
+  margin-right: 5rem;
 }
 
 .read-more-state {
