@@ -1,0 +1,16 @@
+body {
+  background-color: orange;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 10rem;
+  font-size: 2rem;
+  color: white;
+  text-shadow: 1.5px 1.5px black;
+}
+
+p {
+  text-align: center;
+  font-size: 1.3rem;
+}

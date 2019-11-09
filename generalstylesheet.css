@@ -10,6 +10,8 @@ header {
   text-align: center;
 }
 
+/*concert down arrow styling*/
+
 i {
   border: solid black;
   border-width: 0 3px 3px 0;
@@ -24,6 +26,7 @@ i {
   -webkit-transform: rotate(45deg);
 }
 
+/*navigation styling*/
 nav ul {
   float: left;
   margin: 0;
@@ -61,12 +64,9 @@ nav ul li ul li {
   width: 100%;
 }
 
+/*footer styling*/
 h4 {
   font-size: 1.6rem;
-}
-
-.row a {
-  color: red;
 }
 
 footer {
@@ -118,6 +118,8 @@ footer button {
   cursor: pointer;
   border-radius: .2rem;
 }
+
+/*hovers*/
 
 footer li a:hover {
   color: red;

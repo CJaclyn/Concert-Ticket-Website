@@ -1,14 +1,20 @@
+<?php
+session_start();
+include('adminfunctions.php');
+login();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Home</title>
+<title>Admin Login</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="generalstylesheet.css">
-<link rel="stylesheet" href="homepage.css">
-<link rel="stylesheet" href="displayconcerts.css">
+<link rel="stylesheet" href="adminlogin.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <header>
   <img src="logo1.png" alt="midsommar music logo" height="55" width="55">
@@ -31,42 +37,55 @@
     </ul>
   </nav>
 
-  <div class="header centered">
-    <img src="/header.jfif">
-    <h1>Midsommar Music</h1>
-  </div>
-  <h2>Upcoming Concerts</h2>
   <?php
-  $db = mysqli_connect('localhost','root','12345','ticket_web') or die('Error connecting to MySQL server.');
-
-  $upcomingConcertsQuery = "SELECT Artist, artists.Image, Street, City, State,
-  DATE_FORMAT(Date, '%a %b %e %Y') Date, TIME_FORMAT(Time, '%h %i %p') Time
-  FROM concerts
-  INNER JOIN artists ON artists.Artist_name = concerts.Artist
-  WHERE Date BETWEEN CURDATE() AND DATE_ADD(NOW(), INTERVAL 7 DAY) ORDER BY DATE(Date) ASC, Time ASC";
-
-  $upcomingConcerts= mysqli_query($db, $upcomingConcertsQuery);
-  mysqli_query($db, $upcomingConcertsQuery) or die('Error querying database.');
-
-  while ($row = mysqli_fetch_array($upcomingConcerts)) {
-    echo "<div class=\"row\">";
-    echo "<div class=\"column left\">";
-    echo "<img src='". $row['Image']."'width='300'>"."<br />";
-    echo "</div>";
-
-    echo "<div class=\"column right\">";
-    echo "<h3>".$row['Artist']."<br />"."</h3>";
-    echo $row['Date']." - ".$row['Time']."<br />";
-    echo $row['Street'].", ".$row['City'].", ".$row['State']."<br />";
-    echo "<a href=\"purchase.html\">Purchase Tickets!</a>";
-    echo "</div>";
-    echo "</div>";
+  if (isLoggedIn()){
+    echo "<h1>Redirecting to Admin Page. . .</h1>";
+    header("refresh:1;url=adminpage.php");
+  }else{
+    echo"
+    <h2>Admin Login</h2>
+    <div id=\"form\">
+      <form action=\"adminlogin.php\" method=\"post\" name=\"adminForm\" onsubmit=\"return validation();\">
+        <label for=\"admin-username\">Admin Username</label>
+        <input type=\"text\" id=\"admin-username\" name=\"admin-username\" required><span id=\"validate-adminU\"></span><br>
+        <label for=\"admin-password\">Admin Password</label>
+        <input type=\"password\" id=\"admin-password\" name=\"admin-password\" required><span id=\"validate-adminP\"></span><br>
+        <button type=\"submit\">Login</button>
+      </form>
+    </div>";
   }
-  mysqli_close($db);
-   ?>
-   <div class="see-all">
-     <a href="all.php">See all concerts ➔</a>
-   </div>
+  ?>
+
+  <script>
+  function validation(){
+    var username, password;
+    username = document.getElementById("admin-username").value;
+    password = document.getElementById("admin-password").value;
+
+    if(username == "admin" && password == "admin"){
+      login();
+      return true;
+    }else {
+      alert("Invalid admin credentials!");
+      if(username !== "admin" && password == "admin"){
+        document.getElementById("validate-adminU").innerHTML = "Admin username invalid.";
+        document.getElementById("validate-adminP").innerHTML = "";
+        return false;
+      }
+      if(password !== "admin" && username == "admin"){
+        document.getElementById("validate-adminP").innerHTML = "Admin password invalid.";
+        document.getElementById("validate-adminU").innerHTML = "";
+        return false;
+      }
+      if(username != "admin" && password != "password"){
+        document.getElementById("validate-adminU").innerHTML = "Admin username invalid.";
+        document.getElementById("validate-adminP").innerHTML = "Admin password invalid.";
+        return false;
+      }
+    }
+
+  }
+  </script>
 
    <footer>
        <img src="logo1.png" alt="midsommar music logo" height="100" width="100">
