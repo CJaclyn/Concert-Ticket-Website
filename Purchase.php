@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$ticket_type = $_POST['ticket_type'];
 	}
 	
-	// Validate password
+	// Validate street
     if(empty(trim($_POST["street"]))){
         $street_err = "Please enter a street address.";
 	} else {
