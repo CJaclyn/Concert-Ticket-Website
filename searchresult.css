@@ -1,14 +1,19 @@
 body {
   background-color: black;
+  color: white;
 }
 
-h2 {
+h1 {
   margin-top: 3rem;
   color: white;
   text-align: center;
   padding: 3rem;
   font-size: 2.5rem;
   text-shadow: 1.5px 1.5px red;
+}
+
+h2 {
+  text-align: center;
 }
 
 .see-concerts {

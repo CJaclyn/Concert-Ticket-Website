@@ -28,4 +28,28 @@ function logOut()
     session_destroy();
   }
 }
+
+function isNotLoggedIn(){
+	echo "
+	<nav>
+		<ul>
+			<li><a href=\"index.php\">Home</a></li>
+			<li><a href=\"concerts.html\">Concerts<i class=\"down\"></i></a>
+				<ul>
+					<li><a href=\"pop.php\">Pop</a></li>
+					<li><a href=\"rock.php\">Rock</a></li>
+					<li><a href=\"edm.php\">EDM</a></li>
+					<li><a href=\"metal.php\">Metal</a></li>
+					<li><a href=\"all.php\">All</a></li>
+				</ul>
+			</li>
+			<li><a href=\"Purchase.php\">Purchase Tickets</a></li>
+			<li><a href=\"news.html\">News</a></li>
+			<li><a href=\"profile.html\">Profile</a></li>
+		</ul>
+	</nav>";
+
+	echo '<div id="error"><h1>You need to be logged in as admin to see this page.</h1>';
+	echo "<a href='index.php'>Go to homepage</a></div>";
+}
  ?>

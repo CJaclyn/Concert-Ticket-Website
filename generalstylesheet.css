@@ -104,14 +104,14 @@ footer input {
   border: 2px solid black;
   padding: .5rem;
   border-radius: .2rem;
-  width: 15rem;
+  width: 10rem;
 }
 
 footer button {
+  margin-left: 1rem;
+  padding: .5rem 1rem;
   border: none;
-  padding: .5rem 1.2rem;
   font-size: 1.1rem;
-  margin-left: .8rem;
   color: white;
   background-color: red;
   font-family: 'Staatliches', sans-serif;
@@ -144,10 +144,4 @@ nav ul li ul li a:hover {
   background-color: red;
   color: white;
   transition: .5s;
-}
-
-@media only screen and (max-width: 1368x) {
-  nav ul li a {
-    font-size: 1rem;
-  }
 }

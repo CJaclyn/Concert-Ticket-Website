@@ -19,6 +19,7 @@ h1 {
   color: white;
   padding: 2rem;
   background-color: red;
+  font-size: 1.3rem;
 }
 
 #links a:hover {

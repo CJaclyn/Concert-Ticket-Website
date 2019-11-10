@@ -32,8 +32,8 @@
           <li><a href="all.php">All</a></li>
         </ul>
       </li>
-      <li><a href="purchase.html">Purchase Tickets</a></li>
-      <li><a href="news.html">News</a></li>
+      <li><a href="Purchase.php">Purchase Tickets</a></li>
+      <li><a href="News.html">News</a></li>
       <li><a href="profile.html">Profile</a></li>
     </ul>
   </nav>

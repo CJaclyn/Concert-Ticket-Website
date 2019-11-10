@@ -1,19 +1,19 @@
 <?php
 
 require_once "config.php";
- 
+
 $username = $password = $confirm_password = $email = $firstname = $lastname = "";
 $username_err = $password_err = $confirm_password_err = $email_err = $firstname_err = $lastname_err = "";
- 
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
+
     // Validate username
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a username.";
     } else{
 		$sql = "SELECT userID FROM users WHERE username = ?";
         if($stmt = mysqli_prepare($link, $sql)){
-			mysqli_stmt_bind_param($stmt, "s", $param_username);            
+			mysqli_stmt_bind_param($stmt, "s", $param_username);
             $param_username = trim($_POST["username"]);
             if(mysqli_stmt_execute($stmt)){
 				mysqli_stmt_store_result($stmt);
@@ -28,19 +28,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
         mysqli_stmt_close($stmt);
     }
-    
+
     // Validate password
     if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter a password.";     
+        $password_err = "Please enter a password.";
     } elseif(strlen(trim($_POST["password"])) < 6){
         $password_err = "Password must have at least 6 characters.";
     } else{
         $password = trim($_POST["password"]);
     }
-    
+
     // Validate confirm password
     if(empty(trim($_POST["confirm_password"]))){
-        $confirm_password_err = "Please confirm password.";     
+        $confirm_password_err = "Please confirm password.";
     } else{
         $confirm_password = trim($_POST["confirm_password"]);
         if(empty($password_err) && ($password != $confirm_password)){
@@ -49,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 	// Validate email
 	if(empty(trim($_POST["email"]))){
-        $email_err = "Please Enter Email Address.";     
+        $email_err = "Please Enter Email Address.";
     } elseif(!filter_var(trim($_POST["email"]), FILTER_VALIDATE_EMAIL)) {
 		$email_err = "Invalid email format.";
     } else{
@@ -57,7 +57,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 	//Validate firstname
 	if(empty(trim($_POST["firstname"]))){
-        $firstname_err = "Please enter first name.";     
+        $firstname_err = "Please enter first name.";
     } else {
 		$firstname = trim($_POST["firstname"]);
 		if (!preg_match("/^[a-zA-Z ]*$/",$firstname)) {
@@ -68,7 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	}
 	//Validate lastname
 	if(empty(trim($_POST["lastname"]))){
-        $lastname_err = "Please enter last name.";     
+        $lastname_err = "Please enter last name.";
     } else {
 		$lastname = trim($_POST["lastname"]);
 		if (!preg_match("/^[a-zA-Z ]*$/",$lastname)) {
@@ -77,25 +77,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			$lastname = trim($_POST["lastname"]);
 		}
     }
-	
- 
+
+
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($email_err) && empty($firstname_err) && empty($lastname_err)){
-        
-    
+
+
         $sql = "INSERT INTO users (Username, Password, Email, Firstname, Lastname) VALUES (?, ?, ?, ?, ?)";
-         
+
         if($stmt = mysqli_prepare($link, $sql)){
-            
+
             mysqli_stmt_bind_param($stmt, "sssss", $param_username, $param_password, $param_email, $param_firstname, $param_lastname);
-            
-            
+
+
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT);
 			$param_email = $email;
 			$param_firstname = $firstname;
 			$param_lastname = $lastname;
-            
-           
+
+
             if(mysqli_stmt_execute($stmt)){
                 header("location: login.php");
             } else{
@@ -107,14 +107,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     mysqli_close($link);
 }
 ?>
- 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="generalstylesheet.css">
-	<link rel="stylesheet" type="text/css" href="login.css">
+	<link rel="stylesheet" type="text/css" href="register.css">
 	<link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -133,8 +133,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				<li><a href="all.php">All</a></li>
 			</ul>
 		</li>
-		<li><a href="purchase.php">Purchase Tickets</a></li>
-		<li><a href="news.html">News</a></li>
+		<li><a href="Purchase.php">Purchase Tickets</a></li>
+		<li><a href="News.html">News</a></li>
 		<li><a href="profile.php">Profile</a></li>
 		<li><?php if(isset($_SESSION['id'])){ ?>
 				<a class="link" href="logout.php" style="text-decoration:none">logout</a>
@@ -144,10 +144,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		</li>
     </ul>
   </nav>
-    <h1>Sign Up</h1>  
+    <h1>Sign Up</h1>
     <div class="form">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-			<fieldset class="subform">
 				<p>Please create an account.</p>
 
 				<div <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>>
@@ -155,7 +154,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					<input type="text" name="username" value="<?php echo $username; ?>" placeholder="Username">
 					<br>
 					<span class="error"><?php echo $username_err; ?></span>
-				</div>    
+				</div>
 				<div <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>>
 					<label>Password</label>
 					<input type="password" name="password" value="<?php echo $password; ?>" placeholder="Password">
@@ -191,8 +190,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					<input type="reset" class="button" value="Reset">
 				</div>
 				<p>Already have an account? <a href="login.php">Login here</a>.</p>
-			</fieldset>
         </form>
-    </div>    
+    </div>
+
+    <footer>
+        <img src="logo1.png" alt="midsommar music logo" height="100" width="100">
+       <ul>
+         <li><h4>Join Us</h4></li>
+         <li><a href="register.php">Sign-Up</a></li>
+         <li><a href="login.php">Log-in</a></li>
+         <li><a href="Purchase.php">Purchase Tickets</a></li>
+         <li><a href="News.html">News</a></li>
+       </ul>
+       <ul>
+         <li><h4>Concerts</h4></li>
+         <li><a href="concerts.html">Concerts</a></li>
+         <li><a href="pop.php">Pop Concerts</a></li>
+         <li><a href="rock.php">Rock Concerts</a></li>
+         <li><a href="edm.php">EDM Concerts</a></li>
+         <li><a href="metal.php">Metal Concerts</a></li>
+         <li><a href="all.php">All Concerts</a></li>
+       </ul>
+       <ul>
+         <li><h4>Links</h4></li>
+         <li><a href="about.html">About</a></li>
+         <li><a href="contact.php">Contact Us</a></li>
+         <li><a href="adminlogin.php">Admin</a></li>
+       </ul>
+    </footer>
 </body>
 </html>
