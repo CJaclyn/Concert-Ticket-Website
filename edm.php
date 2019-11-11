@@ -16,7 +16,7 @@
   <nav>
     <ul>
       <li><a href="index.php">Home</a></li>
-      <li><a href="concerts.html">Concerts<i class="down"></i></a>
+      <li><a href="concerts.php">Concerts<i class="down"></i></a>
         <ul>
           <li><a href="pop.php">Pop</a></li>
           <li><a href="rock.php">Rock</a></li>
@@ -26,8 +26,8 @@
         </ul>
       </li>
       <li><a href="Purchase.php">Purchase Tickets</a></li>
-      <li><a href="News.html">News</a></li>
-      <li><a href="profile.html">Profile</a></li>
+      <li><a href="News.php">News</a></li>
+      <li><a href="profile.php">Profile</a></li>
     </ul>
   </nav>
 
@@ -61,32 +61,8 @@
   }
 
   mysqli_close($link);
+    include('footer.html');
    ?>
 
-   <footer>
-       <img src="logo1.png" alt="midsommar music logo" height="100" width="100">
-      <ul>
-        <li><h4>Join Us</h4></li>
-        <li><a href="register.php">Sign-Up</a></li>
-        <li><a href="login.php">Log-in</a></li>
-        <li><a href="Purchase.php">Purchase Tickets</a></li>
-        <li><a href="News.html">News</a></li>
-      </ul>
-      <ul>
-        <li><h4>Concerts</h4></li>
-        <li><a href="concerts.html">Concerts</a></li>
-        <li><a href="pop.php">Pop Concerts</a></li>
-        <li><a href="rock.php">Rock Concerts</a></li>
-        <li><a href="edm.php">EDM Concerts</a></li>
-        <li><a href="metal.php">Metal Concerts</a></li>
-        <li><a href="all.php">All Concerts</a></li>
-      </ul>
-      <ul>
-        <li><h4>Links</h4></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.php">Contact Us</a></li>
-        <li><a href="adminlogin.php">Admin</a></li>
-      </ul>
-   </footer>
 </body>
 </html>

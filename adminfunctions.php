@@ -15,6 +15,26 @@ function login(){
 function isLoggedIn()
 {
 	if (isset($_SESSION['valid_admin'])) {
+		echo "
+		<nav>
+		  <ul>
+		    <li><a href=\"index.php\">Home</a></li>
+		    <li><a href=\"concerts.php\">Concerts<i class=\"down\"></i></a>
+		      <ul>
+		        <li><a href=\"pop.php\">Pop</a></li>
+		        <li><a href=\"rock.php\">Rock</a></li>
+		        <li><a href=\"edm.php\">EDM</a></li>
+		        <li><a href=\"metal.php\">Metal</a></li>
+		        <li><a href=\"all.php\">All</a></li>
+		      </ul>
+		    </li>
+		    <li><a href=\"Purchase.php\">Purchase Tickets</a></li>
+		    <li><a href=\"News.php\">News</a></li>
+		    <li><a href=\"profile.php\">Profile</a></li>
+		    <li><a href=\"adminlogout.php\">Logout</a></li>
+		  </ul>
+		</nav>";
+		
 		return true;
 	}else{
 		return false;
@@ -34,7 +54,7 @@ function isNotLoggedIn(){
 	<nav>
 		<ul>
 			<li><a href=\"index.php\">Home</a></li>
-			<li><a href=\"concerts.html\">Concerts<i class=\"down\"></i></a>
+			<li><a href=\"concerts.php\">Concerts<i class=\"down\"></i></a>
 				<ul>
 					<li><a href=\"pop.php\">Pop</a></li>
 					<li><a href=\"rock.php\">Rock</a></li>
@@ -44,8 +64,8 @@ function isNotLoggedIn(){
 				</ul>
 			</li>
 			<li><a href=\"Purchase.php\">Purchase Tickets</a></li>
-			<li><a href=\"news.html\">News</a></li>
-			<li><a href=\"profile.html\">Profile</a></li>
+			<li><a href=\"News.php\">News</a></li>
+			<li><a href=\"profile.php\">Profile</a></li>
 		</ul>
 	</nav>";
 
