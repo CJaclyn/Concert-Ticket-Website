@@ -43,13 +43,17 @@ nav ul li{
   position: relative;
 }
 
-nav ul li a{
+nav ul li a, #user{
   padding: 1rem 2rem;
   display: block;
   text-decoration: none;
   color: black;
   font-weight: bold;
   font-size: 1.3rem;
+}
+
+#user {
+  color: red;
 }
 
 nav ul li ul{

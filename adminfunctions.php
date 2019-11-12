@@ -32,9 +32,10 @@ function isLoggedIn()
 		    <li><a href=\"News.php\">News</a></li>
 		    <li><a href=\"profile.php\">Profile</a></li>
 		    <li><a href=\"adminlogout.php\">Logout</a></li>
+				<li><span id='user'>Admin</a></li>
 		  </ul>
 		</nav>";
-		
+
 		return true;
 	}else{
 		return false;
