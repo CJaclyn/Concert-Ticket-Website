@@ -98,7 +98,7 @@ function isLoggedIn(){
 		    <li><a href=\"News.php\">News</a></li>
 		    <li><a href=\"profile.php\">Profile</a></li>
 		    <li><a href=\"logout.php\">Logout</a></li>
-        <li><span id='login'>$username</span></a></li>
+        <li><span id='user'>$username</span></a></li>
 		  </ul>
 		</nav>";
     return true;
