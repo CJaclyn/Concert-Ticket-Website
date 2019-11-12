@@ -1,13 +1,7 @@
 <?php
 // Initialize the session
 session_start();
-
-// Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
-    exit;
-	}
-
+include('loginfunctions.php');
 require_once "config.php";
 
 
@@ -165,29 +159,7 @@ $(document).ready(function() {
   <header>
   <img src="logo1.png" alt="midsommar music logo" height="55" width="55">
   </header>
-  <nav>
-    <ul>
-      <li><a href="index.php">Home</a></li>
-      <li><a href="concerts.php">Concerts<i class="down"></i></a>
-        <ul>
-          <li><a href="pop.php">Pop</a></li>
-          <li><a href="rock.php">Rock</a></li>
-          <li><a href="edm.php">EDM</a></li>
-          <li><a href="metal.php">Metal</a></li>
-          <li><a href="all.php">All</a></li>
-        </ul>
-      </li>
-      <li><a href="Purchase.php">Purchase Tickets</a></li>
-      <li><a href="News.php">News</a></li>
-      <li><a href="profile.php">Profile</a></li>
-	  <li>  <?php if(isset($_SESSION['id'])){ ?>
-				<a class="link" href="logout.php" style="text-decoration:none">logout</a>
-			<?php }else{ ?>
-					<a class="link" href="login.php" style="text-decoration:none">login</a>
-			<?php } ?>
-	  </li>
-      </ul>
-  </nav>
+ <?php isLoggedIn() ?>
 
 <h1>Purchase Tickets</h1>
 
@@ -199,11 +171,10 @@ $(document).ready(function() {
 				<div <?php echo (!empty($concert_err)) ? 'has-error' : ''; ?>>
 				<label>Select Concert</label>
 						<?php
-							$db = mysqli_connect('localhost','root','','project') or die('Error connecting to MySQL server.');
 
 							$sql = "SELECT c.Artist, t.Price from concerts as c
 							INNER JOIN tickets as t on t.concertID = c.concertID";
-							$result = mysqli_query($db, $sql);
+							$result = mysqli_query($link, $sql);
 
 							if ($result->num_rows > 0) {
 								echo "<select class = 'calculate' id='concert' name='Artist'>";

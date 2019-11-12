@@ -1,4 +1,6 @@
 <?php
+session_start();
+include('loginfunctions.php');
 
 require_once "config.php";
 
@@ -121,29 +123,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <header>
   <img src="logo1.png" alt="midsommar music logo" height="55" width="55">
   </header>
-  <nav>
-	<ul>
-		<li><a href="index.php">Home</a></li>
-		<li><a href="concerts.php">Concerts<i class="down"></i></a>
-			<ul>
-				<li><a href="pop.php">Pop</a></li>
-				<li><a href="rock.php">Rock</a></li>
-				<li><a href="edm.php">EDM</a></li>
-				<li><a href="metal.php">Metal</a></li>
-				<li><a href="all.php">All</a></li>
-			</ul>
-		</li>
-		<li><a href="Purchase.php">Purchase Tickets</a></li>
-		<li><a href="News.php">News</a></li>
-		<li><a href="profile.php">Profile</a></li>
-		<li><?php if(isset($_SESSION['id'])){ ?>
-				<a class="link" href="logout.php" style="text-decoration:none">logout</a>
-			<?php }else{ ?>
-				<a class="link" href="login.php" style="text-decoration:none">login</a>
-			<?php } ?>
-		</li>
-    </ul>
-  </nav>
+  <?php if(isLoggedIn()){
+    header('location:index.php');
+  } ?>
+
     <h1>Sign Up</h1>
     <div class="form">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
