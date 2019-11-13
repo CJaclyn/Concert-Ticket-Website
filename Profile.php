@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
@@ -51,7 +50,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 require_once("config.php");
 
 if(isset($_POST['upload_profile'])){
- 
+
   $profile = $_FILES['file']['name'];
   $target_dir = "Profile/";
   $target_file = $target_dir . basename($_FILES["file"]["name"]);
@@ -62,28 +61,28 @@ if(isset($_POST['upload_profile'])){
 
 
   if( in_array($imageFileType,$extensions_arr) ){
- 
+
      $query = "UPDATE users SET prof_picture = '".$profile."' WHERE username='".$_SESSION['username']."'";
      mysqli_query($link,$query);
-  
+
      move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$profile);
 
   }
- 
+
 }
-?> 
+?>
 
 
-	<h1><?php echo $_SESSION['username']; ?>'s Profile</h1>	
+	<h1><?php echo $_SESSION['username']; ?>'s Profile</h1>
 	<section>
 		<div class="image">
 		<?php
 		$sql = "SELECT * FROM users WHERE username='".$_SESSION['username']."'";
 		$result = mysqli_query($link,$sql);
 		$row = mysqli_fetch_array($result);
-		
+
 		?><img src="Profile/<?php echo $row['prof_picture']; ?>" height="400" width="400" class="img">
-		
+
 		<form method="post" action="" enctype='multipart/form-data'>
 		<p>Select New Profile Picture</p>
 		<input class = "button" type='file' name='file' />
@@ -92,7 +91,7 @@ if(isset($_POST['upload_profile'])){
 		</div>
 		<br>
 		<br>
-		<div class = "wrapper">	
+		<div class = "wrapper">
 		<div>
 	    <?php
 		$sql = "SELECT * FROM users where username='".$_SESSION['username']."'";
@@ -116,9 +115,9 @@ if(isset($_POST['upload_profile'])){
 				echo "<td>Email: </td>";
 				echo "<td>" . $row['Email'] . "</td>";
 				echo "<td>State:</td>";
-				echo "<td>" . $row['Email'] . "</td>";
+				echo "<td>" . $row['State'] . "</td>";
 				echo "</tr>";
-				
+
 		}
 		echo "</table>";
 		echo "</fieldset";
@@ -145,24 +144,24 @@ if(isset($_POST['upload_profile'])){
 </div>
 <section class="a2">
 	<h3>Favorite Bands/Artists</h3>
-	<!--<form method="post" action="">      
-    <fieldset>      
+	<!--<form method="post" action="">
+    <fieldset>
 		<?php
 		$sql = "SELECT * FROM artists";
 		$result = mysqli_query($link,$sql);
 		$row = mysqli_fetch_array($result);
-		
+
 		while($row = mysqli_fetch_array($result)){
 			echo "<input type='checkbox' name='".$row['Artist_name']. "'> " .$row['Artist_name'] ;
 		}
 
 		?>
-        <input type="checkbox" name="favorite_pet" value="Cats">Cats<br>      
-        <input type="checkbox" name="favorite_pet" value="Dogs">Dogs<br>      
-        <input type="checkbox" name="favorite_pet" value="Birds">Birds<br>      
-        <br>      
-        <input type="submit" value="Submit now" />      
-    </fieldset>      
+        <input type="checkbox" name="favorite_pet" value="Cats">Cats<br>
+        <input type="checkbox" name="favorite_pet" value="Dogs">Dogs<br>
+        <input type="checkbox" name="favorite_pet" value="Birds">Birds<br>
+        <br>
+        <input type="submit" value="Submit now" />
+    </fieldset>
 </form>
 -->
 	<table style ="width: 100%">
@@ -186,7 +185,7 @@ if(isset($_POST['upload_profile'])){
 	<h3>Concert Pictures</h3>
 <?php
 if(isset($_POST['upload_concert'])){
- 
+
   $name = $_FILES['file']['name'];
   $target_dir2 = "upload/";
   $target_file2 = $target_dir2 . basename($_FILES["file"]["name"]);
@@ -199,14 +198,14 @@ if(isset($_POST['upload_concert'])){
 
 
   if( in_array($imageFileType2,$extensions_arr2) ){
- 
+
      $query = "REPLACE INTO images(user_id, name, username) values('".$_SESSION['id']."', '".$name."', '".$_SESSION['username']."')";
      mysqli_query($link,$query);
-  
+
      move_uploaded_file($_FILES['file']['tmp_name'],$target_dir2.$name);
 
   }
- 
+
 }
 ?>
 
@@ -222,7 +221,7 @@ $result = mysqli_query($link,$sql);
 $row = mysqli_fetch_array($result);
 
 
-echo"<tr>"; 
+echo"<tr>";
 
 $i=0;
 while($row = mysqli_fetch_array($result)) {
@@ -232,14 +231,14 @@ while($row = mysqli_fetch_array($result)) {
 
   if($i%4==0)
   {
-    echo"</tr>"; 
+    echo"</tr>";
   }
 if($i%4!=0)
-{   
+{
    echo"</tr>";
-}    
+}
 
-}      
+}
 mysqli_close($link);
 ?>
 </section>

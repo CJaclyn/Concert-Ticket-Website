@@ -123,4 +123,11 @@ function isLoggedIn(){
     return false;
   }
 }
+
+function logout(){
+  if (isset($_SESSION['loggedin'])) {
+  $_SESSION = array();
+  session_destroy();
+}
+}
 ?>
