@@ -34,7 +34,8 @@ Street varchar(25),
 City varchar(25),
 State varchar(25),
 prof_picture varchar(50),
-created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+admin tinyint(1) not null default '0'
 );
 
 create table orders (
@@ -64,4 +65,4 @@ user_id int(11) NOT NULL,
 username varchar(255) NOT NULL,
 name varchar(255) NOT NULL,
 unique (user_id, name)
-)
+);

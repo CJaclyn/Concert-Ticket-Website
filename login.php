@@ -31,11 +31,11 @@ $username_err = $password_err = "";
 			<p>Please fill in your credentials to login.</p>
 				<div <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>>
 					<label>Username</label>
-					<input type="text" name="username" value="<?php echo $username; ?>" placeholder="Username">
+					<input type="text" name="username" value="<?php echo $username; ?>" placeholder="Username" required>
 					<br>
 					<span class = "error"><?php echo $username_err; ?></span>
 				</div>
-				<div <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>>
+				<div <?php echo (!empty($password_err)) ? 'has-error' : ''; ?> required>
 					<label>Password</label>
 					<input type="password" name="password" placeholder="Password">
 					<br>
