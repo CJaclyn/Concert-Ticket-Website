@@ -1,3 +1,4 @@
+drop database if exists ics325fa1907;
 create database ics325fa1907;
 use ics325fa1907;
 
@@ -13,7 +14,7 @@ create table concerts
 (concertID int(11) unsigned not null auto_increment,
 Artist varchar(25) not null,
 Street varchar(25) not null,
-City varchar(25) not null, 
+City varchar(25) not null,
 State char(2) not null default 'MN',
 Date date not null,
 Time time not null default '18:00:00',
@@ -36,25 +37,25 @@ prof_picture varchar(50),
 created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+create table orders (
+orderID int(11) unsigned not null auto_increment,
+userID int(11) not null,
+amount decimal(10,2),
+primary key (orderID),
+constraint FK_userID foreign key (userID)
+references users(userID)
+);
+
 create table tickets (
 ticketID int(11) unsigned not null auto_increment,
-concertID int(11) not null,
-orderID int(11),
+concertID int(11) unsigned not null,
+orderID int(11) unsigned not null,
 Price decimal(10,2) not null,
 primary key (ticketID),
 constraint FK_concertID foreign key (concertID)
 references concerts(concertID),
 constraint FK_orderID foreign key (orderID)
 references orders(orderID)
-);
-
-create table orders (
-orderID int(11) unsigned not null auto_increment,
-userID int(11),
-amount decimal(10,2),
-primary key (orderID),
-constraint FK_userID foreign key (userID)
-references users(userID)
 );
 
 create table images (

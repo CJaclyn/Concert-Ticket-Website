@@ -23,7 +23,7 @@ include('loginfunctions.php');
   <h1>Search Results</h1>
   <?php
   require_once "config.php";
-  $searchInput = $_POST['userSrch'];
+  $searchInput = strip_tags($_POST['userSrch']);
 
   if(!empty($searchInput)){
     $stmt = mysqli_prepare($link,"SELECT Artist, artists.Image, Street, City, State, DATE_FORMAT(Date, '%a %b %e %Y') Date, TIME_FORMAT(Time, '%h %i %p') Time
