@@ -8,19 +8,16 @@ include('loginfunctions.php');
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="generalstylesheet.css">
-<link rel="stylesheet" type="text/css" href="News.css">
+<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/generalstylesheet.css">
+<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/News.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-  <img src="logo1.png" alt="midsommar music logo" height="55" width="55">
-  </header>
-
+  <?php include('header.html');?>
   <?php isLoggedIn() ?>
 
 <div class ="header centered">
-<img src="news_header.jfif">
+<img src="/Concert-Ticket-Website/images/news_header.jfif">
 <h1>News</h1>
 </div>
 

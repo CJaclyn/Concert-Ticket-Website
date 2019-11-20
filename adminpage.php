@@ -9,15 +9,13 @@
 <title>Admin Page</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="generalstylesheet.css">
-<link rel="stylesheet" href="adminpage.css">
-<link rel="stylesheet" href="adminerror.css">
+<link rel="stylesheet" href="/Concert-Ticket-Website/css/generalstylesheet.css">
+<link rel="stylesheet" href="/Concert-Ticket-Website/css/adminpage.css">
+<link rel="stylesheet" href="/Concert-Ticket-Website/css/adminerror.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-  <img src="logo1.png" alt="midsommar music logo" height="55" width="55">
-  </header>
+<?php include('header.html');?>
 
 <?php
     if (isLoggedIn())

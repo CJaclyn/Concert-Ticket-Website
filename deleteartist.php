@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Delete Concert</title>
+<title>Delete Artist</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/Concert-Ticket-Website/css/generalstylesheet.css">
@@ -21,7 +21,7 @@
     if (isLoggedIn())
     {
       require_once "config.php";
-      echo "<h1 id='delete'>Delete Concert</h1>";
+      echo "<h1 id='delete'>Delete Artist</h1>";
       echo "<form method='post'>";
       echo "<label>Confirm Deletion</label>";
       echo "<button type='submit' name='delete' id='deletebut'>Delete</button>";
@@ -37,11 +37,11 @@
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $id = $_GET['id'];
 
-    $query = "DELETE FROM concerts WHERE concertID='".$id."'";
+    $query = "DELETE FROM artists WHERE artistID='".$id."'";
 
     if(mysqli_query($link, $query)){
-      echo "<script type='text/javascript'>alert('Concert successfully deleted!');</script>";
-      header( "refresh:.5;url=manageconcerts.php" );
+      echo "<script type='text/javascript'>alert('Artist successfully deleted!');</script>";
+      header( "refresh:.5;url=manageartists.php" );
     }else {
       echo "ERROR: Could not able to execute $query. ".mysqli_error($db);
     }

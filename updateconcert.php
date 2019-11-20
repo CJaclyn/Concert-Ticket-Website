@@ -9,27 +9,25 @@
 <title>Update Concert</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="generalstylesheet.css">
-<link rel="stylesheet" href="update.css">
-<link rel="stylesheet" href="adminerror.css">
+<link rel="stylesheet" href="/Concert-Ticket-Website/css/generalstylesheet.css">
+<link rel="stylesheet" href="/Concert-Ticket-Website/css/update.css">
+<link rel="stylesheet" href="/Concert-Ticket-Website/css/adminerror.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-  <img src="logo1.png" alt="midsommar music logo" height="55" width="55">
-  </header>
+<?php include('header.html');?>
 
 <?php
+  $currDate = date("Y-m-d");
     if (isLoggedIn())
     {
       echo "<h1 id='update'>Update Concert</h1>";
       require_once "config.php";
 
-      echo "
-        <form method='POST' action=''>
+      echo "<form method='POST' action=''>
           <label for='date'>Date</label>
-          <input type='date' name='date' id='date'></input>
-          <label for='time'>Time</label>
+          <input type='date' name='date' id='date' min='".$currDate."'></input>";
+      echo "<label for='time'>Time</label>
           <input type='time' name='time' id='time'></input>
           <div id='centered'>
           <button type='submit'>Update</button>
@@ -44,10 +42,12 @@
   ?>
 
   <?php
+  require('functions.php');
+
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $id = $_GET['id'];
-    $date = $_POST['date'];
-    $time = $_POST['time'];
+    $id = strip_tags($_GET['id']);
+    $date = strip_tags($_POST['date']);
+    $time = strip_tags($_POST['time']);
 
     $dateQuery = mysqli_prepare($link, "UPDATE concerts SET Date = ? WHERE concertID = '".$id."'");
     $timeQuery = mysqli_prepare($link, "UPDATE concerts SET Time = ? WHERE concertID = '".$id."'");

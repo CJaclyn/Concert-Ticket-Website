@@ -6,7 +6,7 @@ create table artists
 (artistID int(11) unsigned not null auto_increment,
 Artist_name varchar(25) not null unique,
 Genre char(5) not null,
-Image varchar(45) not null,
+Image varchar(45),
 primary key (artistID)
 );
 
@@ -20,7 +20,8 @@ Date date not null,
 Time time not null default '18:00:00',
 primary key (concertID),
 constraint FK_artist foreign key (Artist)
-references artists(Artist_name)
+  references artists(Artist_name)
+  ON DELETE CASCADE
 );
 
 create table users (
@@ -44,7 +45,7 @@ userID int(11) not null,
 amount decimal(10,2),
 primary key (orderID),
 constraint FK_userID foreign key (userID)
-references users(userID)
+  references users(userID)
 );
 
 create table tickets (
@@ -54,9 +55,10 @@ orderID int(11) unsigned not null,
 Price decimal(10,2) not null,
 primary key (ticketID),
 constraint FK_concertID foreign key (concertID)
-references concerts(concertID),
+  references concerts(concertID)
+  ON DELETE CASCADE,
 constraint FK_orderID foreign key (orderID)
-references orders(orderID)
+  references orders(orderID)
 );
 
 create table images (

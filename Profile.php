@@ -12,14 +12,12 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 <title>Profile Page</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="generalstylesheet.css">
-<link rel="stylesheet" type="text/css" href="Profile.css">
+<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/generalstylesheet.css">
+<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/Profile.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-  <img src="logo1.png" alt="midsommar music logo" height="55" width="55">
-  </header>
+  <?php include('header.html');?>
   <nav>
     <ul>
       <li><a href="index.php">Home</a></li>

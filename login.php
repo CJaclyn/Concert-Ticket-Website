@@ -12,14 +12,12 @@ $username_err = $password_err = "";
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="generalstylesheet.css">
-	<link rel="stylesheet" type="text/css" href="login.css">
+    <link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/generalstylesheet.css">
+	<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/login.css">
 	<link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-  <img src="logo1.png" alt="midsommar music logo" height="55" width="55">
-  </header>
+  <?php include('header.html');?>
   <?php if(isLoggedIn()){
     header('location:index.php');
   } ?>

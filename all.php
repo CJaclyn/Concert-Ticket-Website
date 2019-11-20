@@ -9,15 +9,14 @@ include('loginfunctions.php');
 <title>all Concerts</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="generalstylesheet.css">
-<link rel="stylesheet" href="genre.css">
-<link rel="stylesheet" href="displayconcerts.css">
+<link rel="stylesheet" href="/Concert-Ticket-Website/css/generalstylesheet.css">
+<link rel="stylesheet" href="/Concert-Ticket-Website/css/genre.css">
+<link rel="stylesheet" href="/Concert-Ticket-Website/css/displayconcerts.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-  <img src="logo1.png" alt="midsommar music logo" height="55" width="55">
-  </header>
+<?php include('header.html');?>
+
   <?php isLoggedIn() ?>
 
   <h1>all Concerts</h1>
@@ -25,7 +24,8 @@ include('loginfunctions.php');
   <?php
   require_once "config.php";
 
-  $allQuery = "SELECT Artist, artists.Image, Street, City, State, DATE_FORMAT(Date, '%a %b %e %Y') Date, TIME_FORMAT(Time, '%h %i %p') Time
+  $allQuery = "SELECT Artist, artists.Image, Street, City, State,
+  DATE_FORMAT(Date, '%a %b %e %Y') Date, TIME_FORMAT(Time, '%h %i %p') Time
   FROM concerts
   INNER JOIN artists ON artists.Artist_name = concerts.Artist
   ORDER BY date ASC, time ASC";

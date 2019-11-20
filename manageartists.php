@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Manage Concerts</title>
+<title>Manage Artists</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/Concert-Ticket-Website/css/generalstylesheet.css">
@@ -20,23 +20,21 @@
 <?php
     if (isLoggedIn())
     {
-      echo "<h1>Manage Concerts</h1>";
-      echo "<div id='add'><a href='addconcert.php'>Add Concert</a></div>";
+      echo "<h1>Manage Artists</h1>";
+      echo "<div id='add'><a href='addartist.php'>Add Artists</a></div>";
       require_once "config.php";
 
-      $allQuery = "SELECT * FROM concerts
-      ORDER BY date ASC, time ASC";
+      $allQuery = "SELECT Artist_name, Genre, artistID FROM artists
+      ORDER BY Artist_name ASC";
 
       $all = mysqli_query($link, $allQuery);
       mysqli_query($link, $allQuery) or die('Error querying database.');
       echo "<div id='container'>";
       while ($row = mysqli_fetch_array($all)) {
         echo "<div class=\"row\">";
-        echo "<h3>".$row['Artist']."<br />"."</h3>";
-        echo $row['Date']." ".$row['Time']."<br />";
-        echo $row['Street'].", ".$row['City'].", ".$row['State']."<br />";
-        echo "<a href='updateconcert.php?id=".$row['concertID']."'>Update</a>";
-        echo "<a href='deleteconcert.php?id=".$row['concertID']."'>Delete</a>";
+        echo "<h3>".$row['Artist_name']."<br />"."</h3>";
+        echo "Genre: ".$row['Genre']."<br />";
+        echo "<a href='deleteartist.php?id=".$row['artistID']."'>Delete</a>";
         echo "</div>";
       }
       echo "</div>";
