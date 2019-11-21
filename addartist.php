@@ -1,6 +1,8 @@
 <?php
   session_start();
   include('adminfunctions.php');
+  require_once "config.php";
+  include('functions.php');
 ?>
 
 <!DOCTYPE html>
@@ -15,12 +17,59 @@
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="page-wrap">
 <?php include('header.html');?>
+
 <?php
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+  $artist = htmlspecialchars($_POST['artistname']);
+  $genre = $_POST['genre'];
+
+  if(regexCheck($artist)){
+    //select query
+    $selectQ = $link->prepare("SELECT COUNT(1) FROM artists WHERE Artist_name = ?");
+    $selectQ->bind_param("s", $artist);
+
+    if($selectQ->execute()){
+      $selectQ->bind_result($count);
+      $selectQ->fetch();
+
+      if ($count == 0){
+        $selectQ->close();
+
+        //insert query
+        $insertQ = $link->prepare("INSERT INTO artists(Artist_name, Genre) VALUES(?, ?)");
+        $insertQ->bind_param("ss", $artist, $genre);
+
+        if($insertQ->execute()){
+          echo "<script type='text/javascript'>alert('Artist successfully added!');</script>";
+          header( "refresh:.5;url=manageartists.php" );
+
+        }else {
+          echo "ERROR adding artist.<br>";
+          echo mysqli_error($link);
+
+        }
+      }else {
+        $selectQ->close();
+        echo "Artist already exists!";
+
+      }
+    }else{
+      echo "ERROR selecting artist query.<br>";
+      echo mysqli_error($link);
+
+    }
+    $link->close();
+
+  }else {
+    echo "<script type='text/javascript'>alert('Please try again. The artist name can only contain numbers, letters, hyphens, periods, and or spaces.');</script>";
+  }
+}
+
     if (isLoggedIn())
     {
       echo "<h1>Add Artist</h1>";
-      require_once "config.php";
 
       $currDate = date("Y-m-d");
 
@@ -28,7 +77,7 @@
       echo "<form method='POST' action=''>";
       echo "<fieldset>";
       echo "<legend>Artist</legend>";
-      echo "<label for='artistname'>Artist<label>";
+      echo "<label for='artistname'>Artist</label>";
       echo "<input type='text' name='artistname' id='artistname' required max='25'>";
       echo "<label for='genre'>Genre</label>";
       echo "<select name='genre' id='genre'>";
@@ -54,33 +103,7 @@
       isNotLoggedIn();
     }
   ?>
-
+</div>
   <?php
-  include('functions.php');
-
-  if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $artist = strip_tags($_POST['artistname']);
-    $genre = $_POST['genre'];
-
-    if(regexCheck($artist)){
-      $insertQuery = mysqli_prepare($link, "INSERT INTO artists(artistID, Artist_name, Genre) VALUES(DEFAULT, ?, ?)");
-      mysqli_stmt_bind_param($insertQuery,"ss", $artist, $genre);
-
-      if($insertQuery->execute()){
-        echo "<script type='text/javascript'>alert('Artist successfully added!');</script>";
-        header( "refresh:.5;url=manageartists.php" );
-      }
-      else {
-        echo "ERROR adding artist.";
-        //echo mysqli_error($link);
-      }
-      mysqli_close($link);
-
-    }else {
-      echo "<script type='text/javascript'>alert('Please try again. The artist name
-      can only contain numbers, letters, hyphens, periods, and or spaces.');</script>";
-    }
-  }
-
     include('footer.html');
    ?>

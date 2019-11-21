@@ -74,18 +74,18 @@
   include('functions.php');
 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $artist = strip_tags($_POST['artist']);
-    $street = strip_tags($_POST['street']);
-    $city = strip_tags($_POST['city']);
-    $state = strip_tags($_POST['state']);
-    $date = strip_tags($_POST['date']);
-    $time = strip_tags($_POST['time']);
+    $artist = htmlspecialchars($_POST['artist']);
+    $street = htmlspecialchars($_POST['street']);
+    $city = htmlspecialchars($_POST['city']);
+    $state = htmlspecialchars($_POST['state']);
+    $date = htmlspecialchars($_POST['date']);
+    $time = htmlspecialchars($_POST['time']);
 
-    if(regexCheck($artist) && regexCheck($street) && regexCheck($city) && regexCheck($state)){
-      $insertQuery = mysqli_prepare($link, "INSERT INTO concerts VALUES(DEFAULT, ?, ?, ?, ?, ?, ?)");
-      mysqli_stmt_bind_param($insertQuery,"ssssss", $artist, $street, $city, $state, $date, $time);
+    if(regexCheck($artist) && regexCheck($street) && regexCheck($city) && ctype_alpha($state)){
+      $insertQ = $link->prepare("INSERT INTO concerts VALUES(DEFAULT, ?, ?, ?, ?, ?, ?)");
+      $insertQ->bind_param("ssssss", $artist, $street, $city, $state, $date, $time);
 
-      if($insertQuery->execute()){
+      if($insertQ->execute()){
         echo "<script type='text/javascript'>alert('Concert successfully added!');</script>";
         header( "refresh:.5;url=manageconcerts.php" );
       }
@@ -94,11 +94,10 @@
         //echo mysqli_error($link);
       }
 
-      mysqli_close($link);
+      $link->close();
 
     }else {
-      echo "<script type='text/javascript'>alert('Please try again. Inputs can only contain numbers,
-      letters, hyphens, periods, and or spaces.');</script>";
+      echo "<script type='text/javascript'>alert('Please try again. Only contain numbers, letters, hyphens, periods, and spaces are allowed. State can only be letters.');</script>";
     }
   }
 

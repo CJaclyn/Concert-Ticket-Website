@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/Concert-Ticket-Website/css/generalstylesheet.css">
-<link rel="stylesheet" href="/Concert-Ticket-Website/css/manage.css">
+<link rel="stylesheet" href="/Concert-Ticket-Website/css/manageartists.css">
 <link rel="stylesheet" href="/Concert-Ticket-Website/css/adminerror.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
@@ -32,8 +32,7 @@
       echo "<div id='container'>";
       while ($row = mysqli_fetch_array($all)) {
         echo "<div class=\"row\">";
-        echo "<h3>".$row['Artist_name']."<br />"."</h3>";
-        echo "Genre: ".$row['Genre']."<br />";
+        echo "<h3>".$row['Artist_name']." <span id='right'>".$row['Genre']."</span></h3>";
         echo "<a href='deleteartist.php?id=".$row['artistID']."'>Delete</a>";
         echo "</div>";
       }
