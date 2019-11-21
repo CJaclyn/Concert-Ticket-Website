@@ -35,7 +35,7 @@ function login(){
                       mysqli_stmt_bind_result($stmt, $userID, $username, $hashed_password);
 
                       if(mysqli_stmt_fetch($stmt)){
-                          if(password_verify($password, $hashed_password)){
+                          if(SHA1($password) == $hashed_password){
                               session_start();
 
                               $_SESSION["loggedin"] = true;
