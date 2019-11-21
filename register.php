@@ -96,7 +96,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
             $param_username = $username;
-            $param_password = password_hash($password, PASSWORD_DEFAULT);
+            $param_password = SHA1($password);
 			      $param_email = $email;
 			      $param_firstname = $firstname;
 			      $param_lastname = $lastname;
