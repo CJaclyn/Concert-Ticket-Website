@@ -2,9 +2,7 @@
 session_start();
 include('loginfunctions.php');
 login();
-
-$username = $password = "";
-$username_err = $password_err = "";
+global $username_err, $username, $password_err, $password;
 ?>
 
 <!DOCTYPE html>

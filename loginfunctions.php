@@ -4,6 +4,9 @@ function login(){
   require_once "config.php";
 
   if($_SERVER["REQUEST_METHOD"] == "POST"){
+    global $username_err, $username, $password_err, $password;
+    $username = $password = "";
+    $username_err = $password_err = "";
 
       // Check if username is empty
       if(empty(trim($_POST["username"]))){
