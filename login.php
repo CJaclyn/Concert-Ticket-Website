@@ -31,9 +31,9 @@ global $username_err, $username, $password_err, $password;
 					<br>
 					<span class = "error"><?php echo $username_err; ?></span>
 				</div>
-				<div <?php echo (!empty($password_err)) ? 'has-error' : ''; ?> required>
+				<div <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>>
 					<label>Password</label>
-					<input type="password" name="password" placeholder="Password">
+					<input type="password" name="password" placeholder="Password" required>
 					<br>
 					<span class = "error"><?php echo $password_err; ?></span>
 				</div>
