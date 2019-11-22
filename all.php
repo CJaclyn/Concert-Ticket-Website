@@ -6,7 +6,7 @@ include('loginfunctions.php');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>all Concerts</title>
+<title>All Concerts</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/Concert-Ticket-Website/css/generalstylesheet.css">
@@ -19,7 +19,7 @@ include('loginfunctions.php');
 
   <?php isLoggedIn() ?>
 
-  <h1>all Concerts</h1>
+  <h1>All Concerts</h1>
 
   <?php
   require_once "config.php";

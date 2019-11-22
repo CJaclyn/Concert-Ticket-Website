@@ -45,7 +45,7 @@ nav ul li{
   position: relative;
 }
 
-nav ul li a, #user{
+nav ul li a{
   padding: 1rem 2rem;
   display: block;
   text-decoration: none;

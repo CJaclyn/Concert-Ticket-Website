@@ -1,0 +1,85 @@
+body {
+  background-color: orange;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 7rem;
+  color: white;
+  text-shadow: 1.5px 1.5px red;
+  font-size: 2.5rem;
+}
+
+#admin-link {
+  text-align: center;
+}
+
+#admin-link a {
+  color: red;
+  font-size: 1.3rem;
+  margin: 1rem;
+}
+
+#container {
+  margin-top: 5rem;
+  margin-bottom: 8rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
+}
+
+#container h2 {
+  text-align: center;
+  margin-top: 5rem;
+  font-size: 2rem;
+  margin-bottom: .5rem;
+  color: white;
+  text-shadow: 1.5px 1.5px red;
+}
+
+/*rows*/
+.user-row {
+  border-bottom: solid white;
+  padding: 1.5rem;
+}
+
+.user-row:first-of-type{
+  border-top: solid white;
+}
+
+.user-row:last-of-type{
+  border-bottom: none;
+}
+
+/*username*/
+.user-row h3 {
+  color: white;
+  font-size: 1.5rem;
+  margin-left: 5rem;
+  margin-bottom: 0;
+}
+
+.created-date {
+  margin-left: 5rem;
+  font-size: 1.1rem;
+  color: white;
+  opacity: 0.6;
+  margin-bottom: 1rem;
+}
+
+/*view more link for user*/
+.user-row a {
+  color: red;
+  margin-left: 5rem;
+  font-size: 1.2rem;
+}
+
+/*hovers*/
+.user-row h3:hover {
+  color: red;
+}
+
+#addadmin a:hover {
+  color: white;
+  transition: .5s;
+}

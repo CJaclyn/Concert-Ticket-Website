@@ -32,7 +32,7 @@ function isLoggedIn()
 		    <li><a href=\"News.php\">News</a></li>
 		    <li><a href=\"profile.php\">Profile</a></li>
 		    <li><a href=\"adminlogout.php\">Logout</a></li>
-				<li><span id='user'>Admin</a></li>
+				<li><a href='adminpage.php'><div id='user'>Admin</div></a></li>
 		  </ul>
 		</nav>";
 
@@ -71,6 +71,7 @@ function isNotLoggedIn(){
 	</nav>";
 
 	echo '<div id="error"><h1>You need to be logged in as admin to see this page.</h1>';
-	echo "<a href='index.php'>Go to homepage</a></div>";
+	echo "<p>Going to homepage now. . .</p></div>";
+	header("refresh:1.5; url=index.php");
 }
  ?>

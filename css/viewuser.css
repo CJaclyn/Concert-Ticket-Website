@@ -1,0 +1,64 @@
+body {
+  background-color: orange;
+}
+
+/*top = username header and delete link*/
+#top {
+  margin-top: 7rem;
+}
+
+#top h1 {
+  text-align: center;
+  color: white;
+  text-shadow: 1.5px 1.5px red;
+  font-size: 2.5rem;
+  margin-bottom: .5rem;
+}
+
+/*delete link*/
+#centered {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+#centered a {
+  color: red;
+  font-size: 1.2rem;
+}
+
+#container, #top {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*user info container*/
+#container {
+  padding: 1rem;
+  margin-bottom: 8rem;
+  background-color: red;
+}
+
+/*user type*/
+#container h2 {
+  color: white;
+  font-size: 1.8rem;
+  margin-bottom: .5rem;
+  text-align: center;
+}
+
+/*user info*/
+#container table {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.5rem;
+  color: white;
+}
+
+#container table td {
+  padding: 1rem 3rem;
+}
+
+#container td:first-child {
+
+}
