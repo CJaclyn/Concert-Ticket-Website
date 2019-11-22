@@ -17,7 +17,7 @@
 <body>
 <?php include('../header.html');?>
 <?php
-    if (isLoggedIn())
+    if (isLoggedInAdmin())
     {
       echo "<h1>Add Admin Permissions</h1>";
 
@@ -45,7 +45,7 @@
     }
     else
     {
-      isNotLoggedInAdmin();
+      isNotLoggedIn();
     }
   ?>
 

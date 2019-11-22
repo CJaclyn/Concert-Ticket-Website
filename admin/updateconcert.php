@@ -20,7 +20,7 @@
 
 <?php
   $currDate = date("Y-m-d");
-    if (isLoggedIn())
+    if (isLoggedInAdmin())
     {
       echo "<h1 id='update'>Update Concert</h1>";
 
@@ -37,7 +37,7 @@
     }
     else
     {
-      isNotLoggedInAdmin();
+      isNotLoggedIn();
     }
   ?>
 

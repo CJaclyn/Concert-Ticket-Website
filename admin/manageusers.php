@@ -20,7 +20,7 @@
 <?php include('../header.html');?>
 
 <?php
-    if (isLoggedIn())
+    if (isLoggedInAdmin())
     {
       echo "<h1>Manage Users</h1>";
       echo "<div id='admin-link'><a href='addadmin.php'>Add Admin Privileges</a>";
@@ -50,7 +50,7 @@
     }
     else
     {
-      isNotLoggedInAdmin();
+      isNotLoggedIn();
     }
 
       include('../footer.html');

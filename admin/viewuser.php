@@ -20,7 +20,7 @@
 <?php include('../header.html');?>
 
 <?php
-    if (isLoggedIn())
+    if (isLoggedInAdmin())
     {
       $username = $_GET['username'];
 
@@ -61,7 +61,7 @@
     }
     else
     {
-      isNotLoggedInAdmin();
+      isNotLoggedIn();
     }
 
       include('../footer.html');

@@ -66,6 +66,7 @@ function login(){
 
 function isLoggedIn(){
     if(isset($_SESSION['username'])) {
+      $username = $_SESSION['username'];
       echo "
   		<nav>
   		  <ul>
@@ -90,6 +91,7 @@ function isLoggedIn(){
       return true;
 
     }elseif (isset($_SESSION['valid_admin'])) {
+      $username = $_SESSION['valid_admin'];
   		echo "
   		<nav>
   		  <ul>
@@ -106,7 +108,7 @@ function isLoggedIn(){
   		    <li><a href=\"/Concert-Ticket-Website/Purchase.php\">Purchase Tickets</a></li>
   		    <li><a href=\"/Concert-Ticket-Website/News.php\">News</a></li>
   		    <li><a href=\"/Concert-Ticket-Website/admin/adminlogout.php\">Logout</a></li>
-  				<li><a href='/Concert-Ticket-Website/admin/adminpage.php'><div id='adminuser'>Admin</div></a></li>
+  				<li><a href='/Concert-Ticket-Website/admin/adminpage.php'><div id='adminuser'>$username</div></a></li>
   		  </ul>
   		</nav>";
 
@@ -130,7 +132,14 @@ function isLoggedIn(){
           <li><a href=\"login.php\">Login</a></li>
         </ul>
       </nav>";
+
     return false;
+  }
+}
+
+function isNotLoggedIn(){
+  if(!isset($_SESSION['loggedin'])){
+    header("Location: /Concert-Ticket-Website/login.php");
   }
 }
 
@@ -151,6 +160,9 @@ function loginAdmin(){
     $username = htmlspecialchars($_POST['username']);
     $password = SHA1($_POST['password']);
 
+    global $user_err, $pass_err;
+    $user_err = $pass_err = "";
+
     if(usernameRegex($username)){
       $selectUserQ = $link->prepare("SELECT COUNT(1) FROM users WHERE Username = ? AND admin = 1");
       $selectUserQ->bind_param("s", $username);
@@ -158,7 +170,6 @@ function loginAdmin(){
       if($selectUserQ->execute()){
         $selectUserQ->bind_result($count);
         $selectUserQ->fetch();
-
         $selectUserQ->close();
 
         if($count == 1){
@@ -172,35 +183,50 @@ function loginAdmin(){
 
             if($count == 1){
               $_SESSION['valid_admin'] = $username;
+              $_SESSION['loggedin'] = true;
 
             }else {
-              echo "Password is wrong.";
-              echo $password;
+              $pass_err = "Password is wrong.";
             }
           }else {
             echo $link->error();
           }
         }else {
-          echo "User does not exist or is not an admin.";
+          $user_err = "User does not exist or is not an admin.";
         }
       }else {
         echo $link->error();
       }
     }else {
-      echo "Invalid username.";
+      $user_err = "Invalid username.";
     }
   }
 }
 
-function logOutAdmin()
-{
-  if (isset($_SESSION['valid_admin'])) {
-    unset($_SESSION['valid_admin']);
-    session_destroy();
-  }
-}
+function isLoggedInAdmin(){
+  if(isset($_SESSION['valid_admin'])) {
+    $username = $_SESSION['valid_admin'];
+    echo "
+    <nav>
+      <ul>
+        <li><a href=\"/Concert-Ticket-Website/index.php\">Home</a></li>
+        <li><a href=\"/Concert-Ticket-Website/concerts.php\">Concerts<i class=\"down\"></i></a>
+          <ul>
+            <li><a href=\"/Concert-Ticket-Website/pop.php\">Pop</a></li>
+            <li><a href=\"/Concert-Ticket-Website/rock.php\">Rock</a></li>
+            <li><a href=\"/Concert-Ticket-Website/edm.php\">EDM</a></li>
+            <li><a href=\"/Concert-Ticket-Website/metal.php\">Metal</a></li>
+            <li><a href=\"/Concert-Ticket-Website/all.php\">All</a></li>
+          </ul>
+        </li>
+        <li><a href=\"/Concert-Ticket-Website/Purchase.php\">Purchase Tickets</a></li>
+        <li><a href=\"/Concert-Ticket-Website/News.php\">News</a></li>
+        <li><a href=\"/Concert-Ticket-Website/admin/adminlogout.php\">Logout</a></li>
+        <li><a href='/Concert-Ticket-Website/admin/adminpage.php'><div id='adminuser'>$username</div></a></li>
+      </ul>
+    </nav>";
 
-function isNotLoggedInAdmin(){
-	header("Location: /Concert-Ticket-Website/index.php");
+    return true;
+  }
 }
 ?>

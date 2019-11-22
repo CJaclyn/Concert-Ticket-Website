@@ -19,7 +19,7 @@
 <?php include('../header.html');?>
 
 <?php
-    if (isLoggedIn())
+    if (isLoggedInAdmin())
     {
       echo "<h1 id='delete'>Delete Artist</h1>";
       echo "<form method='post'>";
@@ -29,7 +29,7 @@
     }
     else
     {
-      isNotLoggedInAdmin();
+      isNotLoggedIn();
     }
   ?>
 

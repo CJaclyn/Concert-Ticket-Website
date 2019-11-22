@@ -41,14 +41,13 @@
   header( "refresh:1;url=../index.php" );
   if (!empty($old_user))
   {
-    logOutAdmin();
+    logOut();
     echo '<h2>You are now logged out.</h2>';
     echo '<p>Returning to homepage. . .</p>';
   }
   else
   {
-    echo '<h2>You were not logged in, and so have not been logged out.</h2>';
-    echo '<p>Returning to homepage. . .</p>';
+    header('Location: index.php');
   }
 ?>
 

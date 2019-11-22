@@ -3,6 +3,7 @@
 session_start();
 include('loginfunctions.php');
 require_once "config.php";
+isNotLoggedIn();
 
 
 $concert = $ticket_type = $tickets = $street = $city = $state = $total = $price = $amount = "";

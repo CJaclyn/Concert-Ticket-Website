@@ -18,7 +18,7 @@
 <?php include('../header.html');?>
 
 <?php
-    if (isLoggedIn())
+    if (isLoggedInAdmin())
     {
       echo "<h1>Admin Dashboard</h1>";
       echo "<div id='links'>";
@@ -29,7 +29,7 @@
     }
     else
     {
-      isNotLoggedInAdmin();
+      isNotLoggedIn();
     }
       include('../footer.html');
   ?>

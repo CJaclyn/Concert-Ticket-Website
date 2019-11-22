@@ -19,7 +19,7 @@
 <?php include('../header.html');?>
 
 <?php
-    if (isLoggedIn())
+    if (isLoggedInAdmin())
     {
       echo "<h1>Manage Artists</h1>";
       echo "<div id='add'><a href='addartist.php'>Add Artists</a></div>";
@@ -41,7 +41,7 @@
     }
     else
     {
-      isNotLoggedInAdmin();
+      isNotLoggedIn();
     }
 
       include('../footer.html');

@@ -28,18 +28,18 @@ h2 {
 #form form input{
   margin-bottom: 1rem;
   border: none;
-  margin-left: 1rem;
   padding: .5rem;
 }
 
 #form form label {
   font-size: 1.25rem;
+  display: block;
 }
 
 #form form button {
   border: none;
   padding: .5rem 2rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-bottom: 5rem;
   background-color: red;
   color: white;
@@ -48,8 +48,8 @@ h2 {
   cursor: pointer;
 }
 
-span {
+div .error {
   color: red;
-  margin-left: 1rem;
-  position: absolute;
+  margin-bottom: 1rem;
+  margin-top: -.5rem;
 }
