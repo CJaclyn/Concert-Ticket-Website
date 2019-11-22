@@ -3,7 +3,7 @@
   if(isset($_SESSION['valid_admin'])){
       $old_user = $_SESSION['valid_admin'];
   }
-  include('adminfunctions.php');
+  include('../loginfunctions.php');
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
-<?php include('header.html');?>
+<?php include('../header.html');?>
   <nav>
     <ul>
       <li><a href="index.php">Home</a></li>
@@ -38,10 +38,10 @@
 
 <?php
 
-  header( "refresh:1;url=index.php" );
+  header( "refresh:1;url=../index.php" );
   if (!empty($old_user))
   {
-    logOut();
+    logOutAdmin();
     echo '<h2>You are now logged out.</h2>';
     echo '<p>Returning to homepage. . .</p>';
   }

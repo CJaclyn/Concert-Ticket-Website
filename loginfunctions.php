@@ -65,30 +65,54 @@ function login(){
 }
 
 function isLoggedIn(){
-  if (isset($_SESSION["loggedin"])) {
-    $username = $_SESSION['username'];
-		echo "
-		<nav>
-		  <ul>
-		    <li><a href=\"index.php\">Home</a></li>
-		    <li><a href=\"concerts.php\">Concerts<i class=\"down\"></i></a>
-		      <ul>
-		        <li><a href=\"pop.php\">Pop</a></li>
-		        <li><a href=\"rock.php\">Rock</a></li>
-		        <li><a href=\"edm.php\">EDM</a></li>
-		        <li><a href=\"metal.php\">Metal</a></li>
-		        <li><a href=\"all.php\">All</a></li>
-		      </ul>
-		    </li>
-		    <li><a href=\"Purchase.php\">Purchase Tickets</a></li>
-		    <li><a href=\"News.php\">News</a></li>
-		    <li><a href=\"profile.php\">Profile</a></li>
-		    <li><a href=\"logout.php\">Logout</a></li>
-        <li><span id='user'>$username</span></a></li>
-		  </ul>
-		</nav>";
-    return true;
-  }else {
+    if(isset($_SESSION['username'])) {
+      echo "
+  		<nav>
+  		  <ul>
+  		    <li><a href=\"index.php\">Home</a></li>
+  		    <li><a href=\"concerts.php\">Concerts<i class=\"down\"></i></a>
+  		      <ul>
+  		        <li><a href=\"pop.php\">Pop</a></li>
+  		        <li><a href=\"rock.php\">Rock</a></li>
+  		        <li><a href=\"edm.php\">EDM</a></li>
+  		        <li><a href=\"metal.php\">Metal</a></li>
+  		        <li><a href=\"all.php\">All</a></li>
+  		      </ul>
+  		    </li>
+  		    <li><a href=\"Purchase.php\">Purchase Tickets</a></li>
+  		    <li><a href=\"News.php\">News</a></li>
+  		    <li><a href=\"profile.php\">Profile</a></li>
+  		    <li><a href=\"logout.php\">Logout</a></li>
+          <li><span id='user'>$username</span></a></li>
+  		  </ul>
+  		</nav>";
+
+      return true;
+
+    }elseif (isset($_SESSION['valid_admin'])) {
+  		echo "
+  		<nav>
+  		  <ul>
+  		    <li><a href=\"/Concert-Ticket-Website/index.php\">Home</a></li>
+  		    <li><a href=\"/Concert-Ticket-Website/concerts.php\">Concerts<i class=\"down\"></i></a>
+  		      <ul>
+  		        <li><a href=\"/Concert-Ticket-Website/pop.php\">Pop</a></li>
+  		        <li><a href=\"/Concert-Ticket-Website/rock.php\">Rock</a></li>
+  		        <li><a href=\"/Concert-Ticket-Website/edm.php\">EDM</a></li>
+  		        <li><a href=\"/Concert-Ticket-Website/metal.php\">Metal</a></li>
+  		        <li><a href=\"/Concert-Ticket-Website/all.php\">All</a></li>
+  		      </ul>
+  		    </li>
+  		    <li><a href=\"/Concert-Ticket-Website/Purchase.php\">Purchase Tickets</a></li>
+  		    <li><a href=\"/Concert-Ticket-Website/News.php\">News</a></li>
+  		    <li><a href=\"/Concert-Ticket-Website/admin/adminlogout.php\">Logout</a></li>
+  				<li><a href='/Concert-Ticket-Website/admin/adminpage.php'><div id='adminuser'>Admin</div></a></li>
+  		  </ul>
+  		</nav>";
+
+  		return true;
+
+  	}else {
     echo "<nav>
         <ul>
           <li><a href=\"index.php\">Home</a></li>
@@ -168,35 +192,6 @@ function loginAdmin(){
   }
 }
 
-function isLoggedInAdmin()
-{
-	if (isset($_SESSION['valid_admin'])) {
-		echo "
-		<nav>
-		  <ul>
-		    <li><a href=\"index.php\">Home</a></li>
-		    <li><a href=\"concerts.php\">Concerts<i class=\"down\"></i></a>
-		      <ul>
-		        <li><a href=\"pop.php\">Pop</a></li>
-		        <li><a href=\"rock.php\">Rock</a></li>
-		        <li><a href=\"edm.php\">EDM</a></li>
-		        <li><a href=\"metal.php\">Metal</a></li>
-		        <li><a href=\"all.php\">All</a></li>
-		      </ul>
-		    </li>
-		    <li><a href=\"Purchase.php\">Purchase Tickets</a></li>
-		    <li><a href=\"News.php\">News</a></li>
-		    <li><a href=\"adminlogout.php\">Logout</a></li>
-				<li><a href='adminpage.php'><div id='adminuser'>Admin</div></a></li>
-		  </ul>
-		</nav>";
-
-		return true;
-	}else{
-		return false;
-	}
-}
-
 function logOutAdmin()
 {
   if (isset($_SESSION['valid_admin'])) {
@@ -206,27 +201,6 @@ function logOutAdmin()
 }
 
 function isNotLoggedInAdmin(){
-	echo "
-	<nav>
-		<ul>
-			<li><a href=\"index.php\">Home</a></li>
-			<li><a href=\"concerts.php\">Concerts<i class=\"down\"></i></a>
-				<ul>
-					<li><a href=\"pop.php\">Pop</a></li>
-					<li><a href=\"rock.php\">Rock</a></li>
-					<li><a href=\"edm.php\">EDM</a></li>
-					<li><a href=\"metal.php\">Metal</a></li>
-					<li><a href=\"all.php\">All</a></li>
-				</ul>
-			</li>
-			<li><a href=\"Purchase.php\">Purchase Tickets</a></li>
-			<li><a href=\"News.php\">News</a></li>
-			<li><a href=\"profile.php\">Profile</a></li>
-		</ul>
-	</nav>";
-
-	echo '<div id="error"><h1>You need to be logged in as admin to see this page.</h1>';
-	echo "<p>Going to homepage now. . .</p></div>";
-	header("refresh:1.5; url=index.php");
+	header("Location: /Concert-Ticket-Website/index.php");
 }
 ?>

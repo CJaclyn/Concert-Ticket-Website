@@ -12,14 +12,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/Concert-Ticket-Website/css/generalstylesheet.css">
 <link rel="stylesheet" href="/Concert-Ticket-Website/css/delete.css">
-<link rel="stylesheet" href="/Concert-Ticket-Website/css/adminerror.css">
+
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
 <?php include('../header.html');?>
 
 <?php
-    if (isLoggedInAdmin())
+    if (isLoggedIn())
     {
       echo "<h1 id='delete'>Delete Concert</h1>";
       echo "<form method='post'>";
