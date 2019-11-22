@@ -1,8 +1,7 @@
 <?php
   session_start();
-  include('adminfunctions.php');
-  require_once "config.php";
-  include('functions.php');
+  include('../loginfunctions.php');
+  require_once "../config.php";
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +17,7 @@
 </head>
 <body>
   <div class="page-wrap">
-<?php include('header.html');?>
+<?php include('../header.html');?>
 
 <?php
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -52,7 +51,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
       }else {
         $selectQ->close();
-        echo "Artist already exists!";
+        echo "<script type='text/javascript'>alert('Artist already exists!');</script>";
 
       }
     }else{
@@ -67,7 +66,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   }
 }
 
-    if (isLoggedIn())
+    if (isLoggedInAdmin())
     {
       echo "<h1>Add Artist</h1>";
 
@@ -100,10 +99,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
     else
     {
-      isNotLoggedIn();
+      isNotLoggedInAdmin();
     }
   ?>
 </div>
   <?php
-    include('footer.html');
+    include('../footer.html');
    ?>

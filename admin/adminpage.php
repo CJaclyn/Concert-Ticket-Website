@@ -1,6 +1,6 @@
 <?php
   session_start();
-  include('adminfunctions.php');
+  include('../loginfunctions.php');
 ?>
 
 <!DOCTYPE html>
@@ -15,10 +15,10 @@
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
-<?php include('header.html');?>
+<?php include('../header.html');?>
 
 <?php
-    if (isLoggedIn())
+    if (isLoggedInAdmin())
     {
       echo "<h1>Admin Dashboard</h1>";
       echo "<div id='links'>";
@@ -29,7 +29,7 @@
     }
     else
     {
-      isNotLoggedIn();
+      isNotLoggedInAdmin();
     }
-      include('footer.html');
+      include('../footer.html');
   ?>

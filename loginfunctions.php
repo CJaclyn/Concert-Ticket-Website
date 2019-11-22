@@ -114,6 +114,119 @@ function logout(){
   if (isset($_SESSION['loggedin'])) {
   $_SESSION = array();
   session_destroy();
+  }
 }
+
+/*admin login functions*/
+include('functions.php');
+
+function loginAdmin(){
+  require_once "../config.php";
+  if (isset($_POST['username']) && isset($_POST['password']))
+  {
+    $username = htmlspecialchars($_POST['username']);
+    $password = SHA1($_POST['password']);
+
+    if(usernameRegex($username)){
+      $selectUserQ = $link->prepare("SELECT COUNT(1) FROM users WHERE Username = ? AND admin = 1");
+      $selectUserQ->bind_param("s", $username);
+
+      if($selectUserQ->execute()){
+        $selectUserQ->bind_result($count);
+        $selectUserQ->fetch();
+
+        $selectUserQ->close();
+
+        if($count == 1){
+          $selectUserPassQ = $link->prepare("SELECT COUNT(1) FROM users
+          WHERE Username = ? AND Password = ? AND admin = 1");
+          $selectUserPassQ->bind_param("ss", $username, $password);
+
+          if($selectUserPassQ->execute()){
+            $selectUserPassQ->bind_result($count);
+            $selectUserPassQ->fetch();
+
+            if($count == 1){
+              $_SESSION['valid_admin'] = $username;
+
+            }else {
+              echo "Password is wrong.";
+              echo $password;
+            }
+          }else {
+            echo $link->error();
+          }
+        }else {
+          echo "User does not exist or is not an admin.";
+        }
+      }else {
+        echo $link->error();
+      }
+    }else {
+      echo "Invalid username.";
+    }
+  }
+}
+
+function isLoggedInAdmin()
+{
+	if (isset($_SESSION['valid_admin'])) {
+		echo "
+		<nav>
+		  <ul>
+		    <li><a href=\"index.php\">Home</a></li>
+		    <li><a href=\"concerts.php\">Concerts<i class=\"down\"></i></a>
+		      <ul>
+		        <li><a href=\"pop.php\">Pop</a></li>
+		        <li><a href=\"rock.php\">Rock</a></li>
+		        <li><a href=\"edm.php\">EDM</a></li>
+		        <li><a href=\"metal.php\">Metal</a></li>
+		        <li><a href=\"all.php\">All</a></li>
+		      </ul>
+		    </li>
+		    <li><a href=\"Purchase.php\">Purchase Tickets</a></li>
+		    <li><a href=\"News.php\">News</a></li>
+		    <li><a href=\"adminlogout.php\">Logout</a></li>
+				<li><a href='adminpage.php'><div id='adminuser'>Admin</div></a></li>
+		  </ul>
+		</nav>";
+
+		return true;
+	}else{
+		return false;
+	}
+}
+
+function logOutAdmin()
+{
+  if (isset($_SESSION['valid_admin'])) {
+    unset($_SESSION['valid_admin']);
+    session_destroy();
+  }
+}
+
+function isNotLoggedInAdmin(){
+	echo "
+	<nav>
+		<ul>
+			<li><a href=\"index.php\">Home</a></li>
+			<li><a href=\"concerts.php\">Concerts<i class=\"down\"></i></a>
+				<ul>
+					<li><a href=\"pop.php\">Pop</a></li>
+					<li><a href=\"rock.php\">Rock</a></li>
+					<li><a href=\"edm.php\">EDM</a></li>
+					<li><a href=\"metal.php\">Metal</a></li>
+					<li><a href=\"all.php\">All</a></li>
+				</ul>
+			</li>
+			<li><a href=\"Purchase.php\">Purchase Tickets</a></li>
+			<li><a href=\"News.php\">News</a></li>
+			<li><a href=\"profile.php\">Profile</a></li>
+		</ul>
+	</nav>";
+
+	echo '<div id="error"><h1>You need to be logged in as admin to see this page.</h1>';
+	echo "<p>Going to homepage now. . .</p></div>";
+	header("refresh:1.5; url=index.php");
 }
 ?>

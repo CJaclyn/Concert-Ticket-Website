@@ -79,7 +79,7 @@ h1 {
   color: red;
 }
 
-#addadmin a:hover {
+#admin-link a:hover {
   color: white;
   transition: .5s;
 }

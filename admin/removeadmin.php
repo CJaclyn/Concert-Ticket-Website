@@ -1,6 +1,7 @@
 <?php
   session_start();
-  include('adminfunctions.php');
+  include('../loginfunctions.php');
+  require_once "../config.php";
 ?>
 
 <!DOCTYPE html>
@@ -15,14 +16,13 @@
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
-<?php include('header.html');?>
+<?php include('../header.html');?>
 <?php
-    if (isLoggedIn())
+    if (isLoggedInAdmin())
     {
       echo "<h1>Remove Admin Permissions</h1>";
-      require_once "config.php";
 
-      if($result=$link->query("SELECT Username FROM users WHERE admin = 1 ORDER BY created ASC")){
+      if($result=$link->query("SELECT Username FROM users WHERE admin = 1 AND Username != 'admin_jc' ORDER BY created ASC")){
         echo "<div class='centered'>";
         echo "<form method='POST' action=''>";
         echo "<label for='username'>Select User</label>";
@@ -46,12 +46,11 @@
     }
     else
     {
-      isNotLoggedIn();
+      isNotLoggedInAdmin();
     }
   ?>
 
   <?php
-  include('functions.php');
 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $username = $_POST['username'];
@@ -67,5 +66,5 @@
       $link->close();
   }
 
-    include('footer.html');
+    include('../footer.html');
    ?>

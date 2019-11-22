@@ -1,6 +1,7 @@
 <?php
   session_start();
-  include('adminfunctions.php');
+  include('../loginfunctions.php');
+  require_once "../config.php";
 ?>
 
 <!DOCTYPE html>
@@ -15,12 +16,11 @@
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
-<?php include('header.html');?>
+<?php include('../header.html');?>
 <?php
-    if (isLoggedIn())
+    if (isLoggedInAdmin())
     {
       echo "<h1>Add Concert</h1>";
-      require_once "config.php";
 
       $query = "SELECT Artist_name FROM artists";
       $artistq = mysqli_query($link, $query);
@@ -66,13 +66,11 @@
     }
     else
     {
-      isNotLoggedIn();
+      isNotLoggedInAdmin();
     }
   ?>
 
   <?php
-  include('functions.php');
-
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $artist = htmlspecialchars($_POST['artist']);
     $street = htmlspecialchars($_POST['street']);
@@ -101,5 +99,5 @@
     }
   }
 
-    include('footer.html');
+    include('../footer.html');
    ?>

@@ -1,6 +1,7 @@
 <?php
   session_start();
-  include('adminfunctions.php');
+  include('../loginfunctions.php');
+  require_once "../config.php";
 ?>
 
 <!DOCTYPE html>
@@ -15,14 +16,13 @@
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
-<?php include('header.html');?>
+<?php include('../header.html');?>
 
 <?php
-    if (isLoggedIn())
+    if (isLoggedInAdmin())
     {
       echo "<h1>Manage Artists</h1>";
       echo "<div id='add'><a href='addartist.php'>Add Artists</a></div>";
-      require_once "config.php";
 
       $allQuery = "SELECT Artist_name, Genre, artistID FROM artists
       ORDER BY Artist_name ASC";
@@ -41,8 +41,8 @@
     }
     else
     {
-      isNotLoggedIn();
+      isNotLoggedInAdmin();
     }
 
-      include('footer.html');
+      include('../footer.html');
   ?>

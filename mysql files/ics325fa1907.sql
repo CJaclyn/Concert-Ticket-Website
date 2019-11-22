@@ -68,3 +68,8 @@ username varchar(255) NOT NULL,
 name varchar(255) NOT NULL,
 unique (user_id, name)
 );
+
+insert into users(Username, Password, Email, Firstname, Lastname, admin) values
+("admin_jc", SHA1("admin123"), "eq6679uu@go.minnstate.edu", "Jaclyn", "C.", 1),
+("admin_cs", SHA1("admin123"), "chris@email.com", "Chris", "Schreiber", 1),
+("bob123", SHA1("123456"), "bob@email.com", "Bob", "Ert", 0);
