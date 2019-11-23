@@ -1,7 +1,7 @@
 <?php
-//function to make sure input can only have letters, numbers, spaces, periods, and or hyphens
+//function to make sure input can only have letters, numbers, spaces, periods, single quotes, and or hyphens
 function regexCheck($arg){
-  if(preg_match("/[^A-Za-z0-9-.\s]/", $arg)){
+  if(preg_match("/[^A-Za-z0-9-.\s\']/", $arg)){
     return false;
   }else {
     return true;
@@ -19,7 +19,7 @@ function usernameRegex($arg){
 
 //function to make sure first and last name input can only have letters, hyphens, spaces, and or periods
 function nameRegex($arg){
-  if(preg_match("/[^A-Za-z_-.\s]/")){
+  if(preg_match("/[^A-Za-z-.\s]/")){
     return false;
   }else {
     return true;
