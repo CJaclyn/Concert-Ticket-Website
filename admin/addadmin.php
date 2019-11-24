@@ -45,7 +45,7 @@
     }
     else
     {
-      isNotLoggedIn();
+      isNotLoggedInAdmin();
     }
   ?>
 

@@ -29,7 +29,7 @@
     }
     else
     {
-      isNotLoggedIn();
+      isNotLoggedInAdmin();
     }
   ?>
 

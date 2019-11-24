@@ -41,7 +41,7 @@
     }
     else
     {
-      isNotLoggedIn();
+      isNotLoggedInAdmin();
     }
 
       include('../footer.html');

@@ -232,4 +232,11 @@ function isLoggedInAdmin(){
     return true;
   }
 }
+
+function isNotLoggedInAdmin() {
+  if(!isset($_SESSION['valid_admin'])) {
+    header('Location:/Concert-Ticket-Website/index.php');
+  }
+}
+
 ?>

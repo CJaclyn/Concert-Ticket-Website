@@ -3,8 +3,7 @@ session_start();
 include('../loginfunctions.php');
 loginadmin();
 
-global $user_err;
-global $pass_err;
+global $user_err, $pass_err;
 ?>
 
 <!DOCTYPE html>

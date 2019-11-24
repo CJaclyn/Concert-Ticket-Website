@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('loginfunctions.php');
+require_once("config.php");
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +15,10 @@ include('loginfunctions.php');
 </head>
 <body>
   <?php include('header.html');?>
+  <?php if(isLoggedInAdmin()){
+    header('location:index.php');
+  } ?>
+  
   <nav>
     <ul>
       <li><a href="index.php">Home</a></li>
@@ -41,8 +46,6 @@ include('loginfunctions.php');
 
 
 <?php
-require_once("config.php");
-
 if(isset($_POST['upload_profile'])){
 
   $profile = $_FILES['file']['name'];
