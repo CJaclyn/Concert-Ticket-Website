@@ -1,8 +1,7 @@
 <?php
 session_start();
 include('../loginfunctions.php');
-loginadmin();
-
+loginAdmin();
 global $user_err, $pass_err;
 ?>
 
@@ -24,7 +23,11 @@ global $user_err, $pass_err;
   if (isLoggedInAdmin()){
     echo "<h1>Redirecting to Admin Page. . .</h1>";
     header("refresh:1;url=adminpage.php");
-  }else{
+    
+  }elseif(isset($_SESSION['username'])){
+    header('location:/Concert-Ticket-Website/index.php');
+  }
+  else{
     echo '
     <h2>Admin Login</h2>
     <div id="form">
