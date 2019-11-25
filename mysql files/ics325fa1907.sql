@@ -25,7 +25,7 @@ constraint FK_artist foreign key (Artist)
 );
 
 create table users (
-userID int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+userID int(11) unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT,
 Username varchar(25) NOT NULL,
 Password varchar(255) NOT NULL,
 Email varchar(50) NOT NULL,
@@ -40,25 +40,31 @@ admin tinyint(1) not null default '0'
 );
 
 create table orders (
-orderID int(11) unsigned not null auto_increment,
-userID int(11) not null,
-amount decimal(10,2),
-primary key (orderID),
+orderID int(11) unsigned not null auto_increment primary key,
+date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+userID int(11) unsigned not null,
 constraint FK_userID foreign key (userID)
-  references users(userID)
+	references users(userID)
 );
 
 create table tickets (
-ticketID int(11) unsigned not null auto_increment,
+ticketID int(11) unsigned not null auto_increment primary key,
 concertID int(11) unsigned not null,
-orderID int(11) unsigned not null,
 Price decimal(10,2) not null,
-primary key (ticketID),
 constraint FK_concertID foreign key (concertID)
-  references concerts(concertID)
-  ON DELETE CASCADE,
+	references concerts(concertID)
+);
+
+create table order_tickets (
+order_ticketsID int(11) unsigned not null auto_increment primary key,
+orderID int(11) unsigned not null,
+ticketID int(11) unsigned not null,
+quantity int(11),
+price decimal(10,2),
 constraint FK_orderID foreign key (orderID)
-  references orders(orderID)
+	references orders(orderID),
+constraint FK_ticketID foreign key (ticketID)
+	references tickets(ticketID)
 );
 
 create table images (
