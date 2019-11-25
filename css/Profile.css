@@ -34,3 +34,15 @@ h1 {
 	margin-top: 1rem;
 	display: none;
 }
+
+/*orders styling*/
+#no-orders {
+	font-size: 1.5rem;
+}
+
+/*upload concert pictures styling */
+.img {
+	width:350px;
+  height:350px;
+  object-fit:scale-down;
+}

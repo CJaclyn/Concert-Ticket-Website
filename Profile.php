@@ -130,6 +130,7 @@ if(isset($_POST['upload_profile'])){
     <?php
     $userID = $_SESSION["id"];
 
+    //get orders query
 		$sql = "SELECT * FROM orders WHERE orderID = (SELECT max(orderID) FROM orders) AND userID = ".$userID."";
         $result = mysqli_query($link, $sql);
 
@@ -163,10 +164,8 @@ if(isset($_POST['upload_profile'])){
 			echo "<legend>Recent Order</legend>";
 			echo "<table>";
 			$result = mysqli_query($link,$sql);
-      if(empty($result)) {
-        echo "<span id='no-orders'>You don't have any orders.</span>";
-      }else {
-        while($row = mysqli_fetch_array($result)) {
+
+      while($row = mysqli_fetch_array($result)) {
   				echo "<tr>";
   				echo "<div class =\"right\">";
   				echo "<div id =\"boxshadow\">";
@@ -197,7 +196,7 @@ if(isset($_POST['upload_profile'])){
   				echo "<td>" . $date . "</td>";
   				echo "</tr>";
   			}
-      }
+
 			echo "</table>";
 			echo "</fieldset>";
 
@@ -206,6 +205,7 @@ if(isset($_POST['upload_profile'])){
 
 <h1 class="head">Concert Pictures</h1>
   <?php
+  //upload concert pictures query
   if(isset($_POST['upload_concert'])){
     $name = $_FILES['file']['name'];
     $target_dir2 = "Upload/";
@@ -237,6 +237,7 @@ if(isset($_POST['upload_profile'])){
 
 
 <?php
+//get concert pictures query
 $sql = "SELECT * FROM images WHERE username='".$_SESSION['username']."'";
 $result = mysqli_query($link,$sql);
 $row = mysqli_fetch_array($result);
@@ -245,7 +246,8 @@ echo"<tr>";
 $i=0; //keeps count of the row
 while($row = mysqli_fetch_array($result)){
    $i=$i+1;
-   echo "<td>";?><img src="Upload/<?php echo $row['name']; ?>" height="400" width="33%" ><?php echo"</td>";
+   echo "<td>";?>
+  <img src="Upload/<?php echo $row['name']; ?>" class='img'><?php echo"</td>";
    if($i%4==0){
      echo"</tr>";
    }
