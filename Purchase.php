@@ -86,7 +86,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		}
 		mysqli_stmt_close($stmt);
 
-		
+
 		$sql = "INSERT INTO order_tickets (orderID, ticketID, quantity) VALUES (?, ?, ?)";
 
 		if($stmt = mysqli_prepare($link, $sql)){
@@ -104,7 +104,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			}
 		}
 		mysqli_stmt_close($stmt);
-	
+
 	$sql = "SELECT price FROM tickets WHERE ticketID = ".$ticketID."";
 	$result = mysqli_query($link,$sql);
 	while ($row = mysqli_fetch_array($result)) {
@@ -169,8 +169,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <title>Purchase Tickets</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="generalstylesheet.css">
-<link rel="stylesheet" type="text/css" href="Purchase.css">
+<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/generalstylesheet.css">
+<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/Purchase.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
