@@ -6,7 +6,7 @@ require_once "config.php";
 isNotLoggedIn();
 
 
-$concert = $ticket_type = $tickets = $street = $city = $state = $total = $price = $amount = "";
+$concert = $ticket_type = $tickets = $street = $city = $state = $total = $price = $amount = $ticketID = $orderID = "";
 $concert_err = $ticket_type_err = $tickets_err = $street_err = $city_err = $state_err = $terms_err = "";
 
 
@@ -24,13 +24,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$tickets_err = "Please select a valid number of tickets";
 	} else {
 		$tickets = $_POST['quantity'];
-	}
-
-	//validate ticket type
-	if(empty(trim($_POST['ticket_type']))) {
-		$ticket_type_err = "Please select a ticket type";
-	} else {
-		$ticket_type = $_POST['ticket_type'];
 	}
 
 	// Validate street
@@ -73,31 +66,70 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$terms_err = "You must accept terms and conditions.";
 	}
 
-	if(empty($concert_err) && empty($ticket_type_err) && empty($tickets_err)){
+	if(empty($concert_err) && empty($tickets_err)){
 
 		$userID = $_SESSION["id"];
-		$amount = (($concert * $ticket_type)*($tickets));
+		$ticketID = $_POST['Artist'];
 
-		$sql = "INSERT INTO orders (userID, amount) VALUES (?, ?)";
+		$sql = "INSERT INTO orders (userID) VALUES (?)";
 
 		if($stmt = mysqli_prepare($link, $sql)){
 
-            mysqli_stmt_bind_param($stmt, "id", $param_userID, $param_amount);
+            mysqli_stmt_bind_param($stmt, "i", $param_userID);
 
 
             $param_userID = $userID;
-            $param_amount = $amount;
 
 			if(mysqli_stmt_execute($stmt)){
-
+				$orderID = mysqli_insert_id($link);
 			}
 		}
 		mysqli_stmt_close($stmt);
+
+		
+		$sql = "INSERT INTO order_tickets (orderID, ticketID, quantity) VALUES (?, ?, ?)";
+
+		if($stmt = mysqli_prepare($link, $sql)){
+
+            mysqli_stmt_bind_param($stmt, "iii", $param_orderID, $param_ticketID, $param_quantity);
+
+			$param_orderID = $orderID;
+			$param_ticketID = $ticketID;
+			$param_quantity = $tickets;
+
+			if(mysqli_stmt_execute($stmt)){
+
+			} else {
+				echo "Something went wrong. Please try again later.";
+			}
+		}
+		mysqli_stmt_close($stmt);
+	
+	$sql = "SELECT price FROM tickets WHERE ticketID = ".$ticketID."";
+	$result = mysqli_query($link,$sql);
+	while ($row = mysqli_fetch_array($result)) {
+		$price = $row['price'];
 	}
 
-	//need to insert statement here to create ticket after order is created.
+	$sql = "UPDATE order_tickets SET total=? WHERE orderID = ".$orderID."";
+		$total = ($price * $tickets);
+	if($stmt = mysqli_prepare($link, $sql)){
 
-    if(empty($street_err) && empty($city_err) && empty($state_err)){
+		mysqli_stmt_bind_param($stmt, "d", $param_total);
+
+		$param_total = $total;
+
+		if(mysqli_stmt_execute($stmt)){
+
+		} else {
+			echo "Something went wrong. Please try again later.";
+		}
+	}
+	mysqli_stmt_close($stmt);
+}
+
+
+    if(empty($street_err) && empty($city_err) && empty($state_err) && empty($terms_err)){
 
 		$userID = $_SESSION["id"];
 
@@ -116,7 +148,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             if(mysqli_stmt_execute($stmt)){
 
-                header("location: profile.php"); //will probably add a different page to jump to after it executes the order.
+                header("location: checkout.php");
             } else{
                 echo "Something went wrong. Please try again later.";
             }
@@ -137,8 +169,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <title>Purchase Tickets</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/generalstylesheet.css">
-<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/Purchase.css">
+<link rel="stylesheet" type="text/css" href="generalstylesheet.css">
+<link rel="stylesheet" type="text/css" href="Purchase.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -154,7 +186,6 @@ $(document).ready(function() {
     });
 });
 </script>
-
 </head>
 <body>
 <?php include('header.html');?>
@@ -171,7 +202,7 @@ $(document).ready(function() {
 				<label>Select Concert</label>
 						<?php
 
-							$sql = "SELECT c.Artist, t.Price from concerts as c
+							$sql = "SELECT c.Artist, t.ticketID from concerts as c
 							INNER JOIN tickets as t on t.concertID = c.concertID";
 							$result = mysqli_query($link, $sql);
 
@@ -179,7 +210,7 @@ $(document).ready(function() {
 								echo "<select class = 'calculate' id='concert' name='Artist'>";
 								echo "<option value=''>---Select A Concert---</option>";
 							while($row = mysqli_fetch_array($result)) {
-								echo "<option value='" . $row['Price'] . "'>" . $row['Artist'] . "</option>";
+								echo "<option value='" . $row['ticketID'] . "'>" . $row['Artist'] . "</option>";
 							}
 							echo "</select>";
 							}
@@ -188,18 +219,6 @@ $(document).ready(function() {
 						?>
 				<br>
 				<span class="error"><?php echo $concert_err; ?></span>
-				</div>
-
-
-				<div <?php echo (!empty($ticket_type_err)) ? 'has-error' : ''; ?>>
-				<label>Select Ticket Type</label>
-				<select id="ticket_type" name="ticket_type">
-				<option value = "">---Select Ticket Type---</option>
-				<option value = "1.0">Normal</option>
-				<option value = "2.5">VIP</option>
-				</select>
-				<br>
-				<span class="error"><?php echo $ticket_type_err; ?></span>
 				</div>
 
 			<label>Quantity</label>
@@ -226,18 +245,13 @@ $(document).ready(function() {
 					<br>
 					<span class="error"><?php echo $state_err; ?></span>
 				</div>
-				<h3>Total</h3>
-				<span>Ticket: <span id="total">$</span></span>
-
-				<br>
-
+				<br />
 				<div <?php echo (!empty($terms_err)) ? 'has-error' : ''; ?>>
 					<input type="checkbox" id ="terms" name="terms" value="yes">I Agree to Terms & Conditions<br>
 					<span class="error"><?php echo $terms_err; ?></span>
 				</div>
-
       <div class="checkout">
-        <input type="submit" class="button" value="Check Out">
+    	<input type="submit" class="button" value="Check Out">
       </div>
 		</fieldset>
 	</form>
