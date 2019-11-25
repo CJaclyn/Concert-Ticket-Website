@@ -1,3 +1,36 @@
 body {
 	background-color: grey;
 }
+
+h1 {
+	text-align: center;
+	margin-top: 7rem;
+	font-size: 2.5rem;
+}
+
+.centered {
+	text-align: center;
+}
+
+/*profile picture styling*/
+#profile-picture {
+	border-radius: 300px;
+}
+
+#profpic-button, #profpic-form {
+	margin-top: 1rem;
+}
+
+#info {
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1rem;
+	font-size: 1.3rem;
+	border: solid black;
+}
+
+.upload-form {
+	margin-top: 1rem;
+	display: none;
+}

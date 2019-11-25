@@ -15,7 +15,7 @@ $concertID = $tickets = $total = $price = $ticketID = $orderID = "";
 <title>Order Summary</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="generalstylesheet.css">
+<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/generalstylesheet.css">
 <link rel="stylesheet" type="text/css" href="order.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
@@ -57,7 +57,7 @@ $concertID = $tickets = $total = $price = $ticketID = $orderID = "";
             $concertID = $row['concertID'];
             $price = $row['Price'];
         }
-        
+
         $sql = "SELECT Artist, artists.Image, Street, City, State, DATE_FORMAT(Date, '%a %b %e %Y') Date, TIME_FORMAT(Time, '%h %i %p') Time
         FROM concerts
         INNER JOIN artists ON artists.Artist_name = concerts.Artist
@@ -67,8 +67,6 @@ $concertID = $tickets = $total = $price = $ticketID = $orderID = "";
         echo "<div id =\"boxshadow\">";
         echo "<img src='". $row['Image']."'width='300'>"."<br />";
         echo "</div>";
-        
-
         echo "<h3>".$row['Artist']."<br />"."</h3>";
         echo "Congratulations, ".$firstname.",<br />";
         echo "You've Got ".$tickets." Tickets for the show"."<br />";

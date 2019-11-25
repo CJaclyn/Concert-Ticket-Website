@@ -31,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $street_err = "Please enter a street address.";
 	} else {
 		$street = trim($_POST["street"]);
-		if (!preg_match("/^\\d+ [a-zA-Z ]+ [a-zA-Z ]+$/",$street)) {
+		if (!regexCheck($street)) {
 			$street_err = "No special characters allowed";
 		} else{
 			$street = trim($_POST["street"]);

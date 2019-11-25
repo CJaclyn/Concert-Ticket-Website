@@ -15,7 +15,7 @@ isNotLoggedIn();
 
 <script>
 function myFunction1() {
-  var x = document.getElementById("div1");
+  var x = document.getElementById("profpic-form");
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {
@@ -24,16 +24,7 @@ function myFunction1() {
 }
 
 function myFunction2() {
-  var x = document.getElementById("div2");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-
-function myFunction3() {
-  var x = document.getElementById("div3");
+  var x = document.getElementById("uploadconcert-form");
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {
@@ -75,28 +66,38 @@ if(isset($_POST['upload_profile'])){
 }
 ?>
 
+<!--profile picture query and form-->
+<div class='centered'>
 <?php
-	$sql = "SELECT * FROM users WHERE username='".$_SESSION['username']."'";
+  //query to get profile picture
+	$sql = "SELECT prof_picture FROM users WHERE username='".$_SESSION['username']."'";
 	$result = mysqli_query($link,$sql);
 	$row = mysqli_fetch_array($result);
+  if (empty($row['prof_picture'])){
+    echo '
+    <img src="Profile/nopic.png" height="300" width="300" id=\'profile-picture\'><br>';
+  }else {
+    echo '
+    <img src="Profile/'.$row['prof_picture'].'
+    " height="300" width="300" id=\'profile-picture\'><br>';
+  }
 ?>
 
-  <!--upload profile picture form-->
-  <img src="Profile/<?php echo $row['prof_picture']; ?>" height="300" width="300">
-  <button onclick="myFunction1()" id='profpic-button'>Upload Profile Picture</button>
-    <div class = "hide upload-prof-container" id="div1">
+    <button onclick="myFunction1()" id='profpic-button'>Upload Profile Picture</button>
+    <div class = "hide upload-form" id="profpic-form">
       <form method="post" action="" enctype='multipart/form-data'>
         <input class = "button" type='file' name='file' />
         <input class = "button" type='submit' value='Upload Image' name='upload_profile'>
       </form>
     </div>
+</div>
 
-  <div class = "infoleft card">
+      <!--user information-->
 	    <?php
 			$sql = "SELECT * FROM users where username='".$_SESSION['username']."'";
-
 			$result = mysqli_query($link,$sql);
-			echo "<fieldset class='info'>";
+
+			echo "<fieldset id='info'>";
 			echo "<legend>Personal Information</legend>";
 			echo "<table>";
 			while($row = mysqli_fetch_array($result)) {
@@ -107,7 +108,7 @@ if(isset($_POST['upload_profile'])){
 				echo "<td>Last Name:</td>";
 				echo "<td>" . $row['Lastname'] . "</td>";
 				echo "</tr><tr>";
-				echo "<td>Email: </td>";
+				echo "<td>Email:</td>";
 				echo "<td>" . $row['Email'] . "</td>";
 				echo "</tr><tr>";
 				echo "<td>Street:</td>";
@@ -123,8 +124,7 @@ if(isset($_POST['upload_profile'])){
 			}
 			echo "</table>";
 			echo "</fieldset>";
-        ?>
-	</div>
+      ?>
 
 	<div class = "inforight card">
     <?php
@@ -163,43 +163,41 @@ if(isset($_POST['upload_profile'])){
 			echo "<legend>Recent Order</legend>";
 			echo "<table>";
 			$result = mysqli_query($link,$sql);
-			while($row = mysqli_fetch_array($result)) {
-				echo "<tr>";
-				echo "<div class =\"right\">";
-				echo "<div id =\"boxshadow\">";
-				echo "<img src='". $row['Image']."'width='300'>"."<br />";
-				echo "</div>";
-				echo "</div>";
-				echo "<tr>";
-				echo "<td>Artist:</td>";
-				echo "<td>" . $row['Artist'] . "</td>";
-				echo "</tr><tr>";
-				echo "<td>Date:</td>";
-				echo "<td>" . $row['Date'] . "</td>";
-				echo "</tr><tr>";
-				echo "<td>Time:</td>";
-				echo "<td>" . $row['Time'] . "</td>";
-				echo "</tr><tr>";
-				echo "<td>Street</td>";
-				echo "<td>" . $row['Street'] . "</td>";
-				echo "</tr><tr>";
-				echo "<td>City: </td>";
-				echo "<td>" . $row['City'] . "</td>";
-				echo "</tr><tr>";
-				echo "<td>State:</td>";
-				echo "<td>" . $row['State'] . "</td>";
-				echo "</tr><tr>";
-				echo "<td>Tickets: </td>";
-				echo "<td>" . $tickets . "</td>";
-				echo "</tr><tr>";
-				echo "<td>Total: </td>";
-				echo "<td>$" . $total . "</td>";
-				echo "</tr><tr>";
-				echo "<td>Date Purchased: </td>";
-				echo "<td>" . $date . "</td>";
-				echo "</tr>";
-
-			}
+      if(empty($result)) {
+        echo "<span id='no-orders'>You don't have any orders.</span>";
+      }else {
+        while($row = mysqli_fetch_array($result)) {
+  				echo "<tr>";
+  				echo "<div class =\"right\">";
+  				echo "<div id =\"boxshadow\">";
+  				echo "<img src='". $row['Image']."'width='300'>"."<br />";
+  				echo "</div>";
+  				echo "</div>";
+  				echo "<tr>";
+  				echo "<td>Artist:</td>";
+  				echo "<td>" . $row['Artist'] . "</td>";
+  				echo "</tr><tr>";
+  				echo "<td>Date:</td>";
+  				echo "<td>" . $row['Date'] . "</td>";
+  				echo "</tr><tr>";
+  				echo "<td>Time:</td>";
+  				echo "<td>" . $row['Time'] . "</td>";
+  				echo "</tr><tr>";
+  				echo "<td>Location</td>";
+  				echo "<td>".$row['Street'].", ".$row['City'].", ".$row['State'] ."</td>";
+  				echo "</tr><tr>";
+  				echo "</tr><tr>";
+  				echo "<td>Tickets: </td>";
+  				echo "<td>" . $tickets . "</td>";
+  				echo "</tr><tr>";
+  				echo "<td>Total: </td>";
+  				echo "<td>$" . $total . "</td>";
+  				echo "</tr><tr>";
+  				echo "<td>Date Purchased: </td>";
+  				echo "<td>" . $date . "</td>";
+  				echo "</tr>";
+  			}
+      }
 			echo "</table>";
 			echo "</fieldset>";
 
@@ -207,35 +205,34 @@ if(isset($_POST['upload_profile'])){
 	</div>
 
 <h1 class="head">Concert Pictures</h1>
-<div class = "upload-concert-container">
-<?php
-if(isset($_POST['upload_concert'])){
+  <?php
+  if(isset($_POST['upload_concert'])){
+    $name = $_FILES['file']['name'];
+    $target_dir2 = "Upload/";
+    $target_file2 = $target_dir2 . basename($_FILES["file"]["name"]);
 
-  $name = $_FILES['file']['name'];
-  $target_dir2 = "upload/";
-  $target_file2 = $target_dir2 . basename($_FILES["file"]["name"]);
+    // Select file type
+    $imageFileType2 = strtolower(pathinfo($target_file2,PATHINFO_EXTENSION));
+    // Valid file extensions
+    $extensions_arr2 = array("jpg","jpeg","png","gif", "jfif");
 
-  // Select file type
-  $imageFileType2 = strtolower(pathinfo($target_file2,PATHINFO_EXTENSION));
-  // Valid file extensions
-  $extensions_arr2 = array("jpg","jpeg","png","gif", "jfif");
-
-  // Check extension
-  if( in_array($imageFileType2,$extensions_arr2) ){
-     $query = "REPLACE INTO images(user_id, name, username) values('".$_SESSION['id']."', '".$name."', '".$_SESSION['username']."')";
-     mysqli_query($link,$query);
-     move_uploaded_file($_FILES['file']['tmp_name'],$target_dir2.$name);
-
+    // Check extension
+    if( in_array($imageFileType2,$extensions_arr2) ){
+      $query = "REPLACE INTO images(user_id, name, username) values('".$_SESSION['id']."', '".$name."', '".$_SESSION['username']."')";
+      mysqli_query($link,$query);
+      move_uploaded_file($_FILES['file']['tmp_name'],$target_dir2.$name);
+    }
   }
-}
-?>
+  ?>
 
-  <button onclick="myFunction3()" class="button4">Upload Concert Pictures</button>
-  <div class = "hide" id = "div3">
-    <form class = "upload-form" method="post" action="" enctype='multipart/form-data'>
-      <input class = "button" type='file' name='file'>
-      <input class = "button" type='submit' value='Upload Image' name='upload_concert'>
-    </form>
+  <div class='centered'>
+    <button onclick="myFunction2()" class="button4">Upload Concert Pictures</button>
+    <div class = "hide upload-form" id = "uploadconcert-form">
+      <form method="post" action="" enctype='multipart/form-data'>
+        <input class = "button" type='file' name='file'>
+        <input class = "button" type='submit' value='Upload Image' name='upload_concert'>
+      </form>
+    </div>
   </div>
 
 
@@ -244,29 +241,20 @@ $sql = "SELECT * FROM images WHERE username='".$_SESSION['username']."'";
 $result = mysqli_query($link,$sql);
 $row = mysqli_fetch_array($result);
 
-
 echo"<tr>";
-
 $i=0; //keeps count of the row
-while($row = mysqli_fetch_array($result))
-{
+while($row = mysqli_fetch_array($result)){
    $i=$i+1;
-
    echo "<td>";?><img src="Upload/<?php echo $row['name']; ?>" height="400" width="33%" ><?php echo"</td>";
-
-  if($i%4==0)
-  {
-    echo"</tr>";
-  }
-if($i%4!=0)
-{
-   echo"</tr>";
-}
-
+   if($i%4==0){
+     echo"</tr>";
+   }
+   if($i%4!=0){
+     echo"</tr>";
+   }
 }
 mysqli_close($link);
 ?>
-</div>
 
 <?php include('footer.html'); ?>
 </body>
