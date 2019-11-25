@@ -42,10 +42,15 @@ function myFunction3() {
 </head>
 <body>
 <?php include('header.html');?>
-  <?php isLoggedIn(); ?>
+<?php isLoggedIn(); ?>
 
+<?php
+if(isLoggedInAdmin()){
+  header('location:index.php');
+}
+?>
 
-<div class = "row">	
+<div class = "row">
 <div class ="header centered">
 <img src="profileheader.jpg">
 <h1><?php echo $_SESSION['username']; ?></h1>
@@ -54,7 +59,7 @@ function myFunction3() {
 include("config.php");
 
 if(isset($_POST['upload_profile'])){
- 
+
   $profile = $_FILES['file']['name'];
   $target_dir = "Profile/";
   $target_file = $target_dir . basename($_FILES["file"]["name"]);
@@ -65,22 +70,22 @@ if(isset($_POST['upload_profile'])){
 
 
   if( in_array($imageFileType,$extensions_arr) ){
- 
+
      $query = "UPDATE users SET prof_picture = '".$profile."' WHERE username='".$_SESSION['username']."'";
      mysqli_query($link,$query);
-  
+
      move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$profile);
 
   }
 
 }
-?> 
+?>
 <div class = "leftcolumn">
 	<?php
 	$sql = "SELECT * FROM users WHERE username='".$_SESSION['username']."'";
 	$result = mysqli_query($link,$sql);
 	$row = mysqli_fetch_array($result);
-	
+
 	?>
 	<div id = "boxshadow">
 	<img src="Profile/<?php echo $row['prof_picture']; ?>" height="300" width="300" ><?php
@@ -117,7 +122,7 @@ if(isset($_POST['upload_profile'])){
 				echo "<td>" . $row['Lastname'] . "</td>";
 				echo "</tr><tr>";
 				echo "<td>Email: </td>";
-				echo "<td>" . $row['Email'] . "</td>";			
+				echo "<td>" . $row['Email'] . "</td>";
 				echo "</tr><tr>";
 				echo "<td>Street:</td>";
 				echo "<td>" . $row['Street'] . "</td>";
@@ -140,7 +145,7 @@ if(isset($_POST['upload_profile'])){
 
         <?php
         $userID = $_SESSION["id"];
-	
+
 		$sql = "SELECT * FROM orders WHERE orderID = (SELECT max(orderID) FROM orders) AND userID = ".$userID."";
         $result = mysqli_query($link, $sql);
         while ($row = mysqli_fetch_array($result)) {
@@ -162,7 +167,7 @@ if(isset($_POST['upload_profile'])){
             $concertID = $row['concertID'];
             $price = $row['Price'];
         }
-        
+
 			$sql = "SELECT Artist, artists.Image, Street, City, State, DATE_FORMAT(Date, '%a %b %e %Y') Date, TIME_FORMAT(Time, '%h %i %p') Time
 			FROM concerts
 			INNER JOIN artists ON artists.Artist_name = concerts.Artist
@@ -198,13 +203,13 @@ if(isset($_POST['upload_profile'])){
 				echo "</tr><tr>";
 				echo "<td>State:</td>";
 				echo "<td>" . $row['State'] . "</td>";
-				echo "</tr><tr>";					
+				echo "</tr><tr>";
 				echo "<td>Tickets: </td>";
 				echo "<td>" . $tickets . "</td>";
-				echo "</tr><tr>";				
+				echo "</tr><tr>";
 				echo "<td>Total: </td>";
 				echo "<td>$" . $total . "</td>";
-				echo "</tr><tr>";				
+				echo "</tr><tr>";
 				echo "<td>Date Purchased: </td>";
 				echo "<td>" . $date . "</td>";
 				echo "</tr>";
@@ -266,7 +271,7 @@ if(isset($_POST['upload_profile'])){
 <?php
 
 if(isset($_POST['upload_concert'])){
- 
+
   $name = $_FILES['file']['name'];
   $target_dir2 = "upload/";
   $target_file2 = $target_dir2 . basename($_FILES["file"]["name"]);
@@ -279,10 +284,10 @@ if(isset($_POST['upload_concert'])){
 
   // Check extension
   if( in_array($imageFileType2,$extensions_arr2) ){
- 
+
      $query = "REPLACE INTO images(user_id, name, username) values('".$_SESSION['id']."', '".$name."', '".$_SESSION['username']."')";
      mysqli_query($link,$query);
-  
+
      move_uploaded_file($_FILES['file']['tmp_name'],$target_dir2.$name);
   }
 
@@ -304,7 +309,7 @@ $result = mysqli_query($link,$sql);
 $row = mysqli_fetch_array($result);
 
 
-echo"<tr>"; 
+echo"<tr>";
 
 $i=0; //keeps count of the row
 while($row = mysqli_fetch_array($result))
@@ -322,7 +327,7 @@ if($i%4!=0)
    echo"</tr>";
 }
 
-}  
+}
 mysqli_close($link);
 ?>
 </div>
