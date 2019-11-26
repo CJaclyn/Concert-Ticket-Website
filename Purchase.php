@@ -4,6 +4,9 @@ session_start();
 include('loginfunctions.php');
 require_once "config.php";
 isNotLoggedIn();
+if(isLoggedInAdmin()){
+	header('location:\Concert-Ticket-Website\admin\adminpage.php');
+}
 
 
 $concert = $ticket_type = $tickets = $street = $city = $state = $total = $price = $amount = $ticketID = $orderID = "";
@@ -67,18 +70,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	}
 
 	if(empty($concert_err) && empty($tickets_err)){
-
 		$userID = $_SESSION["id"];
 		$ticketID = $_POST['Artist'];
 
 		$sql = "INSERT INTO orders (userID) VALUES (?)";
 
 		if($stmt = mysqli_prepare($link, $sql)){
-
-            mysqli_stmt_bind_param($stmt, "i", $param_userID);
-
-
-            $param_userID = $userID;
+			mysqli_stmt_bind_param($stmt, "i", $param_userID);
+      $param_userID = $userID;
 
 			if(mysqli_stmt_execute($stmt)){
 				$orderID = mysqli_insert_id($link);

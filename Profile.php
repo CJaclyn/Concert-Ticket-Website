@@ -83,7 +83,7 @@ if(isset($_POST['upload_profile'])){
   }
 ?>
 
-    <button onclick="myFunction1()" id='profpic-button'>Upload Profile Picture</button>
+    <button onclick="myFunction1()" class='button'>Upload Profile Picture</button>
     <div class = "hide upload-form" id="profpic-form">
       <form method="post" action="" enctype='multipart/form-data'>
         <input class = "button" type='file' name='file' />
@@ -226,7 +226,7 @@ if(isset($_POST['upload_profile'])){
   ?>
 
   <div class='centered'>
-    <button onclick="myFunction2()" class="button4">Upload Concert Pictures</button>
+    <button onclick="myFunction2()" class="button">Upload Concert Pictures</button>
     <div class = "hide upload-form" id = "uploadconcert-form">
       <form method="post" action="" enctype='multipart/form-data'>
         <input class = "button" type='file' name='file'>

@@ -9,7 +9,7 @@ header("refresh:2;url=order.php");
 <title>Checking Out</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="generalstylesheet.css">
+<link rel="stylesheet" href="/Concert-Ticket-Website/generalstylesheet.css">
 <link rel="stylesheet" href="checkout.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>

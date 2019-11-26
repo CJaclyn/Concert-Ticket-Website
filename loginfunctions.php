@@ -108,7 +108,6 @@ function isLoggedIn(){
   		        <li><a href=\"/Concert-Ticket-Website/all.php\">All</a></li>
   		      </ul>
   		    </li>
-  		    <li><a href=\"/Concert-Ticket-Website/Purchase.php\">Purchase Tickets</a></li>
   		    <li><a href=\"/Concert-Ticket-Website/News.php\">News</a></li>
   		    <li><a href=\"/Concert-Ticket-Website/logout.php\">Logout</a></li>
   				<li><a href='/Concert-Ticket-Website/admin/adminpage.php'><div id='adminuser'>$username</div></a></li>
@@ -222,7 +221,6 @@ function isLoggedInAdmin(){
             <li><a href=\"/Concert-Ticket-Website/all.php\">All</a></li>
           </ul>
         </li>
-        <li><a href=\"/Concert-Ticket-Website/Purchase.php\">Purchase Tickets</a></li>
         <li><a href=\"/Concert-Ticket-Website/News.php\">News</a></li>
         <li><a href=\"/Concert-Ticket-Website/logout.php\">Logout</a></li>
         <li><a href='/Concert-Ticket-Website/admin/adminpage.php'><div id='adminuser'>$username</div></a></li>

@@ -5,10 +5,7 @@ include('loginfunctions.php');
 require_once "config.php";
 
 $concertID = $tickets = $total = $price = $ticketID = $orderID = "";
-
 ?>
-
-
 
 <html>
 <head>
