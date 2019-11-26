@@ -2,6 +2,8 @@
 session_start();
 include('loginfunctions.php');
 isNotLoggedIn();
+
+$date = $tickets = $total = $price = $ticketID = $orderID = $concertID = "";
 ?>
 
 <!DOCTYPE html>
@@ -134,76 +136,74 @@ if(isset($_POST['upload_profile'])){
     $userID = $_SESSION["id"];
 
     //get orders query
-		$sql = "SELECT * FROM orders WHERE orderID = (SELECT max(orderID) FROM orders) AND userID = ".$userID."";
+	$sql = "SELECT * FROM orders WHERE orderID = (SELECT max(orderID) FROM orders) AND userID = ".$userID."";
         $result = mysqli_query($link, $sql);
-	      $row = mysqli_fetch_assoc($result);
-	      $totalRows_results = mysqli_num_rows($result);
+	
+	
+	if (mysqli_num_rows($result) > 0) {
 
-		if($totalRows_results > 0) {
+		while ($row = mysqli_fetch_array($result)) {
+		  $orderID = $row['orderID'];
+		  $date = $row['date'];
+		}
 
-        while ($row = mysqli_fetch_array($result)) {
-          $orderID = $row['orderID'];
-          $date = $row['date'];
-        }
+		$sql = "SELECT * FROM order_tickets WHERE orderID = ".$orderID."";
+		$result = mysqli_query($link, $sql);
+		while ($row = mysqli_fetch_array($result)) {
+		    $ticketID = $row['ticketID'];
+		    $tickets = $row['quantity'];
+		    $total = $row['total'];
+		}
 
-        $sql = "SELECT * FROM order_tickets WHERE orderID = ".$orderID."";
-        $result = mysqli_query($link, $sql);
-        while ($row = mysqli_fetch_array($result)) {
-            $ticketID = $row['ticketID'];
-            $tickets = $row['quantity'];
-            $total = $row['total'];
-        }
+		$sql = "SELECT * FROM tickets WHERE ticketID = ".$ticketID."";
+		$result = mysqli_query($link, $sql);
+		while ($row = mysqli_fetch_array($result)) {
+		    $concertID = $row['concertID'];
+		    $price = $row['Price'];
+		}
 
-        $sql = "SELECT * FROM tickets WHERE ticketID = ".$ticketID."";
-        $result = mysqli_query($link, $sql);
-        while ($row = mysqli_fetch_array($result)) {
-            $concertID = $row['concertID'];
-            $price = $row['Price'];
-        }
+		$sql = "SELECT Artist, artists.Image, Street, City, State, DATE_FORMAT(Date, '%a %b %e %Y') Date, TIME_FORMAT(Time, '%h %i %p') Time
+		FROM concerts
+		INNER JOIN artists ON artists.Artist_name = concerts.Artist
+		WHERE concertID = ".$concertID."";
+		$result = mysqli_query($link,$sql);
 
-			$sql = "SELECT Artist, artists.Image, Street, City, State, DATE_FORMAT(Date, '%a %b %e %Y') Date, TIME_FORMAT(Time, '%h %i %p') Time
-			FROM concerts
-			INNER JOIN artists ON artists.Artist_name = concerts.Artist
-			WHERE concertID = ".$concertID."";
-			$result = mysqli_query($link,$sql);
-
-      while($row = mysqli_fetch_array($result)) {
-  				echo "<tr>";
-  				echo "<div class =\"right\">";
-  				echo "<div id =\"boxshadow\">";
-  				echo "<img src='". $row['Image']."'width='300'>"."<br />";
-  				echo "</div>";
-  				echo "</div>";
-  				echo "<tr>";
-  				echo "<td>Artist:</td>";
-  				echo "<td>" . $row['Artist'] . "</td>";
-  				echo "</tr><tr>";
-  				echo "<td>Date:</td>";
-  				echo "<td>" . $row['Date'] . "</td>";
-  				echo "</tr><tr>";
-  				echo "<td>Time:</td>";
-  				echo "<td>" . $row['Time'] . "</td>";
-  				echo "</tr><tr>";
-  				echo "<td>Location</td>";
-  				echo "<td>".$row['Street'].", ".$row['City'].", ".$row['State'] ."</td>";
-  				echo "</tr><tr>";
-  				echo "</tr><tr>";
-  				echo "<td>Tickets: </td>";
-  				echo "<td>" . $tickets . "</td>";
-  				echo "</tr><tr>";
-  				echo "<td>Total: </td>";
-  				echo "<td>$" . $total . "</td>";
-  				echo "</tr><tr>";
-  				echo "<td>Date Purchased: </td>";
-  				echo "<td>" . $date . "</td>";
-  				echo "</tr>";
-  			}
+		while($row = mysqli_fetch_array($result)) {
+			echo "<tr>";
+			echo "<div class =\"right\">";
+			echo "<div id =\"boxshadow\">";
+			echo "<img src='". $row['Image']."'width='300'>"."<br />";
+			echo "</div>";
+			echo "</div>";
+			echo "<tr>";
+			echo "<td>Artist:</td>";
+			echo "<td>" . $row['Artist'] . "</td>";
+			echo "</tr><tr>";
+			echo "<td>Date:</td>";
+			echo "<td>" . $row['Date'] . "</td>";
+			echo "</tr><tr>";
+			echo "<td>Time:</td>";
+			echo "<td>" . $row['Time'] . "</td>";
+			echo "</tr><tr>";
+			echo "<td>Location</td>";
+			echo "<td>".$row['Street'].", ".$row['City'].", ".$row['State'] ."</td>";
+			echo "</tr><tr>";
+			echo "</tr><tr>";
+			echo "<td>Tickets: </td>";
+			echo "<td>" . $tickets . "</td>";
+			echo "</tr><tr>";
+			echo "<td>Total: </td>";
+			echo "<td>$" . $total . "</td>";
+			echo "</tr><tr>";
+			echo "<td>Date Purchased: </td>";
+			echo "<td>" . $date . "</td>";
+			echo "</tr>";
+		}
 		} else {
-      echo "</table>";
 			echo "No Recent Orders";
 		}
 			echo "</table>";
-			echo "</fieldset>";
+			echo "</fieldset>";;
 
 		?>
 	</div>
