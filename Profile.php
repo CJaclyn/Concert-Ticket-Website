@@ -128,11 +128,18 @@ if(isset($_POST['upload_profile'])){
 
 	<div class = "inforight card">
     <?php
+	echo "<fieldset class='info'>";
+	echo "<legend>Recent Order</legend>";
+	echo "<table>";
     $userID = $_SESSION["id"];
 
     //get orders query
 		$sql = "SELECT * FROM orders WHERE orderID = (SELECT max(orderID) FROM orders) AND userID = ".$userID."";
         $result = mysqli_query($link, $sql);
+	$row = mysqli_fetch_assoc($result);
+	$totalRows_results = mysqli_num_rows($result);
+		
+		if($totalRows_results > 0) {
 
         while ($row = mysqli_fetch_array($result)) {
           $orderID = $row['orderID'];
@@ -158,11 +165,6 @@ if(isset($_POST['upload_profile'])){
 			FROM concerts
 			INNER JOIN artists ON artists.Artist_name = concerts.Artist
 			WHERE concertID = ".$concertID."";
-
-			$result = mysqli_query($link,$sql);
-			echo "<fieldset class='info'>";
-			echo "<legend>Recent Order</legend>";
-			echo "<table>";
 			$result = mysqli_query($link,$sql);
 
       while($row = mysqli_fetch_array($result)) {
@@ -196,8 +198,10 @@ if(isset($_POST['upload_profile'])){
   				echo "<td>" . $date . "</td>";
   				echo "</tr>";
   			}
-
+		} else {
 			echo "</table>";
+			echo "No Recent Orders";
+		}
 			echo "</fieldset>";
 
 		?>
