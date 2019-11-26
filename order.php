@@ -3,6 +3,7 @@
 session_start();
 include('loginfunctions.php');
 require_once "config.php";
+isNotLoggedIn();
 
 $concertID = $tickets = $total = $price = $ticketID = $orderID = "";
 ?>
@@ -38,7 +39,7 @@ $concertID = $tickets = $total = $price = $ticketID = $orderID = "";
         $result = mysqli_query($link, $sql);
 	$row = mysqli_fetch_assoc($result);
         $totalRows_results = mysqli_num_rows($result);
-        
+
         if($totalRows_results > 0) {
         while ($row = mysqli_fetch_array($result)) {
             $orderID = $row['orderID'];
