@@ -1,5 +1,6 @@
 body {
-	background-color: grey;
+	background-color: black;
+	color: white;
 }
 
 h1 {
@@ -15,6 +16,11 @@ h1 {
 /*profile picture styling*/
 #profile-picture {
 	border-radius: 300px;
+	border: solid white 4px;
+}
+
+#profpic-button {
+	margin-bottom: 2rem;
 }
 
 #profpic-button, #profpic-form {
@@ -27,7 +33,11 @@ h1 {
 	margin-right: auto;
 	margin-top: 1rem;
 	font-size: 1.3rem;
-	border: solid black;
+	border: solid white;
+}
+
+#info table {
+	width: 500px;
 }
 
 .upload-form {
@@ -36,6 +46,18 @@ h1 {
 }
 
 /*orders styling*/
+#orders-container {
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 1.3rem;
+	margin-top: 2rem;
+}
+
+#orders {
+	border: solid white;
+}
+
 #no-orders {
 	font-size: 1.5rem;
 }

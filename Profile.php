@@ -85,7 +85,7 @@ if(isset($_POST['upload_profile'])){
   }
 ?>
 
-    <button onclick="myFunction1()" class='button'>Upload Profile Picture</button>
+    <button onclick="myFunction1()" class='button' id='profpic-button'>Upload Profile Picture</button>
     <div class = "hide upload-form" id="profpic-form">
       <form method="post" action="" enctype='multipart/form-data'>
         <input class = "button" type='file' name='file' />
@@ -104,23 +104,14 @@ if(isset($_POST['upload_profile'])){
 			echo "<table>";
 			while($row = mysqli_fetch_array($result)) {
 				echo "<tr>";
-				echo "<td>First Name:</td>";
-				echo "<td>" . $row['Firstname'] . "</td>";
-				echo "</tr><tr>";
-				echo "<td>Last Name:</td>";
-				echo "<td>" . $row['Lastname'] . "</td>";
+				echo "<td>Name:</td>";
+				echo "<td>" . $row['Firstname'] . " ". $row['Lastname'] . "</td>";
 				echo "</tr><tr>";
 				echo "<td>Email:</td>";
 				echo "<td>" . $row['Email'] . "</td>";
 				echo "</tr><tr>";
-				echo "<td>Street:</td>";
-				echo "<td>" . $row['Street'] . "</td>";
-				echo "</tr><tr>";
-				echo "<td>City</td>";
-				echo "<td>" . $row['City'] . "</td>";
-				echo "</tr><tr>";
-				echo "<td>State:</td>";
-				echo "<td>" . $row['State'] . "</td>";
+				echo "<td>Location:</td>";
+				echo "<td>" . $row['Street'] . ", " . $row['City'] . ", " . $row['State'] . "</td>";
 				echo "</tr>";
 
 			}
@@ -129,9 +120,10 @@ if(isset($_POST['upload_profile'])){
       ?>
 
     <?php
-	echo "<fieldset class='info'>";
+    echo "<div id='orders-container'>";
+  	echo "<fieldset id='orders'>";
 	echo "<legend>Recent Order</legend>";
-	echo "<table>";
+	echo "<table align='center'>";
     $userID = $_SESSION["id"];
 
     //get orders query
@@ -169,10 +161,8 @@ if(isset($_POST['upload_profile'])){
 
 		while($row = mysqli_fetch_array($result)) {
 			echo "<tr>";
-			echo "<div class =\"right\">";
-			echo "<div id =\"boxshadow\">";
+      echo "<div class ='centered'>";
 			echo "<img src='". $row['Image']."'width='300'>"."<br />";
-			echo "</div>";
 			echo "</div>";
 			echo "<tr>";
 			echo "<td>Artist:</td>";
@@ -202,8 +192,8 @@ if(isset($_POST['upload_profile'])){
 			echo "No Recent Orders";
 		}
 			echo "</table>";
-			echo "</fieldset>";;
-
+			echo "</fieldset>";
+      echo "</div>";
 		?>
 
 <h1 class="head">Concert Pictures</h1>
