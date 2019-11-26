@@ -58,7 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $state_err = "Please enter state name.";
     } else {
 		$state = trim($_POST["state"]);
-		if (!preg_match("/^[A-Z]{2}$/",$state)) {
+		if (!preg_match("/^[A-z]{2}$/",$state)) {
 			$state_err = "Only letters and white space are allowed";
 		} else {
 			$state = trim($_POST["state"]);

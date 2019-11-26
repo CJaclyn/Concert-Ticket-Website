@@ -136,9 +136,9 @@ if(isset($_POST['upload_profile'])){
     //get orders query
 		$sql = "SELECT * FROM orders WHERE orderID = (SELECT max(orderID) FROM orders) AND userID = ".$userID."";
         $result = mysqli_query($link, $sql);
-	$row = mysqli_fetch_assoc($result);
-	$totalRows_results = mysqli_num_rows($result);
-		
+	      $row = mysqli_fetch_assoc($result);
+	      $totalRows_results = mysqli_num_rows($result);
+
 		if($totalRows_results > 0) {
 
         while ($row = mysqli_fetch_array($result)) {
@@ -199,6 +199,7 @@ if(isset($_POST['upload_profile'])){
   				echo "</tr>";
   			}
 		} else {
+      echo "</table>";
 			echo "No Recent Orders";
 		}
 			echo "</table>";
