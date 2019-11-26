@@ -18,6 +18,5 @@ header("refresh:2;url=order.php");
 <?php isLoggedIn() ?>
   <h1>Finishing Checkout.</h1>
   <p>Please Wait A Moment. . .</p>
-  <?php include('footer.html')?>
 </body>
 </html>

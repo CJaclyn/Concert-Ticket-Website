@@ -128,7 +128,6 @@ if(isset($_POST['upload_profile'])){
 			echo "</fieldset>";
       ?>
 
-	<div class = "inforight card">
     <?php
 	echo "<fieldset class='info'>";
 	echo "<legend>Recent Order</legend>";
@@ -138,8 +137,8 @@ if(isset($_POST['upload_profile'])){
     //get orders query
 	$sql = "SELECT * FROM orders WHERE orderID = (SELECT max(orderID) FROM orders) AND userID = ".$userID."";
         $result = mysqli_query($link, $sql);
-	
-	
+
+
 	if (mysqli_num_rows($result) > 0) {
 
 		while ($row = mysqli_fetch_array($result)) {
@@ -206,7 +205,6 @@ if(isset($_POST['upload_profile'])){
 			echo "</fieldset>";;
 
 		?>
-	</div>
 
 <h1 class="head">Concert Pictures</h1>
   <?php
