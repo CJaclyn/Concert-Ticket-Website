@@ -199,9 +199,9 @@ if(isset($_POST['upload_profile'])){
   				echo "</tr>";
   			}
 		} else {
-			echo "</table>";
 			echo "No Recent Orders";
 		}
+			echo "</table>";
 			echo "</fieldset>";
 
 		?>
