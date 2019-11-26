@@ -35,6 +35,5 @@ header("refresh:1;url=index.php");
     </nav>
   <h1>You are now logged out.</h1>
   <p>Returning to homepage. . .</p>
-  <?php include('footer.html')?>
 </body>
 </html>
