@@ -89,7 +89,7 @@ insert into artists(Artist_name, Genre, Image) values
   ("Seven Lions", "EDM", "/artistphotos/Seven_Lions.jfif"),
   ("Milky Chance", "Rock", "/artistphotos/Milky_Chance.jfif"),
   ("Martin Garrix", "EDM", "/artistphotos/Martin_Garrix.jfif"),
-  ("The Neighbourhood", "Rock", "/artistphotos/The Neighbourhood.jfif"),
+  ("The Neighbourhood", "Rock", "/artistphotos/NBHD.jfif"),
   ("MGMT", "EDM", "/artistphotos/MGMT.jfif"),
   ("Cage the Elephant", "Rock", "/artistphotos/Cage_the_Elephant.jfif"),
   ("Slander", "EDM", "/artistphotos/Slander.jfif"),
