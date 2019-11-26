@@ -37,10 +37,6 @@ $concertID = $tickets = $total = $price = $ticketID = $orderID = "";
 
         $sql = "SELECT * FROM orders WHERE orderID = (SELECT max(orderID) FROM orders) AND userID = ".$userID."";
         $result = mysqli_query($link, $sql);
-				$row = mysqli_fetch_assoc($result);
-        $totalRows_results = mysqli_num_rows($result);
-
-        if($totalRows_results > 0) {
         while ($row = mysqli_fetch_array($result)) {
             $orderID = $row['orderID'];
         }
