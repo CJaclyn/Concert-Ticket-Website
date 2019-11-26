@@ -85,7 +85,7 @@ insert into artists(Artist_name, Genre, Image) values
   ("Angele", "Pop", "/artistphotos/Angele.jfif"),
   ("Arctic Monkeys", "Rock", "/artistphotos/Arctic_Monkeys.jfif"),
   ("The Hu", "Metal", "/artistphotos/The_Hu.jfif"),
-  ("Rammstein", "Metal", "/artistphotos/Rammestein.jfif"),
+  ("Rammstein", "Metal", "/artistphotos/Rammstein.jfif"),
   ("Seven Lions", "EDM", "/artistphotos/Seven_Lions.jfif"),
   ("Milky Chance", "Rock", "/artistphotos/Milky_Chance.jfif"),
   ("Martin Garrix", "EDM", "/artistphotos/Martin_Garrix.jfif"),
