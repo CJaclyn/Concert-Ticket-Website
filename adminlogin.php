@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../loginfunctions.php');
+include('loginfunctions.php');
 loginAdmin();
 global $user_err, $pass_err;
 ?>
@@ -17,13 +17,13 @@ global $user_err, $pass_err;
 </head>
 
 <body>
-<?php include('../header.html');?>
+<?php include('header.html');?>
 
   <?php
   if (isLoggedInAdmin()){
     echo "<h1>Redirecting to Admin Page. . .</h1>";
     header("refresh:1;url=adminpage.php");
-    
+
   }elseif(isset($_SESSION['username'])){
     header('location:/Concert-Ticket-Website/index.php');
   }
@@ -44,9 +44,9 @@ global $user_err, $pass_err;
       </form>
     </div>
     ';
+    include('footer.html'); 
   }
   ?>
-  <?php include('../footer.html'); ?>
 
 </body>
 </html>

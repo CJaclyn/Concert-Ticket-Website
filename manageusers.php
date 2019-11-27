@@ -1,7 +1,7 @@
 <?php
   session_start();
-  include('../loginfunctions.php');
-  require_once "../config.php";
+  include('loginfunctions.php');
+  require_once "config.php";
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<?php include('../header.html');?>
+<?php include('header.html');?>
 
 <?php
     if (isLoggedInAdmin())
@@ -53,5 +53,5 @@
       isNotLoggedInAdmin();
     }
 
-      include('../footer.html');
+      include('footer.html');
   ?>

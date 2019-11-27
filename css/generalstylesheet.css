@@ -45,7 +45,7 @@ nav ul li{
   position: relative;
 }
 
-nav ul li a, #user{
+nav ul li a, .user{
   padding: 1rem 2rem;
   display: block;
   text-decoration: none;
@@ -54,7 +54,7 @@ nav ul li a, #user{
   font-size: 1.3rem;
 }
 
-#user, #adminuser {
+.user {
   color: red;
 }
 
@@ -81,6 +81,7 @@ footer {
     color: black;
     margin-top: 5rem;
     padding-bottom: 1.5rem;
+    position: absolute;
 }
 
 footer img {
@@ -125,8 +126,8 @@ footer button {
   border-radius: .2rem;
 }
 
-/*hovers*/
 
+/*hovers*/
 footer li a:hover {
   color: red;
 }
@@ -151,3 +152,4 @@ nav ul li ul li a:hover {
   color: white;
   transition: .5s;
 }
+

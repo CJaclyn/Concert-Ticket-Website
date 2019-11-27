@@ -1,7 +1,7 @@
 <?php
   session_start();
-  include('../loginfunctions.php');
-  require_once "../config.php";
+  include('loginfunctions.php');
+  require_once "config.php";
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
 </head>
 <body>
   <div class="page-wrap">
-<?php include('../header.html');?>
+<?php include('header.html');?>
 
 <?php
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -104,5 +104,5 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   ?>
 </div>
   <?php
-    include('../footer.html');
+    include('footer.html');
    ?>

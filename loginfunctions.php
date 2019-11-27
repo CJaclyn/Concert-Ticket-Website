@@ -110,7 +110,7 @@ function isLoggedIn(){
   		    </li>
   		    <li><a href=\"/Concert-Ticket-Website/News.php\">News</a></li>
   		    <li><a href=\"/Concert-Ticket-Website/logout.php\">Logout</a></li>
-  				<li><a href='/Concert-Ticket-Website/admin/adminpage.php'><div id='adminuser'>$username</div></a></li>
+  				<li><a href='/Concert-Ticket-Website/adminpage.php'><div id='adminuser'>$username</div></a></li>
   		  </ul>
   		</nav>";
 
@@ -156,7 +156,7 @@ function logout(){
 include('functions.php');
 
 function loginAdmin(){
-  require_once "../config.php";
+  require_once "config.php";
   if (isset($_POST['username']) && isset($_POST['password']))
   {
     $username = htmlspecialchars($_POST['username']);
@@ -223,7 +223,7 @@ function isLoggedInAdmin(){
         </li>
         <li><a href=\"/Concert-Ticket-Website/News.php\">News</a></li>
         <li><a href=\"/Concert-Ticket-Website/logout.php\">Logout</a></li>
-        <li><a href='/Concert-Ticket-Website/admin/adminpage.php'><div id='adminuser'>$username</div></a></li>
+        <li><a href='/Concert-Ticket-Website/adminpage.php'><div id='adminuser'>$username</div></a></li>
       </ul>
     </nav>";
 

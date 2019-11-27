@@ -24,17 +24,17 @@ form {
   margin-right: auto;
 }
 
-form select {
-  margin-bottom: 2rem;
-  width: 200px;
-  border: none;
-  padding: .5rem;
-}
-
 form label {
   font-size: 1.2rem;
   display: block;
   color: white;
+}
+
+form input {
+  margin-bottom: 1rem;
+  width: 175px;
+  border: none;
+  padding: .5rem;
 }
 
 .centered button {
@@ -48,4 +48,9 @@ form label {
   font-size: 1.2rem;
   font-family: 'Staatliches', sans-serif;
   cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-size: 1.1rem;
 }
