@@ -110,8 +110,12 @@ if(isset($_POST['upload_profile'])){
 				echo "<td>Email:</td>";
 				echo "<td>" . $row['Email'] . "</td>";
 				echo "</tr><tr>";
-				echo "<td>Location:</td>";
-				echo "<td>" . $row['Street'] . ", " . $row['City'] . ", " . $row['State'] . "</td>";
+        echo "<td>Location:</td>";
+        if(empty($row['Street']) && empty($row['City']) && empty($row['State'])){
+          echo "<td>N/A</td>";
+        }else {
+          echo "<td>" . $row['Street'] . ", " . $row['City'] . ", " . $row['State'] . "</td>";
+        }
 				echo "</tr>";
 
 			}
