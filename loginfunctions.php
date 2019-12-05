@@ -131,6 +131,7 @@ function isLoggedIn(){
           </li>
           <li><a href=\"Purchase.php\">Purchase Tickets</a></li>
           <li><a href=\"News.php\">News</a></li>
+          <li><a href=\"register.php\">Register</a></li>
           <li><a href=\"login.php\">Login</a></li>
         </ul>
       </nav>";
