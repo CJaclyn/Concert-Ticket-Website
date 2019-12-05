@@ -9,9 +9,9 @@ include('loginfunctions.php');
 <title>Search Result</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/Concert-Ticket-Website/css/generalstylesheet.css">
-<link rel="stylesheet" href="/Concert-Ticket-Website/css/searchresult.css">
-<link rel="stylesheet" href="/Concert-Ticket-Website/css/displayconcerts.css">
+<link rel="stylesheet" href="css/generalstylesheet.css">
+<link rel="stylesheet" href="css/searchresult.css">
+<link rel="stylesheet" href="css/displayconcerts.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>

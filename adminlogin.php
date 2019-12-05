@@ -11,8 +11,8 @@ global $user_err, $pass_err;
 <title>Admin Login</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/Concert-Ticket-Website/css/generalstylesheet.css">
-<link rel="stylesheet" href="/Concert-Ticket-Website/css/adminlogin.css">
+<link rel="stylesheet" href="css/generalstylesheet.css">
+<link rel="stylesheet" href="css/adminlogin.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 
@@ -25,7 +25,7 @@ global $user_err, $pass_err;
     header("refresh:1;url=adminpage.php");
 
   }elseif(isset($_SESSION['username'])){
-    header('location:/Concert-Ticket-Website/index.php');
+    header('location:index.php');
   }
   else{
     echo '

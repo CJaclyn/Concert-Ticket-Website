@@ -9,8 +9,8 @@ include('loginfunctions.php');
 <title>Concerts</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/Concert-Ticket-Website/css/generalstylesheet.css">
-<link rel="stylesheet" href="/Concert-Ticket-Website/css/concerts.css">
+<link rel="stylesheet" href="css/generalstylesheet.css">
+<link rel="stylesheet" href="css/concerts.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 
@@ -36,7 +36,7 @@ include('loginfunctions.php');
     </div>
     <div class="column right">
       <a href="rock.php"><video autoplay loop muted>
-        <source src="/Concert-Ticket-Website/concertvids/rock.mp4" type="video/mp4">
+        <source src="concertvids/rock.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video></a>
       <div class="centered r"><a href="rock.php">Rock</a></div>
@@ -45,14 +45,14 @@ include('loginfunctions.php');
   <div class="row">
     <div class="column left">
       <a href="edm.php"><video autoplay loop muted>
-        <source src="/Concert-Ticket-Website/concertvids/edm.mp4" type="video/mp4">
+        <source src="concertvids/edm.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video></a>
       <div class="centered l"><a href="edm.php">EDM</a></div>
     </div>
     <div class="column right">
       <a href="metal.php"><video autoplay loop muted>
-        <source src="/Concert-Ticket-Website/concertvids/metal.mp4" type="video/mp4">
+        <source src="concertvids/metal.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video></a>
       <div class="centered r"><a href="metal.php">Metal</a></div>
@@ -61,7 +61,7 @@ include('loginfunctions.php');
   <div class="row">
     <div class="column">
       <a href="all.php"><video autoplay loop muted>
-        <source src="/Concert-Ticket-Website/concertvids/all.mp4" type="video/mp4">
+        <source src="concertvids/all.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video></a>
       <div class="centered mid"><a href="all.php">All Concerts</a></div>

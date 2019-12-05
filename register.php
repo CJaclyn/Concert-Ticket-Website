@@ -119,8 +119,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-    <link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/generalstylesheet.css">
-	<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/register.css">
+    <link rel="stylesheet" type="text/css" href="css/generalstylesheet.css">
+	<link rel="stylesheet" type="text/css" href="css/register.css">
 	<link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>

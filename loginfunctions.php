@@ -87,7 +87,7 @@ function isLoggedIn(){
   		    <li><a href=\"News.php\">News</a></li>
   		    <li><a href=\"profile.php\">Profile</a></li>
   		    <li><a href=\"logout.php\">Logout</a></li>
-          <li><span id='user'>$username</span></a></li>
+          <li><span class='user'>$username</span></a></li>
   		  </ul>
   		</nav>";
 
@@ -98,19 +98,19 @@ function isLoggedIn(){
   		echo "
   		<nav>
   		  <ul>
-  		    <li><a href=\"/Concert-Ticket-Website/index.php\">Home</a></li>
-  		    <li><a href=\"/Concert-Ticket-Website/concerts.php\">Concerts<i class=\"down\"></i></a>
+  		    <li><a href=\"index.php\">Home</a></li>
+  		    <li><a href=\"concerts.php\">Concerts<i class=\"down\"></i></a>
   		      <ul>
-  		        <li><a href=\"/Concert-Ticket-Website/pop.php\">Pop</a></li>
-  		        <li><a href=\"/Concert-Ticket-Website/rock.php\">Rock</a></li>
-  		        <li><a href=\"/Concert-Ticket-Website/edm.php\">EDM</a></li>
-  		        <li><a href=\"/Concert-Ticket-Website/metal.php\">Metal</a></li>
-  		        <li><a href=\"/Concert-Ticket-Website/all.php\">All</a></li>
+  		        <li><a href=\"pop.php\">Pop</a></li>
+  		        <li><a href=\"rock.php\">Rock</a></li>
+  		        <li><a href=\"edm.php\">EDM</a></li>
+  		        <li><a href=\"metal.php\">Metal</a></li>
+  		        <li><a href=\"all.php\">All</a></li>
   		      </ul>
   		    </li>
-  		    <li><a href=\"/Concert-Ticket-Website/News.php\">News</a></li>
-  		    <li><a href=\"/Concert-Ticket-Website/logout.php\">Logout</a></li>
-  				<li><a href='/Concert-Ticket-Website/adminpage.php'><div id='adminuser'>$username</div></a></li>
+  		    <li><a href=\"News.php\">News</a></li>
+  		    <li><a href=\"logout.php\">Logout</a></li>
+  				<li><a href='adminpage.php'><div class='user'>$username</div></a></li>
   		  </ul>
   		</nav>";
 
@@ -141,7 +141,7 @@ function isLoggedIn(){
 
 function isNotLoggedIn(){
   if(!isset($_SESSION['loggedin'])){
-    header("Location: /Concert-Ticket-Website/login.php");
+    header("Location: login.php");
   }
 }
 
@@ -211,19 +211,19 @@ function isLoggedInAdmin(){
     echo "
     <nav>
       <ul>
-        <li><a href=\"/Concert-Ticket-Website/index.php\">Home</a></li>
-        <li><a href=\"/Concert-Ticket-Website/concerts.php\">Concerts<i class=\"down\"></i></a>
+        <li><a href=\"index.php\">Home</a></li>
+        <li><a href=\"concerts.php\">Concerts<i class=\"down\"></i></a>
           <ul>
-            <li><a href=\"/Concert-Ticket-Website/pop.php\">Pop</a></li>
-            <li><a href=\"/Concert-Ticket-Website/rock.php\">Rock</a></li>
-            <li><a href=\"/Concert-Ticket-Website/edm.php\">EDM</a></li>
-            <li><a href=\"/Concert-Ticket-Website/metal.php\">Metal</a></li>
-            <li><a href=\"/Concert-Ticket-Website/all.php\">All</a></li>
+            <li><a href=\"pop.php\">Pop</a></li>
+            <li><a href=\"rock.php\">Rock</a></li>
+            <li><a href=\"edm.php\">EDM</a></li>
+            <li><a href=\"metal.php\">Metal</a></li>
+            <li><a href=\"all.php\">All</a></li>
           </ul>
         </li>
-        <li><a href=\"/Concert-Ticket-Website/News.php\">News</a></li>
-        <li><a href=\"/Concert-Ticket-Website/logout.php\">Logout</a></li>
-        <li><a href='/Concert-Ticket-Website/adminpage.php'><div id='adminuser'>$username</div></a></li>
+        <li><a href=\"News.php\">News</a></li>
+        <li><a href=\"logout.php\">Logout</a></li>
+        <li><a href='adminpage.php'><div class='user'>$username</div></a></li>
       </ul>
     </nav>";
 
@@ -233,7 +233,7 @@ function isLoggedInAdmin(){
 
 function isNotLoggedInAdmin() {
   if(!isset($_SESSION['valid_admin'])) {
-    header('Location:/Concert-Ticket-Website/index.php');
+    header('Location:index.php');
   }
 }
 

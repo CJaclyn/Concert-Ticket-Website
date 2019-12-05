@@ -10,8 +10,8 @@
 <title>Add Concert</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/Concert-Ticket-Website/css/generalstylesheet.css">
-<link rel="stylesheet" href="/Concert-Ticket-Website/css/add.css">
+<link rel="stylesheet" href="css/generalstylesheet.css">
+<link rel="stylesheet" href="css/add.css">
 
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>

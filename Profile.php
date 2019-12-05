@@ -11,8 +11,8 @@ $date = $tickets = $total = $price = $ticketID = $orderID = $concertID = "";
 <title>Profile Page</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/generalstylesheet.css">
-<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/Profile.css">
+<link rel="stylesheet" type="text/css" href="css/generalstylesheet.css">
+<link rel="stylesheet" type="text/css" href="css/Profile.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 
 <script>

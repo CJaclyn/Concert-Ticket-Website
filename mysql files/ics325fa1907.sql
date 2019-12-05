@@ -81,20 +81,20 @@ insert into users(Username, Password, Email, Firstname, Lastname, admin) values
 ("bob123", SHA1("123456"), "bob@email.com", "Bob", "Ert", 0);
 
 insert into artists(Artist_name, Genre, Image) values
-  ("Lana Del Rey", "Pop", "/artistphotos/Lana_Del_Rey.jfif"),
-  ("Angele", "Pop", "/artistphotos/Angele.jfif"),
-  ("Arctic Monkeys", "Rock", "/artistphotos/Arctic_Monkeys.jfif"),
-  ("The Hu", "Metal", "/artistphotos/The_Hu.jfif"),
-  ("Rammstein", "Metal", "/artistphotos/Rammstein.jfif"),
-  ("Seven Lions", "EDM", "/artistphotos/Seven_Lions.jfif"),
-  ("Milky Chance", "Rock", "/artistphotos/Milky_Chance.jfif"),
-  ("Martin Garrix", "EDM", "/artistphotos/Martin_Garrix.jfif"),
-  ("The Neighbourhood", "Rock", "/artistphotos/NBHD.jfif"),
-  ("MGMT", "EDM", "/artistphotos/MGMT.jfif"),
-  ("Cage the Elephant", "Rock", "/artistphotos/Cage_the_Elephant.jfif"),
-  ("Slander", "EDM", "/artistphotos/Slander.jfif"),
-  ("Illenium", "EDM", "/artistphotos/Illenium.jfif"),
-  ("Two Door Cinema", "Pop", "/artistphotos/Two_Door_Cinema.jpg");
+  ("Lana Del Rey", "Pop", "artistphotos/Lana_Del_Rey.jfif"),
+  ("Angele", "Pop", "artistphotos/Angele.jfif"),
+  ("Arctic Monkeys", "Rock", "artistphotos/Arctic_Monkeys.jfif"),
+  ("The Hu", "Metal", "artistphotos/The_Hu.jfif"),
+  ("Rammstein", "Metal", "artistphotos/Rammstein.jfif"),
+  ("Seven Lions", "EDM", "artistphotos/Seven_Lions.jfif"),
+  ("Milky Chance", "Rock", "artistphotos/Milky_Chance.jfif"),
+  ("Martin Garrix", "EDM", "artistphotos/Martin_Garrix.jfif"),
+  ("The Neighbourhood", "Rock", "artistphotos/NBHD.jfif"),
+  ("MGMT", "EDM", "artistphotos/MGMT.jfif"),
+  ("Cage the Elephant", "Rock", "artistphotos/Cage_the_Elephant.jfif"),
+  ("Slander", "EDM", "artistphotos/Slander.jfif"),
+  ("Illenium", "EDM", "artistphotos/Illenium.jfif"),
+  ("Two Door Cinema", "Pop", "artistphotos/Two_Door_Cinema.jpg");
 
 insert into concerts(Artist, Street, City, Date, Time) values
 ("Lana Del Rey", "818 Daisy Lane", "Garden", "2019-11-25", "18:00:00"),

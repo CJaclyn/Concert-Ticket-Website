@@ -8,8 +8,8 @@ include('loginfunctions.php');
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/generalstylesheet.css">
-<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/News.css">
+<link rel="stylesheet" type="text/css" href="css/generalstylesheet.css">
+<link rel="stylesheet" type="text/css" href="css/News.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -17,7 +17,7 @@ include('loginfunctions.php');
   <?php isLoggedIn() ?>
 
 <div class ="header centered">
-<img src="/Concert-Ticket-Website/images/news_header.jfif">
+<img src="images/news_header.jfif">
 <h1>News</h1>
 </div>
 

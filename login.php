@@ -10,8 +10,8 @@ global $username_err, $username, $password_err, $password;
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/generalstylesheet.css">
-	<link rel="stylesheet" type="text/css" href="/Concert-Ticket-Website/css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/generalstylesheet.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
 	<link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
