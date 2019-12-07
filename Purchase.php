@@ -212,6 +212,8 @@ $(document).ready(function() {
 								echo "<option value='" . $row['ticketID'] . "'>" . $row['Artist'] . "</option>";
 							}
 							echo "</select>";
+							} else {
+								header( "refresh:0;url=Purchase.php" );
 							}
 
 
