@@ -2,6 +2,7 @@
   session_start();
   include('loginfunctions.php');
   require_once "config.php";
+  global $artist_err, $pic_errors;
 ?>
 
 <!DOCTYPE html>
@@ -16,62 +17,54 @@
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="page-wrap">
 <?php include('header.html');?>
 
 <?php
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $artist = htmlspecialchars($_POST['artistname']);
   $genre = $_POST['genre'];
-  
+
+  $pic_err = array();
+  $err_count = array();
+  $artist_err = "";
+
 if(isset($_FILES['artistimage_upload'])) {
   $target_dir = 'artistphotos/';
 	$filename = $target_dir.($_FILES['artistimage_upload']['name']);
-	$errors     = array();
   $maxsize    = 2097152;
   $extensions = array(
-    'image/jpeg',
-    'image/jpg',
-    'image/gif',
-    'image/png'
+    'jpeg',
+    'jpg',
+    'gif',
+    'png',
+    'jfif'
     );
-  
+  $fileExtention = pathinfo($filename, PATHINFO_EXTENSION);
+
   //check if file is selected for upload
   if(!isset($_FILES['artistimage_upload']) || $_FILES['artistimage_upload']['error'] == UPLOAD_ERR_NO_FILE) {
-      $errors[] = 'Please select a file to upload.';
-  } else {
-
+    array_push($err_count, 1);
+  }else {
     //check if image already exists in folder
     if (file_exists($filename)) {
-      $errors[] = 'Image already exists!';
+      array_push($err_count, 2);
     }
-}
-  
+  }
+
   //check if size is less than 2 MB
-	if(($_FILES['artistimage_upload']['size'] >= $maxsize)) {
-        $errors[] = 'File too large. File must be less than 2 megabytes.';
-    }
-    
-  //check if file extensions are correct
-  if(!in_array($_FILES['artistimage_upload']['type'], $extensions) && (!empty($_FILES["artistimage_upload"]["type"]))) {
-    $errors[] = 'Invalid file type. Only JPG, GIF, PNG, and JFIF types are accepted.';
+  if(($_FILES['artistimage_upload']['size'] >= $maxsize)) {
+    array_push($err_count, 3);
+  }
+
+  //check extention
+  if(!in_array($fileExtention, $extensions) && (!empty($_FILES["artistimage_upload"]["type"]))) {
+    array_push($err_count, 4);
+  }
 }
 
-//check if any errors exists
-if(count($errors) === 0) {
-	$artistimage = basename($_FILES['artistimage_upload']['name']);
-  $artistphoto = '/artistphotos/'.$artistimage;
-} else {
-    foreach($errors as $error) {
-        echo '<script>alert("'.$error.'");</script>';
-		header( "refresh:1;url=addartist.php" );
-    }
-	    die(); //if errors exist, kill process so it cannot add artists without file
-	}
-}
-
-	
-	if(regexCheck($artist)){
+	if(regexCheck($artist) && !$err_count){
+    $artistimage = basename($_FILES['artistimage_upload']['name']);
+    $artistphoto = 'artistphotos/'.$artistimage;
     //select query
     $selectQ = $link->prepare("SELECT COUNT(1) FROM artists WHERE Artist_name = ?");
     $selectQ->bind_param("s", $artist);
@@ -91,7 +84,7 @@ if(count($errors) === 0) {
 
         if($insertQ->execute()){
           echo "<script type='text/javascript'>alert('Artist successfully added!');</script>";
-          header( "refresh:5;url=manageartists.php" );
+          header( "refresh:.5;url=manageartists.php" );
 
         }else {
           echo "ERROR adding artist.<br>";
@@ -100,7 +93,7 @@ if(count($errors) === 0) {
         }
       }else {
         $selectQ->close();
-        echo "<script type='text/javascript'>alert('Artist already exists!');</script>";
+        $artist_err = 'Artist already exists!';
 
       }
     }else{
@@ -110,23 +103,31 @@ if(count($errors) === 0) {
     }
     $link->close();
 
-  }else {
-    echo "<script type='text/javascript'>alert('Please try again. The artist name can only contain numbers, letters, hyphens, periods, and or spaces.');</script>";
+  }if(!regexCheck($artist)){
+    $artist_err = 'Artist name can only contain numbers, letters, hyphens, periods, and or spaces';
+  }if(in_array(1, $err_count)){
+    array_push($pic_err, 'Please select a file to upload.');
+  }if(in_array(2, $err_count)){
+    array_push($pic_err, 'Image already exists!');
+  }if(in_array(3, $err_count)){
+    array_push($pic_err, 'File too large. File must be less than 2 megabytes.');
+  }if(in_array(4, $err_count)){
+    array_push($pic_err, 'Invalid file type. Only JPG, GIF, PNG, and JFIF types are accepted.');
   }
-}	
+
+  $pic_errors = implode("<br>", $pic_err);
+}
 
     if (isLoggedInAdmin())
     {
       echo "<h1>Add Artist</h1>";
-
-      $currDate = date("Y-m-d");
-
       echo "<div class='centered'>";
       echo "<form method='POST' enctype='multipart/form-data' action=''>";
       echo "<fieldset>";
       echo "<legend>Artist</legend>";
       echo "<label for='artistname'>Artist</label>";
       echo "<input type='text' name='artistname' id='artistname' required max='25'>";
+      echo "<div class='error'>".$artist_err."</div>";
       echo "<label for='genre'>Genre</label>";
       echo "<select name='genre' id='genre'>";
       echo "<option value='Pop'>Pop</option>";
@@ -135,23 +136,23 @@ if(count($errors) === 0) {
       echo "<option value='Metal'>Metal</option>";
       echo "</select>";
       echo "</fieldset>";
-      echo"
+      echo "
           <fieldset>
           <legend>Image</legend>
-          <input type='file' name='artistimage_upload' />
-          </fieldset>
+          <input type='file' name='artistimage_upload' />";
+      echo "<div class='error'>".$pic_errors."</div>";
+      echo "</fieldset>
           <div class='centered'>
           <button type='submit'>Add</button>
           </div>
-        </form>
-        </div>";
+          </form>
+          </div>";
     }
     else
     {
       isNotLoggedInAdmin();
     }
   ?>
-</div>
   <?php
     include('footer.html');
    ?>

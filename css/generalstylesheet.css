@@ -54,7 +54,7 @@ nav ul li a, .user{
   font-size: 1.3rem;
 }
 
-.user {
+.user, #admin {
   color: red;
 }
 

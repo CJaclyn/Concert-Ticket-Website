@@ -110,7 +110,7 @@ function isLoggedIn(){
   		    </li>
   		    <li><a href=\"News.php\">News</a></li>
   		    <li><a href=\"logout.php\">Logout</a></li>
-  				<li><a href='adminpage.php'><div class='user'>$username</div></a></li>
+  				<li><a href='adminpage.php'><div id='admin'>$username</div></a></li>
   		  </ul>
   		</nav>";
 
@@ -224,7 +224,7 @@ function isLoggedInAdmin(){
         </li>
         <li><a href=\"News.php\">News</a></li>
         <li><a href=\"logout.php\">Logout</a></li>
-        <li><a href='adminpage.php'><div class='user'>$username</div></a></li>
+        <li><a href='adminpage.php'><div id='admin'>$username</div></a></li>
       </ul>
     </nav>";
 
