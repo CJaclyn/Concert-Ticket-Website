@@ -19,24 +19,16 @@
 <?php include('header.html');?>
 
 <?php
-  $currDate = date("Y-m-d");
-    if (isLoggedInAdmin())
-    {
+    if (isLoggedInAdmin()){
       echo "<h1 id='update'>Update Concert</h1>";
-
       echo "<form method='POST' action=''>
-          <label for='date'>Date</label>
-          <input type='date' name='date' id='date' min='".$currDate."'></input>";
-      echo "<label for='time'>Time</label>
-          <input type='time' name='time' id='time'></input>
-          <div id='centered'>
-          <button type='submit'>Update</button>
-          </div>
-        </form>";
-
-    }
-    else
-    {
+              <label for='date'>Price</label>
+              <input type='number' name='price' id='price' min='1'></input>
+              <div id='centered'>
+                <button type='submit'>Update</button>
+              </div>
+            </form>";
+    }else{
       isNotLoggedInAdmin();
     }
   ?>
@@ -44,42 +36,21 @@
   <?php
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $id = strip_tags($_GET['id']);
-    $date = strip_tags($_POST['date']);
-    $time = strip_tags($_POST['time']);
+    $price = htmlspecialchars($_POST['price']);
 
-    $dateQuery = mysqli_prepare($link, "UPDATE concerts SET Date = ? WHERE concertID = '".$id."'");
-    $timeQuery = mysqli_prepare($link, "UPDATE concerts SET Time = ? WHERE concertID = '".$id."'");
+    $priceQuery = mysqli_prepare($link, "UPDATE tickets SET Price = ? WHERE concertID = '".$id."'");
+    mysqli_stmt_bind_param($priceQuery,"i", $price);
 
-    mysqli_stmt_bind_param($dateQuery,"s", $date);
-    mysqli_stmt_bind_param($timeQuery,"s", $time);
-
-    if(!empty($date) && !empty($time)){
-      if($dateQuery->execute() && $timeQuery->execute()){
-        echo "<script type='text/javascript'>alert('Date & Time Succesfully Updated!');</script>";
+    if(!empty($price)){
+      if($priceQuery->execute()){
+        echo "<script type='text/javascript'>alert('Concert ticket price successfully updated!');</script>";
         header( "refresh:.5;url=manageConcerts.php" );
       }else{
-          echo "ERROR: Could not able to execute $dateQuery. " . mysqli_error($db);
-          echo "ERROR: Could not able to execute $timeQuery. " . mysqli_error($db);
-      }
-    }elseif(!empty($date) && empty($time)){
-      if($dateQuery->execute()){
-        echo "<script type='text/javascript'>alert('Date Successfully Updated!');</script>";
-        header( "refresh:.5;url=manageConcerts.php" );
-      }else{
-        echo "ERROR: Could not able to execute $dateQuery. " . mysqli_error($db);
-      }
-    }elseif(!empty($time) && empty($date)){
-      if($timeQuery->execute()){
-        echo "<script type='text/javascript'>alert('Time Successfully Updated!');</script>";
-        header( "refresh:.5;url=manageConcerts.php" );
-      }else{
-        echo "ERROR: Could not able to execute $timeQuery. " . mysqli_error($db);
+          echo "ERROR: Could not able to execute $priceQuery. " . mysqli_error($db);
       }
     }else {
       header('location:updateconcert.php');
     }
     mysqli_close($link);
   }
-
-  include('footer.html');
    ?>

@@ -145,7 +145,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				<div <?php echo (!empty($concert_err)) ? 'has-error' : ''; ?>>
 				<label>Select Concert</label>
 						<?php
-							$sql = "SELECT c.Artist, t.ticketID from concerts as c
+							$sql = "SELECT c.Artist, t.ticketID, c.Date from concerts as c
 							INNER JOIN tickets as t on t.concertID = c.concertID";
 							$result = mysqli_query($link, $sql);
 
@@ -153,7 +153,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							echo "<option selected value='none'>---Select A Concert---</option>";
 							if ($result->num_rows > 0) {
 								while($row = mysqli_fetch_array($result)) {
-									echo "<option value='" . $row['ticketID'] . "'>" . $row['Artist'] . "</option>";
+									echo "<option value='" . $row['ticketID'] . "'>" . $row['Artist'] . " - " . $row['Date'] . "</option>";
 								}
 							}
 							echo "</select>";

@@ -48,5 +48,4 @@
 
   }
 
-  include('footer.html');
    ?>

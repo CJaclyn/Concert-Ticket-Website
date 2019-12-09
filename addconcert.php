@@ -26,6 +26,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $state = htmlspecialchars($_POST['state']);
   $date = htmlspecialchars($_POST['date']);
   $time = htmlspecialchars($_POST['time']);
+  $price = htmlspecialchars($_POST['price']);
   $street_err = $city_err = $state_err = "";
 
   if(regexCheck($street) && regexCheck($city) && ctype_alpha($state)){
@@ -33,15 +34,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $insertQ->bind_param("ssssss", $artist, $street, $city, $state, $date, $time);
 
     if($insertQ->execute()){
-      echo "<script type='text/javascript'>alert('Concert successfully added!');</script>";
-      header( "refresh:.5;url=manageconcerts.php" );
-    }
-    else {
-      echo "ERROR adding concert.";
-      //echo mysqli_error($link);
-    }
+        $concertID = mysqli_insert_id($link);
 
-    $link->close();
+        $insertPrice = $link->prepare("INSERT INTO tickets VALUES(DEFAULT, ?, ?)");
+        $insertPrice->bind_param("ii", $concertID, $price);
+
+        if($insertPrice->execute()){
+          echo "<script type='text/javascript'>alert('Concert successfully added!');</script>";
+          header( "refresh:.5;url=manageconcerts.php" );
+        }else {
+          echo "Something went wrong.";
+          //echo mysqli_error($link);
+        }
+      }else {
+        echo "Something went wrong.";
+        //echo mysqli_error($link);
+      }
 
   }if(!regexCheck($street)){
     $street_err = "Street can only have letters, numbers, spaces, periods, single quotes, and or hyphens.";
@@ -90,13 +98,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       echo "<div class='error'>".$state_err."</div>";
       echo"</fieldset>
           <fieldset>
-          <legend>Date & Time</legend>
+          <legend>Date, Time & Price</legend>
           <label for='date'>Date</label>";
       echo"<input type='date' name='date' id='date' required min='".$currDate."'></input>";
       echo"
           <label for='time'>Time</label>
           <input type='time' name='time' id='time' required></input>
-          </fieldset>
+          <label for='price'>Price</label>
+          <input type='number' name='price' id='price' min='1' required></input>";
+      echo "</fieldset>
           <div class='centered'>
           <button type='submit'>Add</button>
           </div>
@@ -109,4 +119,5 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
 
     include('footer.html');
+    $link->close();
   ?>

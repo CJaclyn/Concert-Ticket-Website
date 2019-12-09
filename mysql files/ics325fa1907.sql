@@ -53,6 +53,7 @@ concertID int(11) unsigned not null,
 Price decimal(10,2) not null,
 constraint FK_concertID foreign key (concertID)
 	references concerts(concertID)
+  ON DELETE CASCADE
 );
 
 create table order_tickets (
@@ -65,6 +66,7 @@ constraint FK_orderID foreign key (orderID)
 	references orders(orderID),
 constraint FK_ticketID foreign key (ticketID)
 	references tickets(ticketID)
+  ON DELETE CASCADE
 );
 
 create table images (
