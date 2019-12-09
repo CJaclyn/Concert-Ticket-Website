@@ -239,11 +239,12 @@ $sql = "SELECT * FROM images WHERE username='".$_SESSION['username']."'";
 $result = mysqli_query($link,$sql);
 $row = mysqli_fetch_array($result);
 
-echo"<tr>";
+echo"<div id='concert-pics'><tr>";
 $i=0; //keeps count of the row
 while($row = mysqli_fetch_array($result)){
    $i=$i+1;
-   echo "<td>";?><img src="Upload/<?php echo $row['name']; ?>" height="400" width="25%" ><?php echo"</td>";
+   echo "<td>";?>
+  <img src="Upload/<?php echo $row['name']; ?>" class='img'><?php echo"</td>";
    if($i%4==0){
      echo"</tr>";
    }
@@ -251,6 +252,7 @@ while($row = mysqli_fetch_array($result)){
      echo"</tr>";
    }
 }
+echo "</div>";
 mysqli_close($link);
 ?>
 

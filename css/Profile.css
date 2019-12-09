@@ -68,3 +68,7 @@ h1 {
   height:350px;
   object-fit:scale-down;
 }
+
+#concert-pics {
+	text-align: center;
+}
