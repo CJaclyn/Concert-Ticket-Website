@@ -21,7 +21,7 @@ include('loginfunctions.php');
 
   <h1>Explore Concerts</h1>
 
-    <form class="searchbar" action="searchresult.php" method="post">
+    <form class="searchbar" action="searchresult.php" method="get">
       <input type="text" name="userSrch" placeholder="Artist or band">
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
