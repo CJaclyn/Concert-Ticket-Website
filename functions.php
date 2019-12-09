@@ -19,7 +19,7 @@ function usernameRegex($arg){
 
 //function to make sure first and last name input can only have letters, hyphens, spaces, and or periods
 function nameRegex($arg){
-  if(preg_match("/[^A-Za-z-.\s]/")){
+  if(preg_match("/[^A-Za-z-.\s]/", $arg)){
     return false;
   }else {
     return true;

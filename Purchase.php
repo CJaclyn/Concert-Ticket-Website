@@ -5,30 +5,17 @@ include('loginfunctions.php');
 require_once "config.php";
 isNotLoggedIn();
 if(isLoggedInAdmin()){
-	header('location:\Concert-Ticket-Website\admin\adminpage.php');
+	header('location:adminpage.php');
 }
-
 
 $concert = $ticket_type = $tickets = $street = $city = $state = $total = $price = $amount = $ticketID = $orderID = "";
 $concert_err = $ticket_type_err = $tickets_err = $street_err = $city_err = $state_err = $terms_err = "";
 
-
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-	//validate concert
-	if($_POST['Artist'] == 'none') { 
-		$concert_err = "Please select a concert";
-	} else {
-		$concert = $_POST['Artist'];
+	if($_POST["Artist"] == "none"){
+		$concert_err = "Please select a concert.";
 	}
-
-	//validate quantity
-	if(($_POST['quantity'] < 1) || ($_POST['quantity'] > 8)) {
-		$tickets_err = "Please select a valid number of tickets";
-	} else {
-		$tickets = $_POST['quantity'];
-	}
-
 	// Validate street
     if(empty(trim($_POST["street"]))){
         $street_err = "Please enter a street address.";
@@ -46,8 +33,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $city_err = "Please enter city name.";
     } else {
 		$city = trim($_POST["city"]);
-		if (!preg_match("/^[a-zA-Z ]*$/",$city)) {
-			$city_err = "Only letters and white space are allowed";
+		if (!nameRegex($city)) {
+			$city_err = "Only letters, hyphens, spaces, and periods allowed.";
 		} else {
 			$city = trim($_POST["city"]);
 		}
@@ -59,7 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else {
 		$state = trim($_POST["state"]);
 		if (!preg_match("/^[A-z]{2}$/",$state)) {
-			$state_err = "Only letters and white space are allowed";
+			$state_err = "Only two letters are allowed.";
 		} else {
 			$state = trim($_POST["state"]);
 		}
@@ -69,95 +56,66 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$terms_err = "You must accept terms and conditions.";
 	}
 
-	if(empty($concert_err) && empty($tickets_err)){
+	if(empty($concert_err) && empty($street_err) && empty($city_err) && empty($state_err) && empty($terms_err)){
 		$userID = $_SESSION["id"];
+		$quantity = $_POST['quantity'];
 		$ticketID = $_POST['Artist'];
 
+		//insert user id into orders
 		$sql = "INSERT INTO orders (userID) VALUES (?)";
-
-		if($stmt = mysqli_prepare($link, $sql)){
-			mysqli_stmt_bind_param($stmt, "i", $param_userID);
-      $param_userID = $userID;
-
-			if(mysqli_stmt_execute($stmt)){
-				$orderID = mysqli_insert_id($link);
-			}
-		}
-		mysqli_stmt_close($stmt);
-
-
-		$sql = "INSERT INTO order_tickets (orderID, ticketID, quantity) VALUES (?, ?, ?)";
-
-		if($stmt = mysqli_prepare($link, $sql)){
-
-            mysqli_stmt_bind_param($stmt, "iii", $param_orderID, $param_ticketID, $param_quantity);
-
-			$param_orderID = $orderID;
-			$param_ticketID = $ticketID;
-			$param_quantity = $tickets;
-
-			if(mysqli_stmt_execute($stmt)){
-
-			} else {
-				echo "Something went wrong. Please try again later.";
-			}
-		}
-		mysqli_stmt_close($stmt);
-
-	$sql = "SELECT price FROM tickets WHERE ticketID = ".$ticketID."";
-	$result = mysqli_query($link,$sql);
-	while ($row = mysqli_fetch_array($result)) {
-		$price = $row['price'];
-	}
-
-	$sql = "UPDATE order_tickets SET total=? WHERE orderID = ".$orderID."";
-		$total = ($price * $tickets);
-	if($stmt = mysqli_prepare($link, $sql)){
-
-		mysqli_stmt_bind_param($stmt, "d", $param_total);
-
-		$param_total = $total;
+		$stmt = mysqli_prepare($link, $sql);
+		mysqli_stmt_bind_param($stmt, "i", $userID);
 
 		if(mysqli_stmt_execute($stmt)){
+				$orderID = mysqli_insert_id($link);
 
-		} else {
-			echo "Something went wrong. Please try again later.";
-		}
+				//insert into order_tickets table
+				$sql = "INSERT INTO order_tickets (orderID, quantity, ticketID) VALUES (?, ?, ?)";
+				$stmt = mysqli_prepare($link, $sql);
+				mysqli_stmt_bind_param($stmt, "iii", $orderID, $quantity, $ticketID);
+
+				if(mysqli_stmt_execute($stmt)){
+					//select price from ticket table
+					$sql = "SELECT price FROM tickets WHERE ticketID = '".$ticketID."'";
+					$result = mysqli_query($link,$sql);
+					while ($row = mysqli_fetch_array($result)) {
+						$price = $row['price'];
+					}
+
+					//update order_tickets table with total
+					$sql = "UPDATE order_tickets SET total=? WHERE orderID = ".$orderID."";
+					$total = ($price * $quantity);
+					$stmt = mysqli_prepare($link, $sql);
+					mysqli_stmt_bind_param($stmt, "d", $total);
+					if(mysqli_stmt_execute($stmt)){
+
+						//update user address
+						$sql = "UPDATE users SET Street=?, City=?, State=? WHERE userID = ".$userID."";
+						$stmt = mysqli_prepare($link, $sql);
+						mysqli_stmt_bind_param($stmt, "sss", $street, $city, $state);
+
+						if(mysqli_stmt_execute($stmt)){
+								header("location: checkout.php");
+							}else{
+								echo "Something went wrong. Please try again later.";
+							}
+
+					}else{
+						echo "Something went wrong. Please try again later.";
+						//echo mysqli_error($link);
+					}
+
+				}else {
+					echo "Something went wrong. Please try again later.";
+					//echo mysqli_error($link);
+				}
+
+			}else {
+				echo "Something went wrong. Please try again later.";
+				//echo mysqli_error($link);
+			}
+		mysqli_stmt_close($stmt);
 	}
-	mysqli_stmt_close($stmt);
-}
-
-
-    if(empty($street_err) && empty($city_err) && empty($state_err) && empty($terms_err) && empty($concert_err) && empty($tickets_err)){
-
-		$userID = $_SESSION["id"];
-
-
-        $sql = "UPDATE users SET Street=?, City=?, State=? WHERE userID = ".$userID."";
-
-        if($stmt = mysqli_prepare($link, $sql)){
-
-            mysqli_stmt_bind_param($stmt, "sss", $param_street, $param_city, $param_state);
-
-
-            $param_street = $street;
-            $param_city = $city;
-			$param_state = $state;
-
-
-            if(mysqli_stmt_execute($stmt)){
-
-                header("location: checkout.php");
-            } else{
-                echo "Something went wrong. Please try again later.";
-            }
-        }
-
-        mysqli_stmt_close($stmt);
-    }
-
-
-    mysqli_close($link);
 }
 ?>
 
@@ -187,23 +145,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				<div <?php echo (!empty($concert_err)) ? 'has-error' : ''; ?>>
 				<label>Select Concert</label>
 						<?php
-
 							$sql = "SELECT c.Artist, t.ticketID from concerts as c
 							INNER JOIN tickets as t on t.concertID = c.concertID";
 							$result = mysqli_query($link, $sql);
 
+							echo "<select id='concert' name='Artist'>";
+							echo "<option selected value='none'>---Select A Concert---</option>";
 							if ($result->num_rows > 0) {
-								echo "<select id='concert' name='Artist'>";
-								echo "<option selected value='none'>---Select A Concert---</option>";
-							while($row = mysqli_fetch_array($result)) {
-								echo "<option value='" . $row['ticketID'] . "'>" . $row['Artist'] . "</option>";
+								while($row = mysqli_fetch_array($result)) {
+									echo "<option value='" . $row['ticketID'] . "'>" . $row['Artist'] . "</option>";
+								}
 							}
 							echo "</select>";
-							} else {
-								
-							}
-
-
 						?>
 				<br>
 				<span class="error"><?php echo $concert_err; ?></span>
@@ -229,7 +182,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				</div>
 				<div <?php echo (!empty($state_err)) ? 'has-error' : ''; ?>>
 					<label>State</label>
-					<input type="text" name="state" value="<?php echo $state; ?>" placeholder="MN">
+					<input type="text" name="state" value="<?php echo $state; ?>" placeholder="MN"  minlength = '2' maxlength='2'>
 					<br>
 					<span class="error"><?php echo $state_err; ?></span>
 				</div>
