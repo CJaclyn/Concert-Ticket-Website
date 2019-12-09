@@ -237,7 +237,6 @@ if(isset($_POST['upload_profile'])){
 //get concert pictures query
 $sql = "SELECT * FROM images WHERE username='".$_SESSION['username']."'";
 $result = mysqli_query($link,$sql);
-$row = mysqli_fetch_array($result);
 
 echo"<div id='concert-pics'><tr>";
 $i=0; //keeps count of the row
