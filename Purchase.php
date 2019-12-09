@@ -16,7 +16,7 @@ $concert_err = $ticket_type_err = $tickets_err = $street_err = $city_err = $stat
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 	//validate concert
-	if(empty(trim($_POST['Artist']))) {
+	if($_POST['Artist'] == 'none') { 
 		$concert_err = "Please select a concert";
 	} else {
 		$concert = $_POST['Artist'];
@@ -128,7 +128,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 
 
-    if(empty($street_err) && empty($city_err) && empty($state_err) && empty($terms_err)){
+    if(empty($street_err) && empty($city_err) && empty($state_err) && empty($terms_err) && empty($concert_err) && empty($tickets_err)){
 
 		$userID = $_SESSION["id"];
 
@@ -172,19 +172,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <link rel="stylesheet" type="text/css" href="css/Purchase.css">
 <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('.calculate').change(function() {
-        var total = 0;
-        $('.calculate').each(function() {
-            if($(this).val() != 0) {
-                total += parseFloat($(this).val());
-            }
-        });
-        $('#total').text('$' + total.toFixed(2));
-    });
-});
-</script>
 </head>
 <body>
 <?php include('header.html');?>
@@ -206,14 +193,14 @@ $(document).ready(function() {
 							$result = mysqli_query($link, $sql);
 
 							if ($result->num_rows > 0) {
-								echo "<select class = 'calculate' id='concert' name='Artist'>";
-								echo "<option value=''>---Select A Concert---</option>";
+								echo "<select id='concert' name='Artist'>";
+								echo "<option selected value='none'>---Select A Concert---</option>";
 							while($row = mysqli_fetch_array($result)) {
 								echo "<option value='" . $row['ticketID'] . "'>" . $row['Artist'] . "</option>";
 							}
 							echo "</select>";
 							} else {
-								header( "refresh:0;url=Purchase.php" );
+								
 							}
 
 
