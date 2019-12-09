@@ -2,6 +2,7 @@
   session_start();
   include('loginfunctions.php');
   require_once "config.php";
+  global $street_err, $city_err, $state_err;
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +18,41 @@
 </head>
 <body>
 <?php include('header.html');?>
+<?php
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+  $artist = htmlspecialchars($_POST['artist']);
+  $street = htmlspecialchars($_POST['street']);
+  $city = htmlspecialchars($_POST['city']);
+  $state = htmlspecialchars($_POST['state']);
+  $date = htmlspecialchars($_POST['date']);
+  $time = htmlspecialchars($_POST['time']);
+  $street_err = $city_err = $state_err = "";
+
+  if(regexCheck($street) && regexCheck($city) && ctype_alpha($state)){
+    $insertQ = $link->prepare("INSERT INTO concerts VALUES(DEFAULT, ?, ?, ?, ?, ?, ?)");
+    $insertQ->bind_param("ssssss", $artist, $street, $city, $state, $date, $time);
+
+    if($insertQ->execute()){
+      echo "<script type='text/javascript'>alert('Concert successfully added!');</script>";
+      header( "refresh:.5;url=manageconcerts.php" );
+    }
+    else {
+      echo "ERROR adding concert.";
+      //echo mysqli_error($link);
+    }
+
+    $link->close();
+
+  }if(!regexCheck($street)){
+    $street_err = "Street can only have letters, numbers, spaces, periods, single quotes, and or hyphens.";
+  }if(!regexCheck($city)){
+    $city_err = "City can only have letters, numbers, spaces, periods, single quotes, and or hyphens.";
+  }if(!ctype_alpha($state)){
+    $state_err = "State can only have 2 letters.";
+  }
+}
+ ?>
+
 <?php
     if (isLoggedInAdmin())
     {
@@ -44,12 +80,15 @@
           <fieldset>
           <legend>Location</legend>
           <label for='street'>Street</label>
-          <input type='text' name='street' id='street' required maxlength='25'></input>
-          <label for='city'>City</label>
-          <input type='text' name='city' id='city' required maxlength='25'></input>
-          <label for='state'>State</label>
-          <input type='text' name='state' id='state' required maxlength='2'></input>
-          </fieldset>
+          <input type='text' name='street' id='street' required maxlength='25'></input>";
+      echo"<div class='error'>".$street_err."</div>";
+      echo"<label for='city'>City</label>
+          <input type='text' name='city' id='city' required maxlength='25'></input>";
+      echo"<div class='error'>".$city_err."</div>";
+      echo"<label for='state'>State</label>
+          <input type='text' name='state' id='state' required maxlength='2'></input>";
+      echo "<div class='error'>".$state_err."</div>";
+      echo"</fieldset>
           <fieldset>
           <legend>Date & Time</legend>
           <label for='date'>Date</label>";
@@ -68,36 +107,6 @@
     {
       isNotLoggedInAdmin();
     }
-  ?>
-
-  <?php
-  if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $artist = htmlspecialchars($_POST['artist']);
-    $street = htmlspecialchars($_POST['street']);
-    $city = htmlspecialchars($_POST['city']);
-    $state = htmlspecialchars($_POST['state']);
-    $date = htmlspecialchars($_POST['date']);
-    $time = htmlspecialchars($_POST['time']);
-
-    if(regexCheck($artist) && regexCheck($street) && regexCheck($city) && ctype_alpha($state)){
-      $insertQ = $link->prepare("INSERT INTO concerts VALUES(DEFAULT, ?, ?, ?, ?, ?, ?)");
-      $insertQ->bind_param("ssssss", $artist, $street, $city, $state, $date, $time);
-
-      if($insertQ->execute()){
-        echo "<script type='text/javascript'>alert('Concert successfully added!');</script>";
-        header( "refresh:.5;url=manageconcerts.php" );
-      }
-      else {
-        echo "ERROR adding concert.";
-        //echo mysqli_error($link);
-      }
-
-      $link->close();
-
-    }else {
-      echo "<script type='text/javascript'>alert('Please try again. Only contain numbers, letters, hyphens, periods, and spaces are allowed. State can only be letters.');</script>";
-    }
-  }
 
     include('footer.html');
-   ?>
+  ?>
