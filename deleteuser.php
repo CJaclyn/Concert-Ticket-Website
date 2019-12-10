@@ -43,7 +43,7 @@
       echo "<script type='text/javascript'>alert('User successfully deleted!');</script>";
       header( "refresh:.5;url=manageusers.php" );
     }else {
-      echo "ERROR: Could not able to execute $query. ".mysqli_error($db);
+      echo "ERROR: Could not able to execute $query. ".mysqli_error($link);
     }
 
   }
